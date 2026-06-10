@@ -25,7 +25,9 @@ An ATS-focused LaTeX resume rewriting app with a FastAPI backend and React front
 
    `copy backend\.env.example backend\.env`
 
-4. Add your Gemini or OpenAI API key to `backend/.env` if you want AI rewriting.
+4. Configure your AI provider in `backend/.env`. You can use Gemini, standard OpenAI, or OpenRouter/Fireworks by setting `AI_PROVIDER` and the respective keys/models:
+   - For **Gemini**: Set `AI_PROVIDER=gemini` and add `GEMINI_API_KEY`.
+   - For **OpenRouter / OpenAI**: Set `AI_PROVIDER=openai`, add `OPENAI_API_KEY`, and set `OPENAI_BASE_URL` (e.g., `https://openrouter.ai/api/v1`) and `OPENAI_MODEL` (e.g., `deepseek/deepseek-v4-flash`).
 
 5. Run the API from the project root:
 
