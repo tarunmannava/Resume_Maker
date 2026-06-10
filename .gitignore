@@ -1,0 +1,28 @@
+# Environment/secrets
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Build/output
+backend/storage/generated/**
+!backend/storage/generated/.gitkeep
+*.pdf
+*.aux
+*.log
+*.out
+*.synctex.gz

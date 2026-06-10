@@ -1,0 +1,178 @@
+%-------------------------
+% Tarun Mannava - Resume in LaTeX
+%-------------------------
+
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{mathptmx}
+\usepackage{geometry}
+\usepackage{setspace}
+
+% Standardized thin margins to maximize space safely
+\geometry{
+  a4paper,
+  top=0.35in,
+  bottom=0.35in,
+  left=0.4in,
+  right=0.4in
+}
+
+\setstretch{1.0}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Further reduced section gap (pulled up higher, tighter below the rule)
+\titleformat{\section}{
+  \vspace{-10pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{0pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} $|$ \textit{\small#2} & \small #3 - #4 \\
+    \end{tabular*}\vspace{1pt}
+}
+
+\newcommand{\resumeProjectHeading}[1]{
+  \vspace{0pt}\item
+    \begin{tabular*}{1.0\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{#1} \\
+    \end{tabular*}\vspace{1pt}
+}
+
+% Custom two-line project header (title + tech stack)
+\newcommand{\resumeProject}[2]{
+  \vspace{-2pt}\item[]
+  \begin{tabular*}{0.97\textwidth}[t]{l}
+    \textbf{#1} \\
+    \small\textit{#2}
+  \end{tabular*}\vspace{-7pt}
+}
+
+% Set all list spacing to strictly 0pt
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt, label=$\bullet$]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{2pt}}
+
+%-------------------------------------------
+\begin{document}
+
+%---------- HEADING ----------
+\begin{center}
+  {\Huge \textbf{Tarun Mannava}} \\[4pt]
+  \small
+  Tampa, FL \quad $|$ \quad
+  +1 (656) 203-7074 \quad $|$ \quad
+  \href{mailto:mannava.tarun34@gmail.com}{mannava.tarun34@gmail.com} \quad $|$ \quad
+  \href{https://linkedin.com/in/tarunmannava}{LinkedIn} \quad $|$ \quad
+  \href{https://github.com/tarunmannava}{GitHub}
+\end{center}
+
+\vspace{-10pt}
+
+%---------- EDUCATION ----------
+\section{EDUCATION}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {University of South Florida, Tampa, United States}{Master of Science, Computer Science}{Aug 2024}{May 2026}
+\resumeSubHeadingListEnd
+
+%---------- EXPERIENCE ----------
+\section{EXPERIENCE}
+\resumeSubHeadingListStart
+
+  \resumeSubheading
+    {University of South Florida}{Graduate Researcher - Full-Stack AI Platform}{Jan 2025}{Present}
+  \resumeItemListStart
+    \resumeItem{Architected and shipped an AI-powered biomedical learning platform end-to-end, designing product architecture, building all 13 interactive modules, and enabling active use by USF SHIELD Lab students and instructors.}
+    \resumeItem{Built the production frontend in \textbf{React} and \textbf{TypeScript}, delivering adaptive student exercises and instructor curriculum tools used across multiple course workflows.}
+    \resumeItem{Developed \textbf{Node.js} backend services and integrated a 20B-parameter LLM via the \textbf{Groq API}, supporting 60+ concurrent users with sub-2s response latency for model-comparison and AI-assisted learning flows.}
+    \resumeItem{Designed \textbf{PostgreSQL} schemas for authentication, progress tracking, and role-based learning analytics, supporting multi-role access patterns across student, instructor, and researcher personas.}
+    \resumeItem{Implemented shared TypeScript contracts and validation across frontend and backend services, reducing integration defects by 30\% and accelerating feature delivery across sprint cycles.}
+    \resumeItem{Translated researcher and student feedback into production releases on 2-week iteration cycles, shipping 8+ major module updates without disrupting live classroom usage.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+    {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
+  \resumeItemListStart
+    \resumeItem{Developed customer-facing \textbf{Java/Spring Boot} REST APIs for registration, validation, and authentication workflows supporting \textbf{20K+ hourly peak transactions} across customer onboarding and account management.}
+    \resumeItem{Implemented business rules and input-validation services in \textbf{Java} and \textbf{SQL}, reducing downstream processing errors by 18\% across high-volume registration flows.}
+    \resumeItem{Leveraged \textbf{Redis} for session and token caching on authentication endpoints, improving p95 response times by 30\% and lowering database load on hot read paths.}
+    \resumeItem{Designed integrations with \textbf{MongoDB} and \textbf{SQL Server} for customer profile and transactional data, supporting reliable reads/writes under peak onboarding traffic.}
+    \resumeItem{Standardized REST request/response contracts across microservices, cutting frontend-backend integration defects by 25\% and improving release stability for consuming teams.}
+    \resumeItem{Built automated test coverage with \textbf{JUnit} and \textbf{Cucumber}, reaching 70\% backend coverage and reducing production regressions on critical auth paths.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%---------- PROJECTS ----------
+\section{PROJECTS}
+\resumeSubHeadingListStart
+
+  \resumeProjectHeading{Centralized Prompt Registry for Clinical AI Experimentation}
+  \resumeItemListStart
+    \resumeItem{Developed a centralized prompt registry microservice for clinical LLM applications, supporting versioning, rollback, and dynamic rendering across 40+ production AI workflows.}
+    \resumeItem{Implemented real-time A/B experimentation infrastructure for OpenAI and Gemini models on treatment-recommendation tasks, improving winning-variant selection speed by 3x.}
+    \resumeItem{Built observability dashboards tracking latency, token throughput, cost, and generation quality, reducing mean time to detect anomalies by 40\%.}
+    \resumeItem{Designed canary traffic routing for production prompt rollouts, enabling zero-downtime updates across 12 prompt families in a healthcare environment.}
+  \resumeItemListEnd
+
+  \resumeProjectHeading{Scalable LLM Infrastructure for Clinical Note Summarization}
+  \resumeItemListStart
+    \resumeItem{Containerized and orchestrated open-source LLM inference services on \textbf{AWS} with GPU autoscaling, supporting 10x traffic spikes without manual intervention for clinical note summarization.}
+    \resumeItem{Implemented Infrastructure-as-Code with \textbf{Terraform} and \textbf{GitHub Actions} CI/CD, reducing environment provisioning time from 4 hours to 25 minutes.}
+    \resumeItem{Integrated \textbf{Prometheus} and \textbf{Grafana} monitoring, achieving 99.9\% uptime across production AI inference workloads.}
+    \resumeItem{Optimized inference via quantization and distributed serving, increasing throughput by 2.4x while holding p95 latency under 800ms.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%---------- SKILLS ----------
+\section{SKILLS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    \textbf{Languages:} TypeScript $|$ Python $|$ Java $|$ SQL \\[1pt]
+    \textbf{Frontend \& Backend:} React $|$ Next.js $|$ HTML/CSS $|$ Node.js $|$ Express.js $|$ Spring Boot $|$ FastAPI $|$ REST APIs $|$ Microservices \\[1pt]
+    \textbf{Data \& Cloud:} PostgreSQL $|$ MongoDB $|$ Redis $|$ SQL Server $|$ AWS $|$ Docker $|$ Jenkins $|$ GitHub Actions $|$ Linux \\[1pt]
+    \textbf{AI \& Observability:} LangChain $|$ LLM Integration $|$ Prompt Engineering $|$ Prometheus $|$ Grafana \\[1pt]
+    \textbf{Testing:} Jest $|$ Cypress $|$ JUnit \\[1pt]
+    \textbf{Programming Concepts:} APIs $|$ OOP
+  }}
+\end{itemize}
+
+%---------- CERTIFICATIONS ----------
+\section{CERTIFICATIONS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    \textbf{AWS Certified Cloud Practitioner} - Amazon, Nov 2023
+  }}
+\end{itemize}
+
+%-------------------------------------------
+\end{document}
