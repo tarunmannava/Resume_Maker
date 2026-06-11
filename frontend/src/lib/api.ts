@@ -77,6 +77,21 @@ export type CompileResponse = {
   warnings: string[];
 };
 
+export type ScreeningAnswerRequest = {
+  job_description: string;
+  resume_latex: string;
+  question: string;
+  company_context?: string | null;
+  role_name?: string | null;
+  company_name?: string | null;
+};
+
+export type ScreeningAnswerResponse = {
+  question: string;
+  answer: string;
+  warning?: string | null;
+};
+
 const viteEnv = import.meta as ImportMeta & {
   env?: Record<string, string | undefined>;
 };
@@ -160,4 +175,23 @@ export async function healthCheck(): Promise<boolean> {
   } catch {
     return false;
   }
+}
+
+export async function answerScreeningQuestion(
+  payload: ScreeningAnswerRequest,
+): Promise<ScreeningAnswerResponse> {
+  const response = await fetch(`${API_BASE_URL}/api/screening/answer`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    const detail = await response.text();
+    throw new Error(
+      `Screening answer failed with ${response.status}: ${detail}`,
+    );
+  }
+
+  return response.json();
 }

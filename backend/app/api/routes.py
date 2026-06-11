@@ -13,6 +13,8 @@ from ..models.schemas import (
     RewriteResponse,
     ScoreRequest,
     ScoreResponse,
+    ScreeningAnswerRequest,
+    ScreeningAnswerResponse,
 )
 from ..services.keyword_extractor import extract_keywords, seniority_signals
 from ..services.latex import ats_warnings, find_sections, latex_to_text
@@ -20,6 +22,7 @@ from ..services.pdf import compile_latex_to_pdf, resolve_generated_file
 from ..services.rewrite import rewrite_resume
 from ..services.scoring import score_keywords
 from ..services.job_analyzer import detect_details_with_ai, resolve_industry
+from ..services.screening import answer_screening_question
 
 router = APIRouter()
 
@@ -117,3 +120,20 @@ def get_file(folder: str, filename: str):
     if not file_path:
         raise HTTPException(status_code=404, detail="File not found")
     return FileResponse(file_path)
+
+
+@router.post("/screening/answer", response_model=ScreeningAnswerResponse)
+def screening_answer(request: ScreeningAnswerRequest) -> ScreeningAnswerResponse:
+    answer, warning = answer_screening_question(
+        request.resume_latex,
+        request.job_description,
+        request.question,
+        company_context=request.company_context,
+        role_name=request.role_name,
+        company_name=request.company_name,
+    )
+    return ScreeningAnswerResponse(
+        question=request.question,
+        answer=answer,
+        warning=warning,
+    )

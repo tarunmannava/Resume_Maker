@@ -13,6 +13,20 @@ class KeywordItem(BaseModel):
     required: bool = False
     evidence_count: int = 1
 
+class ScreeningAnswerRequest(BaseModel):
+    job_description: str = Field(..., min_length=20)
+    resume_latex: str = Field(..., min_length=20)
+    question: str = Field(..., min_length=3)
+    company_context: str | None = None
+    role_name: str | None = None
+    company_name: str | None = None
+
+
+class ScreeningAnswerResponse(BaseModel):
+    question: str
+    answer: str
+    warning: str | None = None
+
 
 class KeywordMatch(BaseModel):
     term: str
