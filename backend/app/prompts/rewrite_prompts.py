@@ -55,6 +55,9 @@ ROLE IDENTITY LOCK:
 - Maintain that identity consistently across emphasized bullets, skills ordering, and project framing.
 - Do NOT create mixed identities (e.g., "AI researcher + frontend engineer + DevOps architect") unless explicitly supported across the original resume.
 
+EXPERIENCE ORDERING RULE FOR JAVA ROLES:
+- If the target stack or target role identity is Java / Java Developer, COGNIZANT TECHNOLOGY SOLUTIONS MUST BE LISTED FIRST under the EXPERIENCE section, followed by University of South Florida.
+
 INTRODUCTORY SUMMARY STATEMENT ADAPTATION:
 - If the original resume contains an introductory summary statement in the contact header block (e.g. `\\textit{Software Engineer with 2+ years of experience...}`), you MUST rewrite it to align with the target role and job description requirements.
 - MANDATORY HYBRID FRAMING RULE: Strictly retain the candidate's core "2+ years of software engineering experience" and production backend engineering foundation (microservices, REST APIs, databases, cloud platforms).

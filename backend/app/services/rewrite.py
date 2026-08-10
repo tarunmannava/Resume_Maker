@@ -15,7 +15,7 @@ from .latex_projects import (
     projects_section_was_replaced,
     replace_projects_section,
 )
-from .latex_skills import inject_canonical_skills_section, sanitize_skills_section
+from .latex_skills import inject_canonical_skills_section, reorder_experience_for_java, sanitize_skills_section
 from .project_framing import (
     adapt_projects_to_job_description,
     build_evidence_linked_skills_instructions,
@@ -546,7 +546,13 @@ def rewrite_resume(request: RewriteRequest) -> RewriteResponse:
     final_project_guard_applied = False
     skills_sanitized = False
 
-    if selected_projects:
+    if target_stack == "java":
+        rewritten = reorder_experience_for_java(rewritten)
+
+    if selected_projects and target_stack != "java":
+        if target_stack == "node":
+            for proj in selected_projects:
+                proj["tech_stack"] = ["TypeScript", "Node.js", "Express.js", "REST APIs", "PostgreSQL", "Jest"]
         pre_inject = rewritten
         if is_software_engineering_identity(target_identity):
             # SWE identities: always swap PROJECTS deterministically; never trust LLM project picks.

@@ -223,3 +223,41 @@ def inject_canonical_skills_section(
             return latex[: match.start()] + raw + "\n\n" + latex[match.start() :]
 
     return latex.rstrip() + "\n\n" + raw
+
+
+def reorder_experience_for_java(latex: str) -> str:
+    """Ensure Cognizant Technology Solutions appears before USF in EXPERIENCE for Java roles."""
+    exp_match = re.search(
+        r"(\\section\{EXPERIENCE\}.*?)(?=\\section\{|\\end\{document\}|\Z)",
+        latex,
+        flags=re.DOTALL | re.IGNORECASE,
+    )
+    if not exp_match:
+        return latex
+
+    exp_block = exp_match.group(1)
+    cog_match = re.search(
+        r"\\resumeSubheading\s*\{[^}]*Cognizant.*?(?=\\resumeSubheading|\\end\{itemize\}|\Z)",
+        exp_block,
+        flags=re.DOTALL | re.IGNORECASE,
+    )
+    usf_match = re.search(
+        r"\\resumeSubheading\s*\{[^}]*University of South Florida.*?(?=\\resumeSubheading|\\end\{itemize\}|\Z)",
+        exp_block,
+        flags=re.DOTALL | re.IGNORECASE,
+    )
+
+    if cog_match and usf_match and cog_match.start() > usf_match.start():
+        cog_text = cog_match.group(0).strip()
+        usf_text = usf_match.group(0).strip()
+
+        new_exp_block = (
+            exp_block[: usf_match.start()]
+            + cog_text
+            + "\n\n  "
+            + usf_text
+            + exp_block[cog_match.end() :]
+        )
+        latex = latex[: exp_match.start(1)] + new_exp_block + latex[exp_match.end(1) :]
+
+    return latex
