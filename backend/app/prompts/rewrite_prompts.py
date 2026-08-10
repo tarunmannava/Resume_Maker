@@ -55,6 +55,12 @@ ROLE IDENTITY LOCK:
 - Maintain that identity consistently across emphasized bullets, skills ordering, and project framing.
 - Do NOT create mixed identities (e.g., "AI researcher + frontend engineer + DevOps architect") unless explicitly supported across the original resume.
 
+INTRODUCTORY SUMMARY STATEMENT ADAPTATION:
+- If the original resume contains an introductory summary statement in the contact header block (e.g. `\\textit{Software Engineer with 2+ years of experience...}`), you MUST rewrite it to align with the target role and job description requirements.
+- MANDATORY HYBRID FRAMING RULE: Strictly retain the candidate's core "2+ years of software engineering experience" and production backend engineering foundation (microservices, REST APIs, databases, cloud platforms).
+- When targeting specialized roles like AI Engineer: Do NOT delete or replace the backend development foundation. Instead, blend in the target expertise phrasing (e.g. `\\textit{Software Engineer with 2+ years of experience building scalable backend systems, microservices, and distributed applications, with expertise in AI platform engineering, LLM workflows, RAG pipelines, and vector search using Python, FastAPI, React, and Docker.}`).
+- Format the summary statement as an italicized paragraph (`\\textit{...}`) directly under the contact info in the header block.
+
 ATS OPTIMIZATION:
 - Prefer semantic alignment over exact keyword repetition.
 - Never repeat the same technology excessively across multiple bullets.
