@@ -101,6 +101,7 @@ class RewriteRequest(BaseModel):
     align_titles: bool = False
     selected_industry: str | None = None
     selected_role_category: str | None = None
+    selected_stack_override: str | None = None
 
 
 class RewriteResponse(BaseModel):

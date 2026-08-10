@@ -172,3 +172,30 @@ def resolve_industry(
         return ai_norm, 0.5, "ai"
 
     return "General Technology", 0.0, "default"
+
+
+def detect_target_stack(job_description: str, user_override: str | None = None) -> str:
+    """
+    Detects target technical stack (java, node, python) from job description,
+    or respects manual user_override.
+    """
+    if user_override and user_override.strip().lower() in ("java", "node", "python"):
+        return user_override.strip().lower()
+
+    text_lower = job_description.lower()
+    
+    java_patterns = [r"\bjava\b", r"\bspring boot\b", r"\bspring framework\b", r"\bj2ee\b", r"\bjdbc\b", r"\bhibernate\b", r"\bmaven\b", r"\bgradle\b"]
+    node_patterns = [r"\bnode\.?js\b", r"\breact\.?js\b", r"\breact\b", r"\btypescript\b", r"\bexpress\.?js\b", r"\bfastify\b", r"\bnext\.?js\b", r"\bnpm\b"]
+    python_patterns = [r"\bpython\b", r"\bfastapi\b", r"\bdjango\b", r"\bflask\b", r"\bpandas\b", r"\bnumpy\b", r"\bpytorch\b", r"\btensorflow\b", r"\bscikit-learn\b"]
+
+    java_score = sum(len(re.findall(p, text_lower)) for p in java_patterns)
+    node_score = sum(len(re.findall(p, text_lower)) for p in node_patterns)
+    python_score = sum(len(re.findall(p, text_lower)) for p in python_patterns)
+
+    scores = {"java": java_score, "node": node_score, "python": python_score}
+    max_stack = max(scores, key=scores.get)
+    if scores[max_stack] > 0:
+        return max_stack
+
+    return "python"
+

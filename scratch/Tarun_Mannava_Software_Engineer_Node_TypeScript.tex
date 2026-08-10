@@ -1,0 +1,175 @@
+%-------------------------
+% Tarun Mannava - Resume in LaTeX
+%-------------------------
+
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{mathptmx}
+\usepackage{geometry}
+\usepackage{setspace}
+
+% Standardized thin margins to maximize space safely
+\geometry{
+  a4paper,
+  top=0.35in,
+  bottom=0.35in,
+  left=0.4in,
+  right=0.4in
+}
+
+\setstretch{1.0}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Further reduced section gap (pulled up higher, tighter below the rule)
+\titleformat{\section}{
+  \vspace{-10pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{0pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} $|$ \textit{\small#2} & \small #3 - #4 \\
+    \end{tabular*}\vspace{1pt}
+}
+
+\newcommand{\resumeProjectHeading}[1]{
+  \vspace{0pt}\item
+    \begin{tabular*}{1.0\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{#1} \\
+    \end{tabular*}\vspace{1pt}
+}
+
+% Custom two-line project header (title + tech stack)
+\newcommand{\resumeProject}[2]{
+  \vspace{-2pt}\item[]
+  \begin{tabular*}{0.97\textwidth}[t]{l}
+    \textbf{#1} \\
+    \small\textit{#2}
+  \end{tabular*}\vspace{-7pt}
+}
+
+% Set all list spacing to strictly 0pt
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt, label=$\bullet$]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{2pt}}
+
+%-------------------------------------------
+\begin{document}
+
+%---------- HEADING ----------
+\begin{center}
+  {\Huge \textbf{Tarun Mannava}} \\[4pt]
+  \small
+  Tampa, FL \quad $|$ \quad
+  +1 (656) 203-7074 \quad $|$ \quad
+  \href{mailto:mannava.tarun34@gmail.com}{mannava.tarun34@gmail.com} \quad $|$ \quad
+  \href{https://linkedin.com/in/tarunmannava}{LinkedIn} \quad $|$ \quad
+  \href{https://github.com/tarunmannava}{GitHub}
+\end{center}
+
+\vspace{-10pt}
+
+%---------- EDUCATION ----------
+\section{EDUCATION}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {University of South Florida, Tampa, United States}{Master of Science, Computer Science}{Aug 2024}{May 2026}
+\resumeSubHeadingListEnd
+
+%---------- EXPERIENCE ----------
+\section{EXPERIENCE}
+\resumeSubHeadingListStart
+
+  \resumeSubheading
+    {University of South Florida}{Graduate Researcher - Software Engineer}{Jan 2025}{Present}
+  \resumeItemListStart
+    \resumeItem{Architected and shipped a production web platform end-to-end, translating requirements from faculty and research stakeholders into 13 interactive modules built with \textbf{React} and \textbf{TypeScript}, serving students, instructors, and researchers at USF SHIELD Lab.}
+    \resumeItem{Designed and implemented \textbf{Node.js} and \textbf{Express.js} backend services with \textbf{REST APIs} powering enrollment, progress tracking, AI-assisted learning workflows, authentication, and role-based access control, supporting 60+ concurrent users with sub-2s response latency.}
+    \resumeItem{Designed \textbf{PostgreSQL} schemas and shared TypeScript contracts across frontend and backend services, reducing integration defects by 30\% and accelerating feature delivery across sprint cycles.}
+    \resumeItem{Delivered adaptive student exercises and instructor curriculum tools with server-side validation, role-based routing, and production monitoring across multiple course workflows.}
+    \resumeItem{Shipped 8+ major module updates on 2-week Agile iteration cycles using \textbf{Git}-based workflows, code reviews, and production monitoring without disrupting live classroom usage.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+    {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
+  \resumeItemListStart
+    \resumeItem{Developed customer-facing features across \textbf{React} frontends and \textbf{Java/Spring Boot} REST APIs for registration, validation, and authentication workflows supporting \textbf{20K+ hourly peak transactions} across customer onboarding and account management.}
+    \resumeItem{Implemented business rules and input-validation services in \textbf{Java} and \textbf{SQL}, reducing downstream processing errors by 18\% across high-volume registration flows.}
+    \resumeItem{Leveraged \textbf{Redis} for session and token caching on authentication endpoints, improving p95 response times by 30\% and lowering database load on hot read paths.}
+    \resumeItem{Standardized REST request/response contracts across microservices and React clients, cutting frontend-backend integration defects by 25\% and improving release stability for consuming teams.}
+    \resumeItem{Built automated test coverage with \textbf{JUnit} and \textbf{Cucumber}, reaching 70\% backend coverage and reducing production regressions on critical auth paths.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%---------- PROJECTS ----------
+\section{PROJECTS}
+\resumeSubHeadingListStart
+
+  
+  \resumeProject{Distributed Task Execution and Priority Job Worker Platform}{Python, FastAPI, PostgreSQL, Redis, Docker, JWT}
+  \resumeItemListStart
+    \resumeItem{Designed an asynchronous task execution system with FastAPI REST endpoints, Redis priority queues, and multi-process worker pools.}
+    \resumeItem{Implemented retry logic with exponential backoff, task idempotency keys, and a dead-letter queue (DLQ) for failed job handling.}
+    \resumeItem{Built durable task state persistence in PostgreSQL, tracking state transitions from ENQUEUED to RUNNING, COMPLETED, or FAILED.}
+  \resumeItemListEnd
+
+  \resumeProject{Real-Time Telemetry \& Event Streaming Gateway (Node.js \& Python)}{Node.js, TypeScript, Fastify, Python, FastAPI, Redis Streams}
+  \resumeItemListStart
+    \resumeItem{Built a microservices architecture pairing Node.js (Fastify/TypeScript) for WebSocket real-time client streaming and Python (FastAPI) for REST ingestion.}
+    \resumeItem{Configured Redis Streams Consumer Groups with explicit message acknowledgments (`XACK`) to handle event queuing between ingestion and storage workers.}
+    \resumeItem{Implemented sliding-window rate limiting using Redis Lua scripts to enforce API quotas per client IP.}
+  \resumeItemListEnd
+
+
+
+\resumeSubHeadingListEnd
+
+%---------- SKILLS ----------
+\section{SKILLS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    \textbf{Languages:} TypeScript, JavaScript, SQL, Python, Java \\[1pt]
+    \textbf{Frontend \& Backend:} React, Next.js, Node.js, Express.js, REST APIs, Microservices \\[1pt]
+    \textbf{Data \& Cloud:} PostgreSQL, MongoDB, Redis, SQL Server, AWS, Docker, GitHub Actions, Linux \\[1pt]
+    \textbf{Architecture:} REST APIs, Microservices, Authentication, RBAC, System Design
+  }}
+\end{itemize}
+
+%---------- CERTIFICATIONS ----------
+\section{CERTIFICATIONS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    \textbf{AWS Certified Cloud Practitioner} - Amazon, Nov 2023
+  }}
+\end{itemize}
+
+%-------------------------------------------
+\end{document}

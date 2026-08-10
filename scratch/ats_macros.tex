@@ -1,0 +1,35 @@
+% ATS-friendly resume macros (no tabular layouts; minimal pipe delimiters)
+
+\usepackage{anyfontsize}
+\renewcommand{\normalsize}{\fontsize{10.5}{12.6}\selectfont}
+\renewcommand{\small}{\fontsize{10.5}{12.6}\selectfont}
+\normalsize
+
+\newcommand{\resumeSep}{\textbullet}
+
+% Experience / education: stacked lines parse cleanly in PDF-to-text
+\newcommand{\resumeSubheading}[4]{%
+  \vspace{0pt}\item
+  \textbf{#1} \\
+  \textit{\small #2} \\
+  \small #3 -- #4
+  \vspace{2pt}
+}
+
+% Projects: same date-to-bullets spacing as experience
+\newcommand{\resumeProject}[3]{%
+  \vspace{0pt}\item[]
+  \textbf{#1} \\
+  \small\textit{#2} \\
+  \small #3
+  \vspace{2pt}
+}
+
+\newcommand{\resumeItemListStart}{%
+  \begin{itemize}[leftmargin=0.15in, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt, label={$\bullet$}]%
+}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{2pt}}
+
+\newcommand{\resumeHeadingContact}{%
+  Tampa, FL \hspace{0.4em}\resumeSep\hspace{0.4em}+1 (656) 203-7074 \hspace{0.4em}\resumeSep\hspace{0.4em}\href{mailto:mannava.tarun34@gmail.com}{mannava.tarun34@gmail.com} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://linkedin.com/in/tarunmannava}{LinkedIn} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://github.com/tarunmannava}{GitHub}%
+}

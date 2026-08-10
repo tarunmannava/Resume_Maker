@@ -33,7 +33,7 @@ def test_build_rewrite_strategy_includes_priorities():
         job,
         SAMPLE_RESUME,
         "Software Engineer",
-        [PROJECTS[0], PROJECTS[4]],
+        [PROJECTS[0], PROJECTS[2]],
         missing_terms=["Kubernetes"],
     )
     assert strategy.target_role == "backend_engineer"

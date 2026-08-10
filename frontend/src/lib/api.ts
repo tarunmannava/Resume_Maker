@@ -30,6 +30,7 @@ export type RewriteRequest = {
   align_titles?: boolean;
   selected_industry?: string | null;
   selected_role_category?: string | null;
+  selected_stack_override?: string | null;
 };
 
 export type RewriteResponse = {

@@ -416,7 +416,8 @@ export default function App() {
   const [companyContext, setCompanyContext] = useState("");
   const [selectedIndustry, setSelectedIndustry] = useState("Don't know");
   const [customIndustry, setCustomIndustry] = useState("");
-  const [selectedRoleCategory, setSelectedRoleCategory] = useState("Software Engineer");
+  const [selectedRoleCategory, setSelectedRoleCategory] = useState("Java Developer");
+  const [selectedStackOverride, setSelectedStackOverride] = useState<"auto" | "java" | "node" | "python">("auto");
   const [detectedIndustry, setDetectedIndustry] = useState<string | null>(null);
   const [detectedRoleCategory, setDetectedRoleCategory] = useState<string | null>(null);
   const [showIndustryWarning, setShowIndustryWarning] = useState(false);
@@ -545,6 +546,7 @@ export default function App() {
         align_titles: alignTitles,
         selected_industry: selectedIndustry === "Other" ? customIndustry : selectedIndustry,
         selected_role_category: selectedRoleCategory,
+        selected_stack_override: selectedStackOverride === "auto" ? null : selectedStackOverride,
       });
       setResult(response);
     } catch (caught) {
@@ -685,16 +687,35 @@ export default function App() {
               </select>
             </label>
             <label>
-              Role Category
+              Target Role Focus
               <select
                 value={selectedRoleCategory}
                 onChange={(event) => setSelectedRoleCategory(event.target.value)}
               >
-                <option value="Software Engineer">Software Engineer</option>
-                <option value="AI Engineer">AI Engineer</option>
-                <option value="AI Support">AI Support / Infra</option>
-                <option value="ML Engineer">ML Engineer</option>
+                <option value="Java Developer">Java Developer</option>
+                <option value="AI Engineer / Software Engineer">AI Engineer / Software Engineer</option>
               </select>
+            </label>
+            <label style={{ gridColumn: "span 2" }}>
+              Target Tech Stack Override
+              <div style={{ display: "flex", gap: "8px", marginTop: "4px" }}>
+                {(["auto", "java", "node", "python"] as const).map((stack) => (
+                  <button
+                    key={stack}
+                    type="button"
+                    className={selectedStackOverride === stack ? "primary" : "secondary"}
+                    style={{
+                      padding: "4px 12px",
+                      borderRadius: "6px",
+                      fontSize: "12px",
+                      textTransform: "capitalize",
+                    }}
+                    onClick={() => setSelectedStackOverride(stack)}
+                  >
+                    {stack === "auto" ? "⚡ Auto-Detect Stack" : stack === "node" ? "Node.js / React" : stack}
+                  </button>
+                ))}
+              </div>
             </label>
             <label>
               Company Industry

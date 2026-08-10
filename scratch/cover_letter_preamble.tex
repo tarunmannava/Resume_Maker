@@ -1,0 +1,39 @@
+% Shared cover letter preamble. Pair with Tarun_Mannava_Cover_Letter_*.tex
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{geometry}
+\usepackage{mathptmx}
+\usepackage{setspace}
+
+\geometry{
+  letterpaper,
+  top=1in,
+  bottom=1in,
+  left=1in,
+  right=1in
+}
+
+\setstretch{1.12}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{9pt}
+
+\IfFileExists{ats_macros.tex}{%
+  \input{ats_macros.tex}%
+}{%
+  \input{../ats_macros.tex}%
+}
+
+\newcommand{\coverLetterContact}{%
+  Tampa, FL \hspace{0.4em}\resumeSep\hspace{0.4em}+1 (656) 203 7074 \hspace{0.4em}\resumeSep\hspace{0.4em}\href{mailto:mannava.tarun34@gmail.com}{mannava.tarun34@gmail.com} \\[3pt]
+  \href{https://linkedin.com/in/tarunmannava}{LinkedIn} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://github.com/tarunmannava}{GitHub}%
+}
+
+\newcommand{\coverLetterHeading}{%
+  \begin{center}
+    {\Large\textbf{Tarun Mannava}} \\[6pt]
+    \small\coverLetterContact
+  \end{center}
+}

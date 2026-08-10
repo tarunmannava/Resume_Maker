@@ -15,16 +15,18 @@ from .latex_projects import (
     projects_section_was_replaced,
     replace_projects_section,
 )
-from .latex_skills import sanitize_skills_section
+from .latex_skills import inject_canonical_skills_section, sanitize_skills_section
 from .project_framing import (
     adapt_projects_to_job_description,
     build_evidence_linked_skills_instructions,
     build_project_reframing_instructions,
     build_selective_emphasis_instructions,
+    build_stack_experience_framing_instructions,
     extract_jd_foundational_concepts,
     extract_resume_supported_terms,
     select_projects,
 )
+from .job_analyzer import detect_target_stack
 from .rewrite_strategy import (
     build_rewrite_strategy,
     classify_target_role_identity,
@@ -184,9 +186,15 @@ def build_user_prompt(
             + "\nExample: 'Implemented Java validation services using OOP abstractions and exception-handling patterns...'\n"
         )
 
+    target_stack = detect_target_stack(request.job_description, user_override=request.selected_stack_override)
+    stack_block = build_stack_experience_framing_instructions(target_stack)
+
     project_instructions = f"""
 TARGET ROLE CATEGORY: {effective_role_category}
 TARGET COMPANY INDUSTRY: {effective_industry}
+TARGET DETECTED STACK: {target_stack.upper()}
+
+{stack_block}
 
 {reframing_block}
 
@@ -296,10 +304,10 @@ Return only the final corrected LaTeX. Do not return the audit checklist or expl
 """
 
 
-def generate_with_openai(prompt: str, align_titles: bool = False) -> str | None:
+def generate_with_openai(prompt: str, align_titles: bool = False) -> tuple[str | None, str | None]:
     settings = get_settings()
     if not settings.openai_api_key:
-        return None
+        return None, "OpenAI API key not configured"
     client = OpenAI(
         api_key=settings.openai_api_key,
         base_url=settings.openai_base_url,
@@ -328,15 +336,16 @@ def generate_with_openai(prompt: str, align_titles: bool = False) -> str | None:
             }
         }
     completion = client.chat.completions.create(**kwargs)
-    if completion.choices:
+    if completion.choices and len(completion.choices) > 0:
         print(f"DEBUG: OpenAI/OpenRouter finish reason: {completion.choices[0].finish_reason}", flush=True)
-    return completion.choices[0].message.content
+        return completion.choices[0].message.content, None
+    return None, "OpenAI returned empty completion choices"
 
 
-def generate_with_gemini(prompt: str, align_titles: bool = False) -> str | None:
+def generate_with_gemini(prompt: str, align_titles: bool = False) -> tuple[str | None, str | None]:
     settings = get_settings()
     if not settings.gemini_api_key:
-        return None
+        return None, "Gemini API key not configured"
     client = genai.Client(api_key=settings.gemini_api_key)
     response = client.models.generate_content(
         model=settings.gemini_model,
@@ -347,19 +356,22 @@ def generate_with_gemini(prompt: str, align_titles: bool = False) -> str | None:
             max_output_tokens=settings.max_output_tokens,
         ),
     )
-    if response.candidates:
+    if response.candidates and len(response.candidates) > 0:
         print(f"DEBUG: Gemini finish reason: {response.candidates[0].finish_reason}", flush=True)
-    return response.text
+        return response.text, None
+    return None, "Gemini returned empty response"
 
 
-def generate_rewrite(prompt: str, align_titles: bool = False) -> tuple[str | None, str]:
+def generate_rewrite(prompt: str, align_titles: bool = False) -> tuple[str | None, str, str | None]:
     settings = get_settings()
     provider = settings.ai_provider.lower().strip()
     if provider == "gemini":
-        return generate_with_gemini(prompt, align_titles), "gemini"
+        text, err = generate_with_gemini(prompt, align_titles)
+        return text, "gemini", err
     if provider == "openai":
-        return generate_with_openai(prompt, align_titles), "openai"
-    return None, provider
+        text, err = generate_with_openai(prompt, align_titles)
+        return text, "openai", err
+    return None, provider, f"Unsupported AI provider '{provider}'"
 
 
 def repair_truncated_latex(latex: str) -> str:
@@ -427,6 +439,7 @@ def rewrite_resume(request: RewriteRequest) -> RewriteResponse:
 
     effective_industry = get_effective_industry(request.selected_industry, request.job_description, resume_text, request.company_context)
     effective_role_category = get_effective_role_category(request.selected_role_category, request.job_description)
+    target_stack = detect_target_stack(request.job_description, user_override=request.selected_stack_override)
 
     missing_terms = [kw.term for kw in initial_score.missing_keywords]
     unsupported_terms = [kw.term for kw in initial_score.unsupported_keywords]
@@ -478,7 +491,10 @@ def rewrite_resume(request: RewriteRequest) -> RewriteResponse:
         reframing_block,
         emphasis_block,
     )
-    generated_text, provider = generate_rewrite(prompt, request.align_titles)
+    res = generate_rewrite(prompt, request.align_titles)
+    generated_text = res[0]
+    provider = res[1]
+    provider_err = res[2] if len(res) > 2 else None
 
     if generated_text:
         print(f"DEBUG: Generated text length: {len(generated_text)}", flush=True)
@@ -489,8 +505,9 @@ def rewrite_resume(request: RewriteRequest) -> RewriteResponse:
 
     if not generated_text:
         warnings = list(initial_score.warnings)
+        err_msg = f": {provider_err}" if provider_err else ""
         warnings.append(
-            f"AI provider '{provider}' is not configured correctly, so the API returned the original LaTeX with analysis only."
+            f"AI provider '{provider}' is not configured correctly{err_msg}, so the API returned the original LaTeX with analysis only."
         )
         return RewriteResponse(
             rewritten_latex=request.resume_latex,
@@ -572,12 +589,20 @@ def rewrite_resume(request: RewriteRequest) -> RewriteResponse:
 
     pre_skills = rewritten
     supported = extract_resume_supported_terms(latex_to_text(request.resume_latex))
+    rewritten = inject_canonical_skills_section(
+        rewritten,
+        target_stack,
+        job_description=request.job_description,
+        banned_skills=request.banned_skills,
+        original_latex=request.resume_latex,
+    )
     rewritten = sanitize_skills_section(
         rewritten,
         supported,
         request.confirmed_skills,
         target_identity,
         request.resume_latex,
+        banned_skills=request.banned_skills,
     )
     skills_sanitized = rewritten != pre_skills
 

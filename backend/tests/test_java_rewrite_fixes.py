@@ -43,8 +43,7 @@ def test_junior_software_developer_java_phrase():
     identity = classify_target_role_identity(jd, "llm langchain", "Software Engineer")
     assert identity == "backend_engineer"
     projects = select_projects("Software Engineer", jd, identity)
-    assert projects[0]["id"] == 9
-    assert projects[1]["id"] == 10
+    assert projects[0]["id"] == 3
 
 
 def test_inject_replaces_resumeProject_two_arg_format():
@@ -77,8 +76,7 @@ def test_inject_replaces_resumeProject_two_arg_format():
     fixed = force_replace_projects_section(llm, projects, original, "backend_engineer")
     assert "Prompt Registry" not in fixed
     assert "LangGraph" not in fixed
-    assert "Secure Customer Onboarding" in fixed
-    assert "Java Issue Tracking" in fixed
+    assert "Configuration Management" in fixed or "High-Throughput" in fixed or "Distributed Workflow" in fixed
     assert "\\resumeProject{" in fixed
 
 
@@ -222,8 +220,7 @@ def test_rewrite_forces_java_projects_over_bad_model_output(monkeypatch):
         )
     )
 
-    assert "Secure Customer Onboarding" in response.rewritten_latex
-    assert "Java Issue Tracking" in response.rewritten_latex
+    assert "Configuration Management" in response.rewritten_latex or "High-Throughput" in response.rewritten_latex or "Distributed Workflow" in response.rewritten_latex
     assert "Prompt Registry" not in response.rewritten_latex
     assert "Multi-Agent" not in response.rewritten_latex
     assert "LangGraph" not in response.rewritten_latex

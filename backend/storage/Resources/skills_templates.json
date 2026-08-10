@@ -1,0 +1,114 @@
+{
+  "java": {
+    "name": "Java Developer",
+    "categories": [
+      {
+        "label": "Backend",
+        "skills": ["Java", "Spring Boot", "Spring MVC", "Spring Security", "Spring Data JPA", "Hibernate", "REST APIs", "Microservices"]
+      },
+      {
+        "label": "Concurrency",
+        "skills": ["CompletableFuture", "ExecutorService"]
+      },
+      {
+        "label": "Databases",
+        "skills": ["PostgreSQL", "MongoDB", "SQL Server", "Redis", "jOOQ"]
+      },
+      {
+        "label": "Cloud & DevOps",
+        "skills": ["AWS (Cognito, S3)", "Docker", "GitHub Actions", "Linux"]
+      },
+      {
+        "label": "Testing",
+        "skills": ["JUnit", "Cucumber"]
+      },
+      {
+        "label": "Frontend",
+        "skills": ["React", "JavaScript", "HTML", "CSS"]
+      }
+    ],
+    "raw_latex": "\\section{SKILLS}\n\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]\n  \\small{\\item{\n    \\textbf{Backend:} Java, Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, REST APIs, Microservices \\\\[1pt]\n    \\textbf{Concurrency:} CompletableFuture, ExecutorService \\\\[1pt]\n    \\textbf{Databases:} PostgreSQL, MongoDB, SQL Server, Redis, jOOQ \\\\[1pt]\n    \\textbf{Cloud \\& DevOps:} AWS (Cognito, S3), Docker, GitHub Actions, Linux \\\\[1pt]\n    \\textbf{Testing:} JUnit, Cucumber \\\\[1pt]\n    \\textbf{Frontend:} React, JavaScript, HTML, CSS\n  }}\n\\end{itemize}"
+  },
+  "ai": {
+    "name": "AI Engineer",
+    "categories": [
+      {
+        "label": "Languages",
+        "skills": ["Python", "TypeScript", "SQL", "Java"]
+      },
+      {
+        "label": "LLM APIs",
+        "skills": ["OpenAI", "Anthropic", "Groq", "Gemini"]
+      },
+      {
+        "label": "AI & ML",
+        "skills": ["LangChain", "LlamaIndex", "LangGraph", "RAG", "Prompt Engineering", "Model Evaluation", "Vector Search"]
+      },
+      {
+        "label": "Backend & Platform",
+        "skills": ["FastAPI", "Node.js", "React", "REST APIs", "PostgreSQL", "Redis", "Docker", "Kubernetes"]
+      },
+      {
+        "label": "Observability & MLOps",
+        "skills": ["vLLM", "Prometheus", "Grafana", "Terraform", "GitHub Actions", "AWS", "GPU Inference"]
+      },
+      {
+        "label": "Developer Tools",
+        "skills": ["Git", "GitHub", "Cursor", "GitHub Copilot"]
+      },
+      {
+        "label": "Testing",
+        "skills": ["Jest", "JUnit"]
+      }
+    ],
+    "raw_latex": "\\section{SKILLS}\n\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]\n  \\small{\\item{\n    \\textbf{Languages:} Python, TypeScript, SQL, Java \\\\[1pt]\n    \\textbf{LLM APIs:} OpenAI, Anthropic, Groq, Gemini \\\\[1pt]\n    \\textbf{AI \\& ML:} LangChain, LlamaIndex, LangGraph, RAG, Prompt Engineering, Model Evaluation, Vector Search \\\\[1pt]\n    \\textbf{Backend \\& Platform:} FastAPI, Node.js, React, REST APIs, PostgreSQL, Redis, Docker, Kubernetes \\\\[1pt]\n    \\textbf{Observability \\& MLOps:} vLLM, Prometheus, Grafana, Terraform, GitHub Actions, AWS, GPU Inference \\\\[1pt]\n    \\textbf{Developer Tools:} Git, GitHub, Cursor, GitHub Copilot \\\\[1pt]\n    \\textbf{Testing:} Jest, JUnit\n  }}\n\\end{itemize}"
+  },
+  "python": {
+    "name": "Python Developer",
+    "categories": [
+      {
+        "label": "Languages",
+        "skills": ["Python", "TypeScript", "SQL", "JavaScript", "Java"]
+      },
+      {
+        "label": "Backend",
+        "skills": ["FastAPI", "Flask", "Pydantic", "AsyncIO", "REST APIs", "Microservices"]
+      },
+      {
+        "label": "Data & Cloud",
+        "skills": ["PostgreSQL", "Supabase", "MongoDB", "Redis", "AWS", "Docker", "GitHub Actions", "Linux"]
+      },
+      {
+        "label": "Testing",
+        "skills": ["pytest", "JUnit"]
+      },
+      {
+        "label": "Frontend",
+        "skills": ["React", "Next.js"]
+      }
+    ],
+    "raw_latex": "\\section{SKILLS}\n\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]\n  \\small{\\item{\n    \\textbf{Languages:} Python, TypeScript, SQL, JavaScript, Java \\\\[1pt]\n    \\textbf{Backend:} FastAPI, Flask, Pydantic, AsyncIO, REST APIs, Microservices \\\\[1pt]\n    \\textbf{Data \\& Cloud:} PostgreSQL, Supabase, MongoDB, Redis, AWS, Docker, GitHub Actions, Linux \\\\[1pt]\n    \\textbf{Testing:} pytest, JUnit \\\\[1pt]\n    \\textbf{Frontend:} React, Next.js\n  }}\n\\end{itemize}"
+  },
+  "node": {
+    "name": "Node.js / Fullstack",
+    "categories": [
+      {
+        "label": "Core",
+        "skills": ["TypeScript", "Node.js", "JavaScript (ES2022+)", "SQL", "Python"]
+      },
+      {
+        "label": "Backend & APIs",
+        "skills": ["Express.js", "REST APIs", "Socket.io", "Microservices", "Authentication", "RBAC", "Jest", "Supertest"]
+      },
+      {
+        "label": "Frontend",
+        "skills": ["React", "Next.js", "React Query", "Tailwind CSS"]
+      },
+      {
+        "label": "Data & Infra",
+        "skills": ["PostgreSQL", "Redis", "MongoDB", "AWS", "Docker", "Kubernetes", "GitHub Actions", "Linux"]
+      }
+    ],
+    "raw_latex": "\\section{SKILLS}\n\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]\n  \\small{\\item{\n    \\textbf{Core:} TypeScript, Node.js, JavaScript (ES2022+), SQL, Python \\\\[1pt]\n    \\textbf{Backend \\& APIs:} Express.js, REST APIs, Socket.io, Microservices, Authentication, RBAC, Jest, Supertest \\\\[1pt]\n    \\textbf{Frontend:} React, Next.js, React Query, Tailwind CSS \\\\[1pt]\n    \\textbf{Data \\& Infra:} PostgreSQL, Redis, MongoDB, AWS, Docker, Kubernetes, GitHub Actions, Linux\n  }}\n\\end{itemize}"
+  }
+}

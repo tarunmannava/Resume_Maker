@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import re
 
+from .skills_data import get_skills_template_for_stack
+
 # Terms that must not appear unless in resume-supported set or confirmed skills
 RESTRICTED_SKILL_TERMS = (
     "oracle",
@@ -103,10 +105,11 @@ def sanitize_skills_section(
     confirmed_skills: list[str],
     target_role_identity: str,
     original_latex: str,
+    banned_skills: list[str] | None = None,
 ) -> str:
     """
     Remove skill terms from TECHNICAL SKILLS / SKILLS that were not in the original resume
-    unless user confirmed them.
+    unless user confirmed them, or if listed in banned_skills.
     """
     preferred_separator = _preferred_pipe_separator(original_latex)
     allowed = {t.lower() for t in supported_terms}
@@ -165,8 +168,58 @@ def sanitize_skills_section(
                 flags=re.IGNORECASE,
             )
 
+    if banned_skills:
+        for b_term in banned_skills:
+            if b_term.strip():
+                updated = _remove_skill_term(updated, b_term.strip(), preferred_separator)
+
     updated = _normalize_skill_separators(updated, preferred_separator)
 
     if updated != section:
         latex = latex[: section_match.start(1)] + updated + latex[section_match.end(1) :]
     return latex
+
+
+def inject_canonical_skills_section(
+    latex: str,
+    target_stack: str,
+    job_description: str = "",
+    banned_skills: list[str] | None = None,
+    original_latex: str = "",
+) -> str:
+    """
+    Injects or replaces the SKILLS section using the canonical template for the target stack (java, ai, python, node).
+    Filters out any banned skills if provided.
+    """
+    tmpl = get_skills_template_for_stack(target_stack)
+    if not tmpl or "raw_latex" not in tmpl:
+        return latex
+
+    raw = tmpl["raw_latex"]
+    if banned_skills:
+        preferred_sep = _preferred_pipe_separator(original_latex) if original_latex else r" \;|\; "
+        for b_term in banned_skills:
+            if b_term.strip():
+                raw = _remove_skill_term(raw, b_term.strip(), preferred_sep)
+
+    # Check if there is an existing SKILLS section in the document to replace
+    section_match = re.search(
+        r"\\section\{(?:TECHNICAL )?SKILLS\}.*?(?=\\section\{|\\end\{document\}|\Z)",
+        latex,
+        flags=re.DOTALL | re.IGNORECASE,
+    )
+    if section_match:
+        return latex[: section_match.start()] + raw + "\n\n" + latex[section_match.end() :]
+
+    # If no SKILLS section exists, insert before Experience or Education
+    insertion_points = [
+        r"\\section\{EXPERIENCE\}",
+        r"\\section\{EDUCATION\}",
+        r"\\end\{document\}",
+    ]
+    for pattern in insertion_points:
+        match = re.search(pattern, latex, flags=re.IGNORECASE)
+        if match:
+            return latex[: match.start()] + raw + "\n\n" + latex[match.start() :]
+
+    return latex.rstrip() + "\n\n" + raw

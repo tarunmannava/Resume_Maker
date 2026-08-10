@@ -1,0 +1,169 @@
+%-------------------------
+% Tarun Mannava - Resume in LaTeX
+%-------------------------
+
+\documentclass[a4paper,10pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{mathptmx}
+\usepackage{geometry}
+\usepackage{setspace}
+
+% Standardized thin margins to maximize space safely
+\geometry{
+  a4paper,
+  top=0.35in,
+  bottom=0.35in,
+  left=0.4in,
+  right=0.4in
+}
+
+\setstretch{1.0}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Further reduced section gap (pulled up higher, tighter below the rule)
+\titleformat{\section}{
+  \vspace{-10pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+\usepackage{anyfontsize}
+\renewcommand{\normalsize}{\fontsize{10.5}{12.6}\selectfont}
+\renewcommand{\small}{\fontsize{10.5}{12.6}\selectfont}
+\normalsize
+
+\newcommand{\resumeSep}{\textbullet}
+
+% Experience / education: stacked lines parse cleanly in PDF-to-text
+\newcommand{\resumeSubheading}[4]{%
+  \vspace{0pt}\item
+  \textbf{#1} \\
+  \textit{\small #2} \\
+  \small #3 -- #4
+  \vspace{2pt}
+}
+
+% Projects: same date-to-bullets spacing as experience
+\newcommand{\resumeProject}[3]{%
+  \vspace{0pt}\item[]
+  \textbf{#1} \\
+  \small\textit{#2} \\
+  \small #3
+  \vspace{2pt}
+}
+
+\newcommand{\resumeItemListStart}{%
+  \begin{itemize}[leftmargin=0.15in, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt, label={$\bullet$}]%
+}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{2pt}}
+
+\newcommand{\resumeHeadingContact}{%
+  Tampa, FL \hspace{0.4em}\resumeSep\hspace{0.4em}+1 (656) 203-7074 \hspace{0.4em}\resumeSep\hspace{0.4em}\href{mailto:mannava.tarun34@gmail.com}{mannava.tarun34@gmail.com} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://linkedin.com/in/tarunmannava}{LinkedIn} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://github.com/tarunmannava}{GitHub}%
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+%-------------------------------------------
+\begin{document}
+
+%---------- HEADING ----------
+\begin{center}
+  {\Huge \textbf{Tarun Mannava}} \\[4pt]
+  \small
+  \resumeHeadingContact
+\end{center}
+
+\vspace{-10pt}
+
+%---------- TECHNICAL SKILLS ----------
+\section{SKILLS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt] \small{\item{ \textbf{Languages:} Java, Python, TypeScript, SQL \\[1pt] \textbf{Backend \& Frameworks:} Spring Boot, Node.js, Express.js, FastAPI, REST APIs, Microservices \\[1pt] \textbf{Data \& Cloud:} PostgreSQL, MongoDB, Redis, SQL Server, AWS, Docker, Kubernetes, CI/CD (Jenkins, GitHub Actions), Linux \\[1pt] \textbf{Monitoring \& Testing:} Prometheus, Grafana, JUnit, Jest, Cypress \\[1pt] \textbf{Additional:} React, HTML/CSS }}
+\end{itemize} %---------- EXPERIENCE ----------
+\section{EXPERIENCE}
+\resumeSubHeadingListStart
+
+  % Cognizant first (most relevant)
+  \resumeSubheading
+    {Cognizant Technology Solutions}{Software Engineer}{Feb 2022}{Aug 2024}
+  \resumeItemListStart
+    \resumeItem{Contributed to building the small business client onboarding service from the ground up as part of a 6-engineer team, delivering Java/Spring Boot REST APIs for policy application, validation, and customer onboarding integrated into a platform handling 20K+ hourly transactions.}
+    \resumeItem{Implemented dynamic business rules and validation logic in Java and SQL to handle state-by-state policy compliance variations, reducing downstream processing errors by 18\%.}
+    \resumeItem{Leveraged Redis for session caching and rate configuration lookups on customer portals, improving p95 response times by 30\% and lowering database load during peak onboarding traffic.}
+    \resumeItem{Built and optimized data access layers across MongoDB (for flexible vehicle/boat/business client metadata) and SQL Server (for transactional policy records), tuning queries to support high-throughput writes.}
+    \resumeItem{Standardized API contracts and error schemas across 8+ quoting and policy microservices, cutting integration defects by 25\% and streamlining multi-state feature deployments.}
+    \resumeItem{Built automated test suites using JUnit and Cucumber to validate multi-state policy compliance rules, achieving 70\% backend coverage and minimizing regressions in production calculation flows.}
+  \resumeItemListEnd
+
+  % USF second
+  \resumeSubheading
+    {University of South Florida}{Graduate Backend Engineer - AI Platform}{Jan 2025}{Present}
+  \resumeItemListStart
+    \resumeItem{Built an AI-powered biomedical learning platform from scratch with 13 interactive modules, serving active daily use by 60+ students and instructors across multiple course semesters.}
+    \resumeItem{Developed Node.js backend services and integrated a 20B-parameter LLM via the Groq API, supporting 60+ concurrent users with sub-2s response latency for model-comparison and AI-assisted learning flows.}
+    \resumeItem{Designed PostgreSQL schemas for authentication, progress tracking, and role-based learning analytics, supporting multi-role access patterns across student, instructor, and researcher personas.}
+    \resumeItem{Designed shared TypeScript type definitions and Zod validation schemas across frontend and backend services, reducing integration defects by 30\% and eliminating manual API contract synchronization.}
+    \resumeItem{Delivered 8 production feature releases under zero-downtime constraints during active classroom semesters, implementing database migrations and backward-compatible API changes without disrupting live student sessions.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%---------- PROJECTS ----------
+\section{PROJECTS}
+\resumeSubHeadingListStart
+
+  \resumeProject{Secure Customer Onboarding and Authentication API Platform}{Java, Spring Boot, PostgreSQL, Redis, JUnit, REST APIs}{Jun 2024 -- Aug 2024}
+  \resumeItemListStart
+    \resumeItem{Developed Java/Spring Boot REST APIs for registration, validation, and authentication workflows with layered service architecture and clean request/response contracts.}
+    \resumeItem{Implemented business rules and input-validation services using OOP service abstractions and exception-handling patterns with Java/Spring Boot, relational data modeling, reducing downstream processing errors by 18\%.}
+    \resumeItem{Leveraged Redis for session and token caching on authentication endpoints, improving p95 response times by 30\% and lowering database load on hot read paths.}
+  \resumeItemListEnd
+
+  \resumeProject{Java Issue Tracking and Team Workflow Management Application}{Java, Spring Boot, React, PostgreSQL, JUnit, Git}{Jan 2024 -- May 2024}
+  \resumeItemListStart
+    \resumeItem{Built a full-stack Java issue tracking application using Spring Boot, React, and PostgreSQL, supporting multi-role access control, issue lifecycle management, and audit history across teams.}
+    \resumeItem{Designed normalized PostgreSQL tables for users, projects, issues, comments, and audit logs with Java/Spring Boot, relational data modeling, enabling search, filtering, pagination, and reliable workflow state transitions.}
+    \resumeItem{Implemented service-layer business rules, session-based authentication, and reusable validation flows with OOP abstractions, reducing duplicate controller logic across issue creation and assignment paths.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\section{EDUCATION}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {University of South Florida, Tampa, United States}{Master of Science, Computer Science}{Aug 2024}{May 2026}
+\resumeSubHeadingListEnd
+
+%---------- CERTIFICATIONS ----------
+\section{CERTIFICATIONS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    \textbf{AWS Certified Cloud Practitioner} - Amazon, Nov 2023
+  }}
+\end{itemize}
+
+%-------------------------------------------
+\end{document}

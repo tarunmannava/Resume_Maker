@@ -1,0 +1,66 @@
+[
+  {
+    "id": "project_1",
+    "name": "Intelligent Codebase QA & Retrieval Assistant",
+    "title": "Codebase QA & Retrieval Assistant",
+    "target_roles": [
+      "AI Engineer",
+      "Applied AI Engineer",
+      "LLM Engineer",
+      "Backend Engineer",
+      "Software Engineer"
+    ],
+    "tech_stack": [
+      "Python",
+      "FastAPI",
+      "AST Parsing",
+      "Tree-Sitter",
+      "PostgreSQL",
+      "pgvector",
+      "Ollama",
+      "Docker"
+    ],
+    "bullets": [
+      "Built a local QA assistant that traverses code repositories using AST and Tree-Sitter parsing to answer developer questions about the codebase.",
+      "Chunked source code by classes, functions, and module dependencies to preserve full technical context during retrieval.",
+      "Stored code embeddings and keyword indexes in PostgreSQL (pgvector) to support hybrid semantic and exact-match search.",
+      "Retrieved relevant code snippets and fed them into local Ollama LLMs to generate grounded answers for complex architecture and logic questions.",
+      "Implemented dependency tree traversal to trace function call hierarchies and variable usages across multi-file projects."
+    ],
+    "description": "A local QA assistant that traverses code repositories, indexes functions and classes in PostgreSQL with pgvector, and answers developer questions using RAG retrieval.",
+    "extra_context": "Engineering Motivation: Built this assistant to help developers quickly understand unfamiliar repositories. Used AST/Tree-Sitter parsing to chunk code along class and function boundaries, storing embeddings in PostgreSQL with pgvector for hybrid retrieval.",
+    "source_file": "intelligent-code-doc-assistant/README.md"
+  },
+  {
+    "id": "project_2",
+    "name": "Automated PR Documentation Agent with Dynamic Tool Calling",
+    "title": "Automated PR Documentation Agent",
+    "target_roles": [
+      "AI Agent Engineer",
+      "AI Engineer",
+      "LLM Engineer",
+      "Backend Engineer",
+      "Software Engineer"
+    ],
+    "tech_stack": [
+      "Python",
+      "FastAPI",
+      "Pydantic",
+      "Celery",
+      "Redis",
+      "PostgreSQL",
+      "GitHub Webhooks",
+      "Docker"
+    ],
+    "bullets": [
+      "Built an automated PR documentation agent that listens to GitHub webhooks and executes targeted doc tools based on file diffs.",
+      "Parsed PR code diffs (`unidiff`) to dynamically trigger specific tools for README updates, API schema docs, and database migration notes.",
+      "Configured HMAC-SHA256 verified GitHub webhooks and an async Celery/Redis queue to process PR events in the background.",
+      "Enforced strict Pydantic schemas on tool arguments and outputs to ensure generated doc updates remain valid before commenting on PRs.",
+      "Persisted PR events, file diffs, and tool execution logs in PostgreSQL to support retries and track documentation updates."
+    ],
+    "description": "An automated PR documentation agent that processes merged GitHub pull requests and invokes targeted doc tools based on changed files.",
+    "extra_context": "Engineering Motivation: Built this agent to automate documentation maintenance. Inspects PR code diffs and dynamically calls specific documentation tools (README tool, API spec tool, DB schema tool) via Pydantic schema validation.",
+    "source_file": "Agent New/README.md"
+  }
+]

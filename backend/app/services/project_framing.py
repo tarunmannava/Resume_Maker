@@ -9,21 +9,22 @@ from .projects_data import PROJECTS
 
 # Which project IDs are eligible per target identity
 IDENTITY_PROJECT_POOL: dict[str, list[int]] = {
-    "ai_platform_engineer": [1, 2, 3, 4],
-    "ml_engineer": [5, 6],
-    "backend_engineer": [5, 7, 8, 9, 10],
-    "frontend_engineer": [7, 8],
-    "fullstack_engineer": [3, 7, 8, 9, 10],
-    "devops_engineer": [4, 8],
-    "cloud_engineer": [4, 8],
+    "ai_platform_engineer": [1, 2, 3],
+    "ml_engineer": [1, 2],
+    "backend_engineer": [3, 2, 1],
+    "frontend_engineer": [2, 1],
+    "fullstack_engineer": [3, 2, 1],
+    "devops_engineer": [2, 1],
+    "cloud_engineer": [2, 1],
 }
 
 # Legacy role_category → default identity when identity not passed
 LEGACY_CATEGORY_POOL: dict[str, list[int]] = {
     "AI Engineer": [1, 2],
-    "AI Support": [3, 4],
-    "ML Engineer": [5, 6],
-    "Software Engineer": [5, 7, 8, 9, 3],
+    "AI Support": [1, 2],
+    "ML Engineer": [1, 2],
+    "Software Engineer": [3, 2, 1],
+    "Java Developer": [3, 2, 1],
 }
 
 AI_HEAVY_TERMS = re.compile(
@@ -235,26 +236,23 @@ def select_projects(
     ]
     scored.sort(key=lambda x: x[0], reverse=True)
 
-    # Java-focused JD: always include the two Java/Spring projects when available.
+    # Java-focused JD: always include the Java/Spring project when available.
     if target_role_identity in ("backend_engineer", "fullstack_engineer") and JAVA_JD.search(job_description):
-        java_project = next((p for p in pool if p["id"] == 9), None)
+        java_project = next((p for p in pool if p["id"] == 3), None)
         if java_project:
-            java_web_project = next((p for p in pool if p["id"] == 10), None)
             others = sorted(
-                [(s, p) for s, p in scored if p["id"] not in {9, 10}],
+                [(s, p) for s, p in scored if p["id"] != 3],
                 key=lambda x: x[0],
                 reverse=True,
             )
             top_two = [java_project]
-            if java_web_project:
-                top_two.append(java_web_project)
-            elif others:
+            if others:
                 top_two.append(others[0][1])
             return [materialize_project_for_identity(p, identity) for p in top_two[:2]]
 
-    # Backend/Java JD: avoid AI-only projects even if pool allows hybrid
+    # Backend/Java JD: prioritize backend-framed projects
     if target_role_identity == "backend_engineer" and BACKEND_TERMS.search(job_description):
-        non_ai = [(s, p) for s, p in scored if p["id"] >= 7 or p["id"] == 5]
+        non_ai = [(s, p) for s, p in scored if p["id"] == 3 or p["id"] == 2]
         if len(non_ai) >= 2:
             scored = non_ai
 
@@ -377,3 +375,40 @@ def build_evidence_linked_skills_instructions(
 - For missing JD terms that are adjacent (e.g., Oracle when only PostgreSQL/SQL Server appear), use generic phrasing: "relational databases (PostgreSQL, SQL Server)" — not the unsupported vendor name.
 - Missing JD terms to address only when supported or transferable: {", ".join(missing_terms[:12]) or "none"}
 """
+
+
+def build_stack_experience_framing_instructions(target_stack: str) -> str:
+    """
+    Constructs prompt instructions for Cognizant Java guardrail and USF stack adaptation.
+    target_stack is one of: 'java', 'node', 'python'.
+    """
+    stack = target_stack.lower().strip()
+    
+    cognizant_guard = (
+        "COGNIZANT EXPERIENCE GUARDRAIL (STRICT MANDATORY):\n"
+        "- Do NOT change the backend language or core technology stack of the Cognizant work experience entry.\n"
+        "- Cognizant MUST remain Java-focused (Java, Spring Boot, REST APIs, PostgreSQL/SQL, Microservices).\n"
+        "- You may reword Cognizant bullets for metric impact, action verbs, and scale, but NEVER replace Java with Node.js or Python.\n"
+    )
+    
+    if stack == "java":
+        usf_framing = (
+            "USF EXPERIENCE & PROJECTS ADAPTATION (JAVA TARGET STACK):\n"
+            "- Adapt USF (University of San Francisco) experience bullets to showcase Java, Spring Boot, REST APIs, and backend engineering patterns.\n"
+            "- Ensure Projects section features Java / Spring Boot microservice architectures.\n"
+        )
+    elif stack == "node":
+        usf_framing = (
+            "USF EXPERIENCE & PROJECTS ADAPTATION (NODE.JS TARGET STACK):\n"
+            "- Adapt USF (University of San Francisco) experience bullets to showcase Node.js, TypeScript, React, Express/Fastify, and fullstack web workflows.\n"
+            "- Ensure Projects section features Node.js / TypeScript / React fullstack architectures.\n"
+        )
+    else:  # python
+        usf_framing = (
+            "USF EXPERIENCE & PROJECTS ADAPTATION (PYTHON TARGET STACK):\n"
+            "- Adapt USF (University of San Francisco) experience bullets to showcase Python, FastAPI, data pipelines, and backend/AI workflows.\n"
+            "- Ensure Projects section features Python / FastAPI / data-driven architectures.\n"
+        )
+        
+    return cognizant_guard + "\n" + usf_framing
+
