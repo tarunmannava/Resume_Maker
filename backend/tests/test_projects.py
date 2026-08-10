@@ -5,22 +5,11 @@ from backend.app.services.projects_data import PROJECTS
 
 
 def test_keyword_industry_detection():
-    # Fintech keywords
+    # Industry detection disabled
     fintech_job = "Looking for a software engineer to build secure banking APIs and transaction ledgers, fraud prevention."
     industry, role = detect_details_with_keywords(fintech_job)
-    assert industry == "Fintech"
+    assert industry is None
     assert role == "Software Engineer"
-
-    # Healthcare keywords
-    health_job = "We need an engineer to process clinical medical records and patient data in HIPAA environments."
-    industry, role = detect_details_with_keywords(health_job)
-    assert industry == "Healthcare"
-    assert role == "Software Engineer"
-
-    # Cybersecurity keywords
-    sec_job = "Seeking a specialist in cryptography, threat detection, and identity auth systems."
-    industry, role = detect_details_with_keywords(sec_job)
-    assert industry == "Cybersecurity"
 
 
 def test_keyword_role_detection():

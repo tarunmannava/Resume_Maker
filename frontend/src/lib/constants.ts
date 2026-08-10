@@ -59,7 +59,7 @@ export const sampleResume = `%-------------------------
 
 \\newcommand{\\resumeSep}{\\textbullet}
 
-% Experience / education: stacked lines parse cleanly in PDF to text
+% Experience / education: stacked lines parse cleanly in PDF-to-text
 \\newcommand{\\resumeSubheading}[4]{%
   \\vspace{0pt}\\item
   \\textbf{#1} \\\\
@@ -68,7 +68,7 @@ export const sampleResume = `%-------------------------
   \\vspace{2pt}
 }
 
-% Projects: title + tech stack only (no date range; not relevant for projects)
+% Projects: title + tech stack
 \\newcommand{\\resumeProject}[2]{%
   \\vspace{0pt}\\item[]
   \\textbf{#1} \\\\
@@ -82,7 +82,7 @@ export const sampleResume = `%-------------------------
 \\newcommand{\\resumeItemListEnd}{\\end{itemize}\\vspace{2pt}}
 
 \\newcommand{\\resumeHeadingContact}{%
-  Tampa, FL \\hspace{0.4em}\\resumeSep\\hspace{0.4em}+1 (656) 203 7074 \\hspace{0.4em}\\resumeSep\\hspace{0.4em}\\href{mailto:mannava.tarun34@gmail.com}{mannava.tarun34@gmail.com} \\hspace{0.4em}\\resumeSep\\hspace{0.4em}\\href{https://linkedin.com/in/tarunmannava}{LinkedIn} \\hspace{0.4em}\\resumeSep\\hspace{0.4em}\\href{https://github.com/tarunmannava}{GitHub}%
+  Tampa, FL \\hspace{0.4em}\\resumeSep\\hspace{0.4em}+1 (656) 203-7074 \\hspace{0.4em}\\resumeSep\\hspace{0.4em}\\href{mailto:mannava.tarun34@gmail.com}{mannava.tarun34@gmail.com} \\hspace{0.4em}\\resumeSep\\hspace{0.4em}\\href{https://linkedin.com/in/tarunmannava}{LinkedIn} \\hspace{0.4em}\\resumeSep\\hspace{0.4em}\\href{https://github.com/tarunmannava}{GitHub}%
 }
 
 \\newcommand{\\resumeSubHeadingListStart}{\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]}
@@ -96,43 +96,48 @@ export const sampleResume = `%-------------------------
   {\\Huge \\textbf{Tarun Mannava}} \\\\[4pt]
   \\small
   \\resumeHeadingContact \\\\[4pt]
-  \\textit{Software Engineer with 2+ years of experience building scalable Java and Spring Boot backend systems. Experienced in RESTful microservices, concurrent processing, distributed caching, secure authentication, and high-throughput data platforms using PostgreSQL, Redis, Docker, and AWS.}
+  \\textit{Software Engineer with 2+ years of experience building scalable Java and Spring Boot backend systems. Experienced in RESTful microservices, concurrent processing, distributed caching, secure authentication, and high-throughput data platforms using PostgreSQL, Redis, AWS, and modern software engineering practices.}
 \\end{center}
 
 \\vspace{-10pt}
 
-%---------- EDUCATION ----------
-\\section{EDUCATION}
-\\resumeSubHeadingListStart
-  \\resumeSubheading
-    {University of South Florida, Tampa, United States}{Master of Science, Computer Science}{Aug 2024}{May 2026}
-\\resumeSubHeadingListEnd
+%---------- SKILLS ----------
+\\section{SKILLS}
+\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \\small{\\item{
+    \\textbf{Backend:} Java, Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, REST APIs, Microservices \\\\[1pt]
+    \\textbf{Concurrency:} CompletableFuture, ExecutorService \\\\[1pt]
+    \\textbf{Databases:} PostgreSQL, MongoDB, SQL Server, Redis, jOOQ \\\\[1pt]
+    \\textbf{Cloud \\& DevOps:} AWS (Cognito, S3), Docker, GitHub Actions, Linux \\\\[1pt]
+    \\textbf{Testing:} JUnit, Cucumber \\\\[1pt]
+    \\textbf{Frontend:} React, JavaScript, HTML, CSS
+  }}
+\\end{itemize}
 
 %---------- EXPERIENCE ----------
 \\section{EXPERIENCE}
 \\resumeSubHeadingListStart
 
   \\resumeSubheading
-    {University of South Florida}{Graduate Researcher, Full Stack AI Platform}{Jan 2025}{May 2026}
+    {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
   \\resumeItemListStart
-    \\resumeItem{Built and deployed an AI powered learning platform with 13 interactive modules, serving 60+ daily active students and instructors at USF SHIELD Lab.}
-    \\resumeItem{Developed React and TypeScript frontends for student exercises and instructor tools, supporting adaptive learning workflows.}
-    \\resumeItem{Built Node.js backend services integrating LLMs via Groq API, maintaining sub 2s response latency for 60+ concurrent classroom users.}
-    \\resumeItem{Designed PostgreSQL schemas and role based access control (RBAC) models for authentication, enrollment, and learning analytics.}
-    \\resumeItem{Designed shared TypeScript interfaces and Zod validation schemas, reducing API integration defects by 30\\% and eliminating manual contract synchronization.}
-    \\resumeItem{Shipped 8 production releases with zero downtime by implementing backward compatible database migrations and API schemas.}
+    \\resumeItem{Developed \\textbf{Java 11}/\\textbf{Spring Boot} microservices for policy onboarding and validation (persisting client metadata in \\textbf{MongoDB}), contributing to a service on a distributed insurance platform handling 20K+ hourly transactions.}
+    \\resumeItem{Enhanced asynchronous validation workflows built with \\textbf{CompletableFuture} and \\textbf{ExecutorService}, improving request latency through parallel task execution.}
+    \\resumeItem{Implemented \\textbf{Redis}-backed caching strategies and cache warm-up mechanisms, reducing \\textbf{SQL Server} load and improving p95 API response latency by 30\\% during peak onboarding traffic.}
+    \\resumeItem{Optimized complex queries for policy audit reporting using \\textbf{jOOQ} and SQL across \\textbf{PostgreSQL} and \\textbf{SQL Server}, eliminating N+1 query patterns and reducing database round trips.}
+    \\resumeItem{Contributed to refactoring duplicate business logic across 8+ microservices into reusable Spring service-layer components with centralized exception handling.}
+    \\resumeItem{Implemented \\textbf{Spring Security} OAuth2 integration with \\textbf{AWS Cognito} by adding new authorization features and securing REST endpoints with JWT-based authentication.}
+    \\resumeItem{Developed \\textbf{JUnit} and \\textbf{Cucumber} test suites covering business-critical workflows, achieving 70\\% backend code coverage while reducing production regressions.}
   \\resumeItemListEnd
 
   \\resumeSubheading
-    {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
+    {University of South Florida}{Graduate Researcher, Software Engineer}{Jan 2025}{May 2026}
   \\resumeItemListStart
-    \\resumeItem{Developed Java 11 Spring Boot microservices exposing REST APIs for policy validation, persisting client metadata in MongoDB and supporting a distributed insurance platform processing 20K+ hourly transactions.}
-    \\resumeItem{Enhanced asynchronous validation workflows using CompletableFuture and ExecutorService, improving latency through parallel task execution.}
-    \\resumeItem{Implemented Redis backed caching and cache warm up mechanisms, reducing SQL Server load and improving p95 response latency by 30\\% during peak traffic.}
-    \\resumeItem{Optimized complex reporting queries using jOOQ and SQL across PostgreSQL and SQL Server, eliminating N+1 patterns and database round trips.}
-    \\resumeItem{Refactored duplicate logic across 8+ microservices into reusable Spring service components with centralized exception handling.}
-    \\resumeItem{Secured REST endpoints with JWT based authentication using Spring Security OAuth2 and AWS Cognito.}
-    \\resumeItem{Developed JUnit and Cucumber test suites covering critical workflows, achieving 70\\% backend code coverage.}
+    \\resumeItem{Delivered a production web platform end to end, translating requirements from faculty and research stakeholders into 13 interactive modules built with \\textbf{React} and \\textbf{TypeScript}, serving 60+ students, instructors, and researchers at USF SHIELD Lab.}
+    \\resumeItem{Developed a \\textbf{Python/Flask} REST API for AI assisted learning workflows, integrating \\textbf{Groq} and \\textbf{Gemini} with task based grading rubrics and response caching, supporting 60+ concurrent users with sub 2s response latency.}
+    \\resumeItem{Integrated \\textbf{Supabase} (\\textbf{PostgreSQL}) for authentication, enrollment, progress tracking, and quiz persistence, supporting multi role access patterns across student, instructor, and researcher personas.}
+    \\resumeItem{Delivered adaptive student exercises and instructor curriculum tools with \\textbf{React} role based routing and \\textbf{Flask} server side validation, covering 13 active learning modules across multiple course semesters.}
+    \\resumeItem{Shipped 8+ major module updates on 2 week \\textbf{Agile} iteration cycles using \\textbf{Git} based workflows and code reviews, maintaining zero downtime during live classroom usage.}
   \\resumeItemListEnd
 
 \\resumeSubHeadingListEnd
@@ -141,44 +146,31 @@ export const sampleResume = `%-------------------------
 \\section{PROJECTS}
 \\resumeSubHeadingListStart
 
-  \\resumeProject{High-Throughput Financial Order Ledger}{Java 17, Spring Boot, PostgreSQL, Redis, Docker, JUnit 5}
+  \\resumeProject{Java Issue Tracking and Team Workflow Management Application}{Java, Spring Boot, Spring Security, PostgreSQL, JUnit}
   \\resumeItemListStart
-    \\resumeItem{Engineered a high-throughput financial order matching engine using Java 17 and Spring Boot, achieving 10,000+ orders/sec processing capacity.}
-    \\resumeItem{Implemented pessimistic locking and transactional boundaries in PostgreSQL to guarantee ACID consistency and eliminate race conditions on high-concurrency order executions.}
-    \\resumeItem{Designed multi-tier Redis caching for account balances and market depth data, reducing database read latency by 45\\% under peak simulated trading volume.}
-    \\resumeItem{Configured automated CI/CD pipelines via GitHub Actions and Docker containerization, maintaining 85\\% JUnit 5 code coverage across core matching logic.}
+    \\resumeItem{Built a \\textbf{Java}/\\textbf{Spring Boot} backend exposing REST APIs with \\textbf{PostgreSQL} persistence through Spring Data JPA and Hibernate.}
+    \\resumeItem{Designed normalized \\textbf{PostgreSQL} schemas with foreign key constraints and indexes supporting efficient filtering, pagination, and audit logging.}
+    \\resumeItem{Designed and implemented a backend state machine to enforce issue-lifecycle transitions with validation rules and role-scoped access controls.}
+    \\resumeItem{Achieved over 80\\% backend test coverage using \\textbf{JUnit} unit and integration tests validating CRUD operations, state transitions, and business logic.}
   \\resumeItemListEnd
 
 \\resumeSubHeadingListEnd
 
-%---------- SKILLS ----------
-\\section{SKILLS}
-\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
-  \\small{\\item{
-    \\textbf{Languages:} Java, Python, TypeScript, SQL, JavaScript \\\\[1pt]
-    \\textbf{Backend:} Java, Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, REST APIs, Microservices, Node.js, Express.js, FastAPI \\\\[1pt]
-    \\textbf{Concurrency:} CompletableFuture, ExecutorService \\\\[1pt]
-    \\textbf{Databases \\& Caching:} PostgreSQL, MongoDB, SQL Server, Redis, jOOQ \\\\[1pt]
-    \\textbf{Cloud \\& DevOps:} AWS (Cognito, S3), Kubernetes, Terraform, Docker, Git, GitHub Actions, Jenkins, Linux \\\\[1pt]
-    \\textbf{Build Tools:} Maven, Gradle \\\\[1pt]
-    \\textbf{AI \\& Observability:} LLM Integration, LangChain, Prometheus, Grafana \\\\[1pt]
-    \\textbf{Testing:} JUnit, Cucumber, Jest, Cypress \\\\[1pt]
-    \\textbf{Frontend:} React, Next.js, HTML, CSS
-  }}
-\\end{itemize}
+%---------- EDUCATION ----------
+\\section{EDUCATION}
+\\resumeSubHeadingListStart
+  \\resumeSubheading
+    {University of South Florida, Tampa, United States}{Master of Science, Computer Science}{Aug 2024}{May 2026}
+\\resumeSubHeadingListEnd
 
 %---------- CERTIFICATIONS ----------
 \\section{CERTIFICATIONS}
 \\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
   \\small{\\item{
-    \\textbf{AWS Certified Cloud Practitioner} - Amazon, Nov 2023
+    \\textbf{AWS Certified Cloud Practitioner} -- Amazon, Nov 2023
   }}
 \\end{itemize}
 
 %-------------------------------------------
 \\end{document}
 `;
-
-export const sampleJob = `Required: Python, Django, PostgreSQL, REST APIs, AWS.
-Preferred: React or Angular, Docker, CI/CD.
-We value backend engineers who can build scalable services and collaborate across teams.`;

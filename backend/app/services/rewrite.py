@@ -128,14 +128,7 @@ def build_system_prompt(align_titles: bool) -> str:
 
 
 def get_effective_industry(selected_industry: str | None, job_description: str, resume_text: str = "", company_context: str | None = None) -> str:
-    from .job_analyzer import resolve_industry
-
-    industry, _, _ = resolve_industry(
-        job_description,
-        company_context,
-        user_selected=selected_industry,
-    )
-    return industry
+    return "General Technology"
 
 
 def get_effective_role_category(selected_role_category: str | None, job_description: str) -> str:
@@ -192,7 +185,6 @@ def build_user_prompt(
 
     project_instructions = f"""
 TARGET ROLE CATEGORY: {effective_role_category}
-TARGET COMPANY INDUSTRY: {effective_industry}
 TARGET DETECTED STACK: {target_stack.upper()}
 
 {stack_block}
@@ -208,7 +200,7 @@ TARGET DETECTED STACK: {target_stack.upper()}
 {evidence_skills_block}
 
 MANDATORY PROJECTS TO INSERT/REPLACE:
-You MUST replace the projects in the resume with the following two project templates, customized for the target industry '{effective_industry}'.
+You MUST replace the projects in the resume with the following two project templates.
 
 Project 1:
 - Role-framed Title (USE THIS): {proj_a["title"]}

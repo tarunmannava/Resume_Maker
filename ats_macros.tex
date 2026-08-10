@@ -1,8 +1,8 @@
 % ATS-friendly resume macros (no tabular layouts; minimal pipe delimiters)
 
 \usepackage{anyfontsize}
-\renewcommand{\normalsize}{\fontsize{10.5}{12.6}\selectfont}
-\renewcommand{\small}{\fontsize{10.5}{12.6}\selectfont}
+\renewcommand{\normalsize}{\fontsize{10}{12}\selectfont}
+\renewcommand{\small}{\fontsize{10}{12}\selectfont}
 \normalsize
 
 \newcommand{\resumeSep}{\textbullet}
@@ -16,11 +16,12 @@
   \vspace{2pt}
 }
 
-% Projects: title + tech stack only (no date range; not relevant for projects)
-\newcommand{\resumeProject}[2]{%
+% Projects: same date-to-bullets spacing as experience
+\newcommand{\resumeProject}[3]{%
   \vspace{0pt}\item[]
   \textbf{#1} \\
-  \small\textit{#2}
+  \small\textit{#2} \\
+  \small #3
   \vspace{2pt}
 }
 
