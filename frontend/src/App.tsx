@@ -103,7 +103,8 @@ const sampleResume = `%-------------------------
   +1 (656) 203-7074 \\quad $|$ \\quad
   \\href{mailto:mannava.tarun34@gmail.com}{mannava.tarun34@gmail.com} \\quad $|$ \\quad
   \\href{https://linkedin.com/in/tarunmannava}{LinkedIn} \\quad $|$ \\quad
-  \\href{https://github.com/tarunmannava}{GitHub}
+  \\href{https://github.com/tarunmannava}{GitHub} \\\\[4pt]
+  \\textit{Software Engineer with 2+ years of experience building scalable Java and Spring Boot backend systems. Experienced in RESTful microservices, concurrent processing, distributed caching, secure authentication, and high-throughput data platforms using PostgreSQL, Redis, Docker, and AWS.}
 \\end{center}
 
 \\vspace{-10pt}
@@ -147,20 +148,12 @@ const sampleResume = `%-------------------------
 \\section{PROJECTS}
 \\resumeSubHeadingListStart
 
-  \\resumeProjectHeading{Centralized Prompt Registry for Clinical AI Experimentation}
+  \\resumeProjectHeading{High-Throughput Financial Order Ledger \\textit{Java 17, Spring Boot, PostgreSQL, Redis, Docker, JUnit 5}}
   \\resumeItemListStart
-    \\resumeItem{Developed a centralized prompt registry microservice for clinical LLM applications, supporting versioning, rollback, and dynamic rendering across 40+ production AI workflows.}
-    \\resumeItem{Implemented real-time A/B experimentation infrastructure for OpenAI and Gemini models on treatment-recommendation tasks, improving winning-variant selection speed by 3x.}
-    \\resumeItem{Built observability dashboards tracking latency, token throughput, cost, and generation quality, reducing mean time to detect anomalies by 40\\%.}
-    \\resumeItem{Designed canary traffic routing for production prompt rollouts, enabling zero-downtime updates across 12 prompt families in a healthcare environment.}
-  \\resumeItemListEnd
-
-  \\resumeProjectHeading{Scalable LLM Infrastructure for Clinical Note Summarization}
-  \\resumeItemListStart
-    \\resumeItem{Containerized and orchestrated open-source LLM inference services on \\textbf{AWS} with GPU autoscaling, supporting 10x traffic spikes without manual intervention for clinical note summarization.}
-    \\resumeItem{Implemented Infrastructure-as-Code with \\textbf{Terraform} and \\textbf{GitHub Actions} CI/CD, reducing environment provisioning time from 4 hours to 25 minutes.}
-    \\resumeItem{Integrated \\textbf{Prometheus} and \\textbf{Grafana} monitoring, achieving 99.9\\% uptime across production AI inference workloads.}
-    \\resumeItem{Optimized inference via quantization and distributed serving, increasing throughput by 2.4x while holding p95 latency under 800ms.}
+    \\resumeItem{Engineered a high-throughput financial order matching engine using Java 17 and Spring Boot, achieving 10,000+ orders/sec processing capacity.}
+    \\resumeItem{Implemented pessimistic locking and transactional boundaries in PostgreSQL to guarantee ACID consistency and eliminate race conditions on high-concurrency order executions.}
+    \\resumeItem{Designed multi-tier Redis caching for account balances and market depth data, reducing database read latency by 45\\% under peak simulated trading volume.}
+    \\resumeItem{Configured automated CI/CD pipelines via GitHub Actions and Docker containerization, maintaining 85\\% JUnit 5 code coverage across core matching logic.}
   \\resumeItemListEnd
 
 \\resumeSubHeadingListEnd
@@ -169,12 +162,12 @@ const sampleResume = `%-------------------------
 \\section{SKILLS}
 \\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
   \\small{\\item{
-    \\textbf{Languages:} TypeScript $|$ Python $|$ Java $|$ SQL \\\\[1pt]
-    \\textbf{Frontend \\& Backend:} React $|$ Next.js $|$ HTML/CSS $|$ Node.js $|$ Express.js $|$ Spring Boot $|$ FastAPI $|$ REST APIs $|$ Microservices \\\\[1pt]
-    \\textbf{Data \\& Cloud:} PostgreSQL $|$ MongoDB $|$ Redis $|$ SQL Server $|$ AWS $|$ Docker $|$ Jenkins $|$ GitHub Actions $|$ Linux \\\\[1pt]
-    \\textbf{AI \\& Observability:} LangChain $|$ LLM Integration $|$ Prompt Engineering $|$ Prometheus $|$ Grafana \\\\[1pt]
-    \\textbf{Testing:} Jest $|$ Cypress $|$ JUnit \\\\[1pt]
-    \\textbf{Programming Concepts:} APIs $|$ OOP
+    \\textbf{Backend:} Java, Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, REST APIs, Microservices \\\\[1pt]
+    \\textbf{Concurrency:} CompletableFuture, ExecutorService \\\\[1pt]
+    \\textbf{Databases:} PostgreSQL, MongoDB, SQL Server, Redis, jOOQ \\\\[1pt]
+    \\textbf{Cloud \& DevOps:} AWS (Cognito, S3), Docker, GitHub Actions, Linux \\\\[1pt]
+    \\textbf{Testing:} JUnit, Cucumber \\\\[1pt]
+    \\textbf{Frontend:} React, JavaScript, HTML, CSS
   }}
 \\end{itemize}
 

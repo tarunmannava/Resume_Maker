@@ -141,19 +141,12 @@ export const sampleResume = `%-------------------------
 \\section{PROJECTS}
 \\resumeSubHeadingListStart
 
-  \\resumeProject{Scalable LLM Infrastructure for Student Facing AI Tutoring}{Docker, Kubernetes, Terraform, vLLM, Prometheus}
+  \\resumeProject{High-Throughput Financial Order Ledger}{Java 17, Spring Boot, PostgreSQL, Redis, Docker, JUnit 5}
   \\resumeItemListStart
-    \\resumeItem{Built a self hosted inference platform for classroom scale AI tutoring (60+ concurrent users), containerizing vLLM on Kubernetes with GPU autoscaling}
-    \\resumeItem{Provisioned staging clusters with Terraform and automated deployments via GitHub Actions, reducing setup time from 4 hours to under 30 minutes}
-    \\resumeItem{Integrated Prometheus and Grafana alerting on GPU utilization and throughput, resolving bottlenecks to improve p95 latency by 35\\%}
-  \\resumeItemListEnd
-
-  \\resumeProject{Centralized Prompt Registry for AI Assisted Learning Modules}{Python, FastAPI, React, PostgreSQL, Redis}
-  \\resumeItemListStart
-    \\resumeItem{Developed a prompt registry microservice with version history and dynamic rendering for 13+ learning modules}
-    \\resumeItem{Implemented A/B testing comparing OpenAI and Gemini variants, accelerating prompt selection cycles by 3x}
-    \\resumeItem{Implemented Grafana dashboards tracking latency and token costs, reducing regression detection time by 40\\%}
-    \\resumeItem{Designed staged rollouts for zero downtime prompt updates, decoupling prompt changes from application releases}
+    \\resumeItem{Engineered a high-throughput financial order matching engine using Java 17 and Spring Boot, achieving 10,000+ orders/sec processing capacity.}
+    \\resumeItem{Implemented pessimistic locking and transactional boundaries in PostgreSQL to guarantee ACID consistency and eliminate race conditions on high-concurrency order executions.}
+    \\resumeItem{Designed multi-tier Redis caching for account balances and market depth data, reducing database read latency by 45\\% under peak simulated trading volume.}
+    \\resumeItem{Configured automated CI/CD pipelines via GitHub Actions and Docker containerization, maintaining 85\\% JUnit 5 code coverage across core matching logic.}
   \\resumeItemListEnd
 
 \\resumeSubHeadingListEnd
