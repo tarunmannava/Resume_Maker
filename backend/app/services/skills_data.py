@@ -32,3 +32,18 @@ def get_skills_template_for_stack(stack: str) -> dict[str, Any] | None:
     if key in ("node", "node.js", "react", "typescript", "fullstack", "fullstack_engineer"):
         return SKILLS_TEMPLATES.get("node")
     return SKILLS_TEMPLATES.get("python")
+
+
+def format_all_canonical_templates_for_prompt() -> str:
+    lines = [
+        "CANONICAL SKILLS TEMPLATES (SELECT THE BEST MATCH FOR THE JOB DESCRIPTION):",
+        "Examine the Job Description and candidate resume, then select the SINGLE best-matching canonical SKILLS template from the 4 options below. Use its exact category layout, category names, and LaTeX formatting as the baseline for the `\\section{SKILLS}` section. Adapt the skills inside each category to match the job description, pruning irrelevant items.",
+        "",
+    ]
+    for key, tmpl in SKILLS_TEMPLATES.items():
+        name = tmpl.get("name", key.capitalize())
+        raw = tmpl.get("raw_latex", "")
+        lines.append(f"Option ({name}):")
+        lines.append(raw)
+        lines.append("")
+    return "\n".join(lines)

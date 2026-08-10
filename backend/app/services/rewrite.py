@@ -27,6 +27,7 @@ from .project_framing import (
     select_projects,
 )
 from .job_analyzer import detect_target_stack
+from .skills_data import format_all_canonical_templates_for_prompt
 from .rewrite_strategy import (
     build_rewrite_strategy,
     classify_target_role_identity,
@@ -201,6 +202,8 @@ TARGET DETECTED STACK: {target_stack.upper()}
 {selective_emphasis_block}
 
 {foundational_block}
+
+{format_all_canonical_templates_for_prompt()}
 
 {evidence_skills_block}
 
