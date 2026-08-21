@@ -141,6 +141,8 @@ def build_user_prompt(
             "data/backend architectures, and agents."
         )
 
+    missing_str = ", ".join(missing_terms) if missing_terms else "None (strong initial keyword match)"
+
     prompt = f"""TARGET JOB DESCRIPTION:
 {request.job_description}
 
@@ -148,13 +150,14 @@ TARGET ROLE NAME: {target_role}
 TARGET LOCATION (CITY, STATE): {target_location}
 TARGET INDUSTRY CONTEXT: {industry}
 DETECTED PRIMARY STACK: {target_stack.upper()}
+IDENTIFIED ATS CRITERIA & KEYWORD GAPS TO RESOLVE: {missing_str}
 COMPANY CONTEXT: {company_context}
 USER CONFIRMED SKILLS: {confirmed}
 BANNED SKILLS (DO NOT INCLUDE): {banned}
 EXTRA USER NOTES: {notes}
 
 CRITICAL STACK & ROLE INSTRUCTIONS:
-- CONTEXTUAL ATS CRITERIA AUDIT: Audit the base resume against the JD's specific criteria in context; strategically rewrite the existing bullets, projects, and skills to supply missing evidence and quantifiable metrics, elevating the resume to a 90%–95%+ pass rating.
+- CONTEXTUAL ATS CRITERIA AUDIT & GAP RESOLUTION: Audit the base resume against the JD's criteria and the identified gaps above. Strategically rewrite the existing bullets, projects, summary, and skills in-place to supply missing engineering evidence and quantifiable metrics (X-Y-Z formula), elevating the resume to a 90%–95%+ pass rating.
 - {cognizant_instruction}
 - {usf_projects_instruction}
 - Rewrite the candidate's existing projects directly in-place without injecting fake external projects.
