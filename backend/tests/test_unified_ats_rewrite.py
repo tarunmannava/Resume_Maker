@@ -54,7 +54,7 @@ Backend Software Engineer with experience in distributed systems, REST APIs, and
 \section{EXPERIENCE}
 \resumeSubHeadingListStart
   \resumeSubheading
-    {University of San Francisco}{San Francisco, CA}
+    {University of South Florida}{Tampa, FL}
     {Graduate Researcher}{Aug 2023 -- May 2025}
     \resumeItemListStart
       \resumeItem{Developed asynchronous FastAPI services for autonomous multi-agent systems.}

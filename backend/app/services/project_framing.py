@@ -417,7 +417,7 @@ def build_stack_experience_framing_instructions(target_stack: str) -> str:
         )
         usf_framing = (
             "USF EXPERIENCE & PROJECTS ADAPTATION (NODE.JS TARGET STACK):\n"
-            "- Adapt USF (University of San Francisco) experience bullets to showcase Node.js, TypeScript, React, Express/Fastify, and fullstack web workflows.\n"
+            "- Adapt USF (University of South Florida) experience bullets to showcase Node.js, TypeScript, React, Express/Fastify, and fullstack web workflows.\n"
             "- Ensure Projects section features Node.js, TypeScript, React fullstack architectures.\n"
         )
     elif stack in ("ai", "ml", "ai_engineer", "ml_engineer"):
@@ -430,7 +430,7 @@ def build_stack_experience_framing_instructions(target_stack: str) -> str:
         )
         usf_framing = (
             "USF EXPERIENCE & PROJECTS ADAPTATION (AI TARGET STACK):\n"
-            "- Adapt USF (University of San Francisco) experience bullets to showcase Python, LLMs, RAG, and AI agent workflows.\n"
+            "- Adapt USF (University of South Florida) experience bullets to showcase Python, LLMs, RAG, and AI agent workflows.\n"
             "- Ensure Projects section features Python / AI architectures.\n"
         )
     else:  # python
@@ -443,9 +443,8 @@ def build_stack_experience_framing_instructions(target_stack: str) -> str:
         )
         usf_framing = (
             "USF EXPERIENCE & PROJECTS ADAPTATION (PYTHON TARGET STACK):\n"
-            "- Adapt USF (University of San Francisco) experience bullets to showcase Python, FastAPI, data pipelines, and backend/AI workflows.\n"
+            "- Adapt USF (University of South Florida) experience bullets to showcase Python, FastAPI, data pipelines, and backend/AI workflows.\n"
             "- Ensure Projects section features Python / FastAPI / data-driven architectures.\n"
         )
 
     return cognizant_guard + "\n" + usf_framing
-
