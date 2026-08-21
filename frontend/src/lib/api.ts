@@ -71,6 +71,8 @@ export type CompileResponse = {
   filename_base: string;
   tex_path: string;
   pdf_path?: string | null;
+  docx_path?: string | null;
+  docx_download_url?: string | null;
   log_path?: string | null;
   pdf_download_url?: string | null;
   compiler?: string | null;

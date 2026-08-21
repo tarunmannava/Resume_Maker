@@ -245,7 +245,9 @@ export default function App() {
   const [selectedIndustry, setSelectedIndustry] = useState("Don't know");
   const [customIndustry, setCustomIndustry] = useState("");
   const [selectedRoleCategory, setSelectedRoleCategory] = useState("Java Developer");
-  const [selectedStackOverride, setSelectedStackOverride] = useState<"auto" | "java" | "node" | "python">("auto");
+  const [selectedStackOverride, setSelectedStackOverride] = useState<
+    "auto" | "dotnet" | "java" | "node" | "python" | "ai"
+  >("auto");
   const [detectedIndustry, setDetectedIndustry] = useState<string | null>(null);
   const [detectedRoleCategory, setDetectedRoleCategory] = useState<string | null>(null);
   const [showIndustryWarning, setShowIndustryWarning] = useState(false);
@@ -556,8 +558,8 @@ export default function App() {
             </label>
             <label style={{ gridColumn: "span 2" }}>
               Target Tech Stack Override
-              <div style={{ display: "flex", gap: "8px", marginTop: "4px" }}>
-                {(["auto", "java", "node", "python"] as const).map((stack) => (
+              <div style={{ display: "flex", gap: "8px", marginTop: "4px", flexWrap: "wrap" }}>
+                {(["auto", "dotnet", "java", "node", "python", "ai"] as const).map((stack) => (
                   <button
                     key={stack}
                     type="button"
@@ -566,11 +568,20 @@ export default function App() {
                       padding: "4px 12px",
                       borderRadius: "6px",
                       fontSize: "12px",
-                      textTransform: "capitalize",
                     }}
                     onClick={() => setSelectedStackOverride(stack)}
                   >
-                    {stack === "auto" ? "⚡ Auto-Detect Stack" : stack === "node" ? "Node.js / React" : stack}
+                    {stack === "auto"
+                      ? "⚡ Auto-Detect"
+                      : stack === "dotnet"
+                      ? ".NET / C#"
+                      : stack === "java"
+                      ? "Java / Spring"
+                      : stack === "node"
+                      ? "Node / React"
+                      : stack === "ai"
+                      ? "AI / ML"
+                      : "Python / FastAPI"}
                   </button>
                 ))}
               </div>
@@ -700,6 +711,26 @@ export default function App() {
               <button type="button" className="secondary" onClick={downloadTex}>
                 Download .tex
               </button>
+              {compileResult?.docx_download_url && (
+                <a
+                  href={toAbsoluteApiUrl(compileResult.docx_download_url)}
+                  download={`${compileResult.filename_base || "Resume"}.docx`}
+                  className="secondary button-link"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    padding: "8px 14px",
+                    borderRadius: "8px",
+                    background: "#2563eb",
+                    color: "#fff",
+                    textDecoration: "none",
+                    fontSize: "14px",
+                    fontWeight: 500,
+                  }}
+                >
+                  Download .docx
+                </a>
+              )}
               <button type="button" onClick={copyLatex}>
                 {copied ? "Copied" : "Copy LaTeX"}
               </button>
@@ -713,7 +744,7 @@ export default function App() {
             </section>
             <div className="report-stack">
               <section className="card small-card">
-                <h3>PDF Compilation</h3>
+                <h3>Document Compilation (PDF & DOCX)</h3>
                 <div style={{ display: "grid", gap: "10px" }}>
                   <button 
                     type="button" 
@@ -721,7 +752,7 @@ export default function App() {
                     disabled={compiling}
                     style={{ background: "#177a3d" }}
                   >
-                    {compiling ? "Compiling PDF..." : "Compile LaTeX to PDF"}
+                    {compiling ? "Compiling PDF & DOCX..." : "Compile to PDF & DOCX"}
                   </button>
                   
                   {compileError && (
@@ -736,16 +767,25 @@ export default function App() {
                   {compileResult && (
                     <div style={{ fontSize: "14px", marginTop: "8px" }}>
                       {compileResult.success ? (
-                        <div style={{ color: "#177a3d" }}>
-                          ✓ PDF Compiled successfully! 
+                        <div style={{ color: "#177a3d", display: "grid", gap: "6px" }}>
+                          <div>✓ Document generated successfully!</div>
                           {compileResult.pdf_download_url && (
                             <a 
                               href={toAbsoluteApiUrl(compileResult.pdf_download_url)} 
                               target="_blank" 
                               rel="noreferrer"
-                              style={{ display: "block", marginTop: "6px", fontWeight: "bold", color: "#5164ff" }}
+                              style={{ display: "inline-block", fontWeight: "bold", color: "#5164ff" }}
                             >
-                              Download PDF File
+                              📄 Download PDF File
+                            </a>
+                          )}
+                          {compileResult.docx_download_url && (
+                            <a 
+                              href={toAbsoluteApiUrl(compileResult.docx_download_url)} 
+                              download={`${compileResult.filename_base || "Resume"}.docx`}
+                              style={{ display: "inline-block", fontWeight: "bold", color: "#2563eb" }}
+                            >
+                              📝 Download DOCX File (Word)
                             </a>
                           )}
                         </div>

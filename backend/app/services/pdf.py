@@ -10,6 +10,8 @@ class CompileResponse(BaseModel):
     filename_base: str
     tex_path: str
     pdf_path: str | None = None
+    docx_path: str | None = None
+    docx_download_url: str | None = None
     log_path: str | None = None
     pdf_download_url: str | None = None
     compiler: str | None = None
@@ -181,8 +183,16 @@ def compile_latex_to_pdf(
         warnings.append(
             "Compiler output contains warnings. Review the .log file if formatting looks wrong."
         )
+    docx_path = output_dir / f"{filename_base}.docx"
+    docx_success = False
+    try:
+        from .docx import convert_tex_to_docx
+        convert_tex_to_docx(tex_path, docx_path)
+        docx_success = docx_path.exists()
+    except Exception as e:
+        warnings.append(f"DOCX export failed: {e}")
 
-    success = result.returncode == 0 and pdf_path.exists()
+    success = (result.returncode == 0 and pdf_path.exists()) or docx_success
     if not success and not errors:
         errors.append("LaTeX compiler completed, but the expected PDF was not created.")
 
@@ -191,9 +201,11 @@ def compile_latex_to_pdf(
         filename_base=filename_base,
         tex_path=safe_relative(tex_path),
         pdf_path=safe_relative(pdf_path) if pdf_path.exists() else None,
+        docx_path=safe_relative(docx_path) if docx_path.exists() else None,
+        docx_download_url=f"/api/files/{filename_base}/{filename_base}.docx" if docx_path.exists() else None,
         log_path=safe_relative(log_path) if log_path.exists() else None,
         pdf_download_url=f"/api/files/{filename_base}/{filename_base}.pdf"
-        if success
+        if (result.returncode == 0 and pdf_path.exists())
         else None,
         compiler=compiler,
         errors=errors,
