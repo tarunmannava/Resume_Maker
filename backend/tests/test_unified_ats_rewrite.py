@@ -139,7 +139,7 @@ def test_prompt_construction_injects_ats_gap_list_and_guardrails():
     assert "IDENTIFIED ATS CRITERIA & KEYWORD GAPS TO RESOLVE: Kafka, Kubernetes" in prompt
     assert "CONTEXTUAL ATS CRITERIA AUDIT & GAP RESOLUTION" in prompt
     assert "COGNIZANT EXPERIENCE (JAVA TARGET STACK)" in prompt
-    assert "USF & PROJECTS RULE (JAVA): USF Graduate Researcher and Projects MUST STAY Python" in prompt
+    assert "USF & PROJECTS RULE (JAVA): Adapt USF Graduate Researcher to Java 17, Spring Boot" in prompt
     assert "San Francisco, CA" in prompt
 
 

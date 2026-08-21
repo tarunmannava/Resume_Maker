@@ -45,9 +45,9 @@ MANDATORY RULES:
      * STRICTLY BANNED from Cognizant: Do NOT claim payment gateways/webhooks (Stripe/Adyen), duplicate charge reductions, ALB/ECS task autoscaling (e.g. 4 to 60 tasks), outsized TPS metrics (e.g. 1,200 TPS), RabbitMQ, or Cloudflare R2/S3.
 5. USF & PROJECTS STACK & ARCHITECTURE MATRIX (CRITICAL):
    - Advanced event-driven messaging (RabbitMQ), webhook HMAC verification, idempotency, multi-agent pipelines, and cloud object storage (Cloudflare R2/S3) belong strictly in PROJECTS (AutoDocs, SkillBeacon) and USF where the candidate genuinely built them.
-   - For .NET roles: USF and Projects MUST STAY Python (Python, FastAPI, React, multi-agent workflows).
-   - For Java roles: USF and Projects MUST STAY Python (Python, FastAPI, React, multi-agent workflows).
-   - For Python roles: USF and Projects MUST BE Python (FastAPI, AsyncIO, data/backend).
+   - For .NET roles: USF Graduate Researcher adapts to C#, .NET 8 / ASP.NET Core, React, and TypeScript.
+   - For Java roles: USF Graduate Researcher adapts to Java 17, Spring Boot, React, and TypeScript.
+   - For Python roles: USF is Python (FastAPI, AsyncIO, data/backend).
    - For Node.js / Fullstack roles: USF and Projects adapt to Node.js / TypeScript / React.
    - For AI / ML roles: USF and Projects adapt to Python / AI (LLMs, RAG, LangChain, vector search).
 6. ACTION-ORIENTED X-Y-Z BULLET FORMAT (FULL TECHNICAL DEPTH & EVIDENCE):
@@ -130,9 +130,8 @@ def build_user_prompt(
             "DO NOT combine Spring Boot with .NET."
         )
         usf_projects_instruction = (
-            "USF & PROJECTS RULE (.NET): USF Graduate Researcher and Projects (SkillBeacon, AutoDocs) MUST STAY Python "
-            "(FastAPI, React, Lab Research, multi-agent workflows). Do NOT change USF or projects to .NET/C#. "
-            "DO NOT invent or add any extra projects like ByteRoute."
+            "USF & PROJECTS RULE (.NET): Adapt USF Graduate Researcher to C#, .NET 8, ASP.NET Core Web API, React, and TypeScript. "
+            "Projects (SkillBeacon, AutoDocs) keep their core architecture without adding fake external projects."
         )
     elif target_stack == "java":
         cognizant_instruction = (
@@ -140,8 +139,8 @@ def build_user_prompt(
             "Microservices, REST APIs, and SQL/PostgreSQL."
         )
         usf_projects_instruction = (
-            "USF & PROJECTS RULE (JAVA): USF Graduate Researcher and Projects MUST STAY Python "
-            "(FastAPI, React, Lab Research, multi-agent workflows). Do NOT change USF or projects to Java."
+            "USF & PROJECTS RULE (JAVA): Adapt USF Graduate Researcher to Java 17, Spring Boot, React, and TypeScript. "
+            "Projects (SkillBeacon, AutoDocs) keep their core architecture without adding fake external projects."
         )
     elif target_stack == "node":
         cognizant_instruction = (
@@ -456,9 +455,27 @@ DOTNET_COGNIZANT_BLOCK = r"""  \resumeSubheading
     \resumeItem{Authored comprehensive NUnit and xUnit automated test suites covering business-critical paths, establishing 70\%+ backend test coverage and reducing production regressions.}
   \resumeItemListEnd"""
 
+DOTNET_USF_BLOCK = r"""  \resumeSubheading
+    {University of South Florida}{Graduate Researcher, Software Engineer}{Jan 2025}{May 2026}
+  \resumeItemListStart
+    \resumeItem{Architected and deployed an AI-enabled Health Literacy web platform for USF SHIELD Lab across 13 interactive modules in ASP.NET Core Web API, C\#, React, and TypeScript, serving 60+ biomedical students and faculty.}
+    \resumeItem{Engineered a .NET 8/C\# backend and real-time dual-model sandbox integrating LLM APIs and semantic grading rubrics, achieving sub-2s response latency with memory caching and asynchronous endpoints.}
+    \resumeItem{Built an in-browser evaluation engine using ONNX Runtime Web and TypeScript for local embedding and cosine similarity scoring, providing zero-latency pedagogical feedback on prompt structure and constraints.}
+    \resumeItem{Integrated OAuth2/JWT session authentication and engineered SQL Server and PostgreSQL relational schemas with Entity Framework Core and LINQ for secure access code verification, quiz scoring, and chat audit logging.}
+  \resumeItemListEnd"""
+
+JAVA_USF_BLOCK = r"""  \resumeSubheading
+    {University of South Florida}{Graduate Researcher, Software Engineer}{Jan 2025}{May 2026}
+  \resumeItemListStart
+    \resumeItem{Architected and deployed an AI-enabled Health Literacy web platform for USF SHIELD Lab across 13 interactive modules in Java 17, Spring Boot, React, and TypeScript, serving 60+ biomedical students and faculty.}
+    \resumeItem{Engineered a Java 17/Spring Boot REST backend and real-time dual-model sandbox integrating LLM APIs and semantic grading rubrics, achieving sub-2s response latency with Redis caching and asynchronous CompletableFuture pipelines.}
+    \resumeItem{Built an in-browser evaluation engine using Transformers.js (WASM / ONNX) and TypeScript for local cosine similarity embedding scoring, providing zero-latency pedagogical feedback on prompt structure and constraints.}
+    \resumeItem{Integrated OAuth2 (PKCE) session authentication and engineered PostgreSQL relational schemas with Spring Data JPA and Hibernate for secure access code verification, quiz scoring, and deterministic chat logging.}
+  \resumeItemListEnd"""
+
 
 def adapt_resume_for_dotnet(latex: str, request: RewriteRequest) -> str:
-    """Strictly enforces C#/.NET 8 framing across Summary, Skills, and Cognizant Experience."""
+    """Strictly enforces C#/.NET 8 framing across Summary, Skills, Cognizant, and USF Experience."""
     # 1. Professional Summary guard
     center_match = re.search(r"(\\begin\{center\}.*?\\end\{center\})", latex, re.DOTALL)
     if center_match:
@@ -479,7 +496,7 @@ def adapt_resume_for_dotnet(latex: str, request: RewriteRequest) -> str:
                 new_center = re.sub(r"\bSpring Boot\b", lambda _m: ".NET 8 / ASP.NET Core", new_center)
             latex = latex[: center_match.start(1)] + new_center + latex[center_match.end(1) :]
 
-    # 2. Cognizant Experience guard (replace Java bullets with C#/.NET bullets)
+    # 2. Experience section guards (Cognizant -> .NET, USF -> .NET)
     exp_match = re.search(
         r"(\\section\{(?:EXPERIENCE|Work Experience)\}.*?)(?=\\section\{|\\end\{document\}|\Z)",
         latex,
@@ -487,6 +504,7 @@ def adapt_resume_for_dotnet(latex: str, request: RewriteRequest) -> str:
     )
     if exp_match:
         exp_block = exp_match.group(1)
+        # 2a. Cognizant Experience guard
         cog_match = re.search(
             r"(\\resumeSubheading\s*\{[^}]*Cognizant.*?)(\s*\\resumeSubheading|\s*\\resumeSubHeadingListEnd|\s*\\end\{itemize\}|\Z)",
             exp_block,
@@ -495,8 +513,20 @@ def adapt_resume_for_dotnet(latex: str, request: RewriteRequest) -> str:
         if cog_match:
             cog_content = cog_match.group(1)
             if "Java" in cog_content or "Spring" in cog_content or "JUnit" in cog_content or "jOOQ" in cog_content or "CompletableFuture" in cog_content:
-                new_exp = exp_block[: cog_match.start(1)] + DOTNET_COGNIZANT_BLOCK + "\n\n" + exp_block[cog_match.start(2) :]
-                latex = latex[: exp_match.start(1)] + new_exp + latex[exp_match.end(1) :]
+                exp_block = exp_block[: cog_match.start(1)] + DOTNET_COGNIZANT_BLOCK + "\n\n" + exp_block[cog_match.start(2) :]
+
+        # 2b. USF Experience guard
+        usf_match = re.search(
+            r"(\\resumeSubheading\s*\{[^}]*South Florida.*?)(\s*\\resumeSubheading|\s*\\resumeSubHeadingListEnd|\s*\\end\{itemize\}|\Z)",
+            exp_block,
+            flags=re.DOTALL | re.IGNORECASE,
+        )
+        if usf_match:
+            usf_content = usf_match.group(1)
+            if "Python" in usf_content or "Flask" in usf_content or "Django" in usf_content or ("C#" not in usf_content and ".NET" not in usf_content):
+                exp_block = exp_block[: usf_match.start(1)] + DOTNET_USF_BLOCK + "\n\n" + exp_block[usf_match.start(2) :]
+
+        latex = latex[: exp_match.start(1)] + exp_block + latex[exp_match.end(1) :]
 
     # 3. SKILLS Section: Purge Java frameworks and inject .NET technologies
     section_match = re.search(
@@ -525,6 +555,33 @@ def adapt_resume_for_dotnet(latex: str, request: RewriteRequest) -> str:
             sec = re.sub(r"(\s*\$\|\$\s*){2,}", " $|$ ", sec)
             sec = re.sub(r"(\s*,\s*){2,}", ", ", sec)
             latex = latex[: section_match.start(1)] + sec + latex[section_match.end(1) :]
+
+    return latex
+
+
+def adapt_resume_for_java(latex: str, request: RewriteRequest) -> str:
+    """Strictly enforces Java/Spring Boot framing across Experience (Cognizant & USF)."""
+    # Reorder Cognizant before USF for Java roles
+    latex = reorder_experience_for_java(latex)
+
+    # USF Experience guard (adapt USF to Java/Spring Boot if still in Python/Flask)
+    exp_match = re.search(
+        r"(\\section\{(?:EXPERIENCE|Work Experience)\}.*?)(?=\\section\{|\\end\{document\}|\Z)",
+        latex,
+        flags=re.DOTALL | re.IGNORECASE,
+    )
+    if exp_match:
+        exp_block = exp_match.group(1)
+        usf_match = re.search(
+            r"(\\resumeSubheading\s*\{[^}]*South Florida.*?)(\s*\\resumeSubheading|\s*\\resumeSubHeadingListEnd|\s*\\end\{itemize\}|\Z)",
+            exp_block,
+            flags=re.DOTALL | re.IGNORECASE,
+        )
+        if usf_match:
+            usf_content = usf_match.group(1)
+            if "Python" in usf_content or "Flask" in usf_content or ("Java" not in usf_content and "Spring" not in usf_content):
+                exp_block = exp_block[: usf_match.start(1)] + JAVA_USF_BLOCK + "\n\n" + exp_block[usf_match.start(2) :]
+                latex = latex[: exp_match.start(1)] + exp_block + latex[exp_match.end(1) :]
 
     return latex
 
@@ -605,9 +662,9 @@ def rewrite_resume(request: RewriteRequest) -> RewriteResponse:
     # Sanitize unescaped % and special characters in bullets/body
     rewritten = sanitize_latex_escaping(rewritten)
 
-    # If target stack is Java, ensure Cognizant appears before USF and guard against AI jargon in projects
+    # If target stack is Java, ensure Cognizant appears before USF, adapt USF to Java, and guard against AI jargon in projects
     if target_stack == "java":
-        rewritten = reorder_experience_for_java(rewritten)
+        rewritten = adapt_resume_for_java(rewritten, request)
         from .latex_projects import projects_contain_ai_jargon, force_replace_projects_section
         from .projects_data import PROJECTS
         if projects_contain_ai_jargon(rewritten):
@@ -618,7 +675,7 @@ def rewrite_resume(request: RewriteRequest) -> RewriteResponse:
                 "backend_engineer",
             )
 
-    # If target stack is .NET, strictly enforce C#/.NET 8 in Cognizant, Skills, and Summary
+    # If target stack is .NET, strictly enforce C#/.NET 8 in Cognizant, USF, Skills, and Summary
     if target_stack == "dotnet":
         rewritten = adapt_resume_for_dotnet(rewritten, request)
 

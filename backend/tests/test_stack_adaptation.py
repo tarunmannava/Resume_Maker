@@ -111,3 +111,43 @@ def test_adapt_resume_for_dotnet_purges_java():
     assert "JUnit" not in dotnet_resume
     assert "jOOQ" not in dotnet_resume
 
+
+def test_usf_adapts_to_dotnet_and_java():
+    from backend.app.models.schemas import RewriteRequest
+    from backend.app.services.rewrite import adapt_resume_for_dotnet, adapt_resume_for_java
+
+    base_resume = r"""
+\documentclass{article}
+\begin{document}
+\section{EXPERIENCE}
+\begin{itemize}
+\resumeSubheading{Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
+\resumeItemListStart
+\resumeItem{Developed Java 11/Spring Boot microservices.}
+\resumeItemListEnd
+\resumeSubheading{University of South Florida}{Graduate Researcher, Software Engineer}{Jan 2025}{May 2026}
+\resumeItemListStart
+\resumeItem{Engineered a Python/Flask backend and real-time dual-model sandbox.}
+\resumeItemListEnd
+\end{itemize}
+\end{document}
+"""
+    # .NET rewrite should adapt USF to ASP.NET Core / C#
+    dotnet_req = RewriteRequest(
+        job_description="C# .NET Developer role",
+        resume_latex=base_resume,
+        role_name=".NET Developer",
+    )
+    dotnet_res = adapt_resume_for_dotnet(base_resume, dotnet_req)
+    assert "ASP.NET Core" in dotnet_res or "C#" in dotnet_res or "C\\#" in dotnet_res
+
+    # Java rewrite should adapt USF to Java / Spring Boot
+    java_req = RewriteRequest(
+        job_description="Senior Java Spring Boot Engineer",
+        resume_latex=base_resume,
+        role_name="Java Developer",
+    )
+    java_res = adapt_resume_for_java(base_resume, java_req)
+    assert "Spring Boot" in java_res or "Java 17" in java_res
+
+
