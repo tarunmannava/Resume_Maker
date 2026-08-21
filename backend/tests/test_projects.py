@@ -1,6 +1,5 @@
 from backend.app.services.job_analyzer import detect_details_with_keywords
 from backend.app.services.project_framing import materialize_project_for_identity, select_projects
-from backend.app.services.rewrite import get_effective_industry, get_effective_role_category
 from backend.app.services.projects_data import PROJECTS
 
 

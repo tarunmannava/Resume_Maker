@@ -380,35 +380,72 @@ def build_evidence_linked_skills_instructions(
 def build_stack_experience_framing_instructions(target_stack: str) -> str:
     """
     Constructs prompt instructions for Cognizant Java guardrail and USF stack adaptation.
-    target_stack is one of: 'java', 'node', 'python'.
+    target_stack is one of: 'dotnet', 'java', 'node', 'python', 'ai'.
     """
     stack = target_stack.lower().strip()
-    
-    cognizant_guard = (
-        "COGNIZANT EXPERIENCE GUARDRAIL (STRICT MANDATORY):\n"
-        "- Do NOT change the backend language or core technology stack of the Cognizant work experience entry.\n"
-        "- Cognizant MUST remain Java-focused (Java, Spring Boot, REST APIs, PostgreSQL/SQL, Microservices).\n"
-        "- You may reword Cognizant bullets for metric impact, action verbs, and scale, but NEVER replace Java with Node.js or Python.\n"
-    )
-    
-    if stack == "java":
+
+    if stack in ("dotnet", ".net", "c#", "csharp"):
+        cognizant_guard = (
+            "COGNIZANT EXPERIENCE (.NET / C# TARGET STACK):\n"
+            "- Adapt Cognizant Technology Solutions to C# / .NET, ASP.NET Core, Entity Framework Core, SQL Server, and REST APIs.\n"
+        )
+        usf_framing = (
+            "USF EXPERIENCE & PROJECTS ADAPTATION (.NET TARGET STACK):\n"
+            "- USF and Projects MUST STAY Python (Python, FastAPI, React, multi-agent workflows).\n"
+            "- Do NOT rewrite USF or projects into .NET/C#.\n"
+        )
+    elif stack == "java":
+        cognizant_guard = (
+            "COGNIZANT EXPERIENCE GUARDRAIL (STRICT MANDATORY):\n"
+            "- Do NOT change the backend language or core technology stack of the Cognizant work experience entry.\n"
+            "- Cognizant MUST remain Java-focused (Java, Spring Boot, REST APIs, PostgreSQL/SQL, Microservices).\n"
+            "- You may reword Cognizant bullets for metric impact, action verbs, and scale, but NEVER replace Java with Node.js or Python.\n"
+            "- Defensibility limits: Focus Cognizant on Java/Spring microservices, Redis caching, SQL/MongoDB, and testing; do NOT inject payment webhooks (Stripe), cloud autoscaling infra, or RabbitMQ into Cognizant.\n"
+        )
         usf_framing = (
             "USF EXPERIENCE & PROJECTS ADAPTATION (JAVA TARGET STACK):\n"
-            "- Adapt USF (University of San Francisco) experience bullets to showcase Java, Spring Boot, REST APIs, and backend engineering patterns.\n"
-            "- Ensure Projects section features Java / Spring Boot microservice architectures.\n"
+            "- USF and Projects MUST STAY Python (Python, FastAPI, React, multi-agent workflows).\n"
+            "- Do NOT rewrite USF or projects into Java.\n"
         )
-    elif stack == "node":
+    elif stack in ("node", "node.js", "fullstack"):
+        cognizant_guard = (
+            "COGNIZANT EXPERIENCE GUARDRAIL (STRICT MANDATORY):\n"
+            "- Do NOT change the backend language or core technology stack of the Cognizant work experience entry.\n"
+            "- Cognizant MUST remain Java-focused (Java, Spring Boot, REST APIs, PostgreSQL/SQL, Microservices).\n"
+            "- You may reword Cognizant bullets for metric impact, action verbs, and scale, but NEVER replace Java with Node.js or Python.\n"
+            "- Defensibility limits: Focus Cognizant on Java/Spring microservices, Redis caching, SQL/MongoDB, and testing; do NOT inject payment webhooks (Stripe), cloud autoscaling infra, or RabbitMQ into Cognizant.\n"
+        )
         usf_framing = (
             "USF EXPERIENCE & PROJECTS ADAPTATION (NODE.JS TARGET STACK):\n"
             "- Adapt USF (University of San Francisco) experience bullets to showcase Node.js, TypeScript, React, Express/Fastify, and fullstack web workflows.\n"
-            "- Ensure Projects section features Node.js / TypeScript / React fullstack architectures.\n"
+            "- Ensure Projects section features Node.js, TypeScript, React fullstack architectures.\n"
+        )
+    elif stack in ("ai", "ml", "ai_engineer", "ml_engineer"):
+        cognizant_guard = (
+            "COGNIZANT EXPERIENCE GUARDRAIL (STRICT MANDATORY):\n"
+            "- Do NOT change the backend language or core technology stack of the Cognizant work experience entry.\n"
+            "- Cognizant MUST remain Java-focused (Java, Spring Boot, REST APIs, PostgreSQL/SQL, Microservices).\n"
+            "- You may reword Cognizant bullets for metric impact, action verbs, and scale, but NEVER replace Java with Node.js or Python.\n"
+            "- Defensibility limits: Focus Cognizant on Java/Spring microservices, Redis caching, SQL/MongoDB, and testing; do NOT inject payment webhooks (Stripe), cloud autoscaling infra, or RabbitMQ into Cognizant.\n"
+        )
+        usf_framing = (
+            "USF EXPERIENCE & PROJECTS ADAPTATION (AI TARGET STACK):\n"
+            "- Adapt USF (University of San Francisco) experience bullets to showcase Python, LLMs, RAG, and AI agent workflows.\n"
+            "- Ensure Projects section features Python / AI architectures.\n"
         )
     else:  # python
+        cognizant_guard = (
+            "COGNIZANT EXPERIENCE GUARDRAIL (STRICT MANDATORY):\n"
+            "- Do NOT change the backend language or core technology stack of the Cognizant work experience entry.\n"
+            "- Cognizant MUST remain Java-focused (Java, Spring Boot, REST APIs, PostgreSQL/SQL, Microservices).\n"
+            "- You may reword Cognizant bullets for metric impact, action verbs, and scale, but NEVER replace Java with Node.js or Python.\n"
+            "- Defensibility limits: Focus Cognizant on Java/Spring microservices, Redis caching, SQL/MongoDB, and testing; do NOT inject payment webhooks (Stripe), cloud autoscaling infra, or RabbitMQ into Cognizant.\n"
+        )
         usf_framing = (
             "USF EXPERIENCE & PROJECTS ADAPTATION (PYTHON TARGET STACK):\n"
             "- Adapt USF (University of San Francisco) experience bullets to showcase Python, FastAPI, data pipelines, and backend/AI workflows.\n"
             "- Ensure Projects section features Python / FastAPI / data-driven architectures.\n"
         )
-        
+
     return cognizant_guard + "\n" + usf_framing
 

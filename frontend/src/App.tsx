@@ -17,11 +17,6 @@ import type {
 import { sampleResume } from "./lib/constants";
 import "./styles.css";
 
-\\end{itemize}
-
-%-------------------------------------------
-\\end{document}`;
-
 const sampleJob = `Required: Python, Django, PostgreSQL, REST APIs, AWS.
 Preferred: React or Angular, Docker, CI/CD.
 We value backend engineers who can build scalable services and collaborate across teams.`;
@@ -408,12 +403,11 @@ export default function App() {
   return (
     <main className="page-shell">
       <header className="hero">
-        <div>
-          <p className="eyebrow">ATS LaTeX Resume Rewriter</p>
-          <h1>Paste a job description and your current resume.</h1>
+        <div className="hero-copy">
+          <p className="eyebrow">Resume Maker · ATS workspace</p>
+          <h1>Turn a job description into a stronger, honest resume.</h1>
           <p>
-            The frontend sends both to your FastAPI backend, which uses Gemini
-            to rewrite the resume and return LaTeX plus a keyword report.
+            Add the role and your LaTeX source, then rewrite, review the fit, and export when everything looks right.
           </p>
         </div>
         <div
@@ -428,11 +422,32 @@ export default function App() {
         </div>
       </header>
 
-      <form className="grid" onSubmit={handleSubmit}>
-        <section className="card editor-card">
+      <div className="workflow-bar" aria-label="Resume workflow">
+        <div className={`workflow-step active`}>
+          <span>01</span>
+          <div><strong>Prepare</strong><small>Job + resume</small></div>
+        </div>
+        <div className={`workflow-line ${result ? "complete" : ""}`} />
+        <div className={`workflow-step ${result ? "active" : ""}`}>
+          <span>02</span>
+          <div><strong>Rewrite</strong><small>Evidence-led edits</small></div>
+        </div>
+        <div className={`workflow-line ${result ? "complete" : ""}`} />
+        <div className={`workflow-step ${result ? "active" : ""}`}>
+          <span>03</span>
+          <div><strong>Review</strong><small>ATS fit + export</small></div>
+        </div>
+      </div>
+
+      <form className="workspace" onSubmit={handleSubmit}>
+        <div className="editor-grid">
+        <section className="card editor-card job-editor">
           <div className="section-heading">
-            <h2>Job Description</h2>
-            <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+            <div>
+              <span className="section-kicker">Step 1</span>
+              <h2>Job description</h2>
+            </div>
+            <div className="editor-tools">
               <button
                 type="button"
                 className="secondary"
@@ -442,7 +457,7 @@ export default function App() {
               >
                 {analyzingJob ? "Analyzing..." : "Detect Role & Industry"}
               </button>
-              <span>{jobDescription.length} chars</span>
+              <span className="editor-count">{jobDescription.length.toLocaleString()} chars</span>
             </div>
           </div>
           <textarea
@@ -453,19 +468,29 @@ export default function App() {
           />
         </section>
 
-        <section className="card editor-card">
+        <section className="card editor-card resume-editor">
           <div className="section-heading">
-            <h2>Current LaTeX Resume</h2>
-            <span>{resumeLatex.length} chars</span>
+            <div>
+              <span className="section-kicker">Step 2</span>
+              <h2>Current LaTeX resume</h2>
+            </div>
+            <span className="editor-count">{resumeLatex.length.toLocaleString()} chars</span>
           </div>
           <textarea
             value={resumeLatex}
             onChange={(event) => setResumeLatex(event.target.value)}
           />
         </section>
+        </div>
 
         <section className="card settings-card">
-          <h2>Rewrite Settings</h2>
+          <div className="settings-header">
+            <div>
+              <span className="section-kicker">Controls</span>
+              <h2>Rewrite settings</h2>
+            </div>
+            <p className="muted">Keep the defaults, or tune the rewrite for a specific application.</p>
+          </div>
 
           {showIndustryWarning && (
             <div className="warning" style={{ margin: "0 0 14px 0", fontSize: "14px" }}>
@@ -639,9 +664,16 @@ export default function App() {
               onChange={(event) => setExtraNotes(event.target.value)}
             />
           </label>
-          <button disabled={!canSubmit} type="submit">
-            {loading ? "Rewriting..." : "Rewrite Resume"}
-          </button>
+          <div className="submit-row">
+            <div>
+              <strong>{loading ? "Working on your resume…" : "Ready to rewrite?"}</strong>
+              <span className="muted">The original document stays unchanged until you review the result.</span>
+            </div>
+            <button className="primary-action" disabled={!canSubmit} type="submit">
+              {loading ? "Rewriting…" : "Rewrite resume"}
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
           {error && <p className="error">{error}</p>}
         </section>
       </form>

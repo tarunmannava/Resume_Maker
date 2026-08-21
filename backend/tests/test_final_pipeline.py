@@ -7,7 +7,7 @@ def test_reorder_experience_for_java():
 \\section{EXPERIENCE}
 \\begin{itemize}
   \\resumeSubheading
-    {University of South Florida}{Jan 2025 -- Present}
+    {University of South Florida}{Jan 2025 -- May 2026}
     {Graduate Researcher}{Tampa, FL}
     \\resumeItemListStart
       \\resumeItem{Built RAG pipelines.}

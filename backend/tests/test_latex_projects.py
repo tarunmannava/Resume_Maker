@@ -84,3 +84,121 @@ def test_force_replace_removes_duplicate_ai_project_sections():
     assert "Configuration Management" in replaced or "High-Throughput" in replaced or "Ledger" in replaced
     assert "Multi-Agent" not in replaced
     assert "Prompt Registry" not in replaced
+
+
+def test_cap_projects_at_max_removes_third_project():
+    from backend.app.services.latex_projects import cap_projects_at_max
+
+    three_projects_latex = r"""
+\section{PROJECTS}
+\resumeSubHeadingListStart
+
+  \resumeProject{Project Alpha}{React, TypeScript}
+  \resumeItemListStart
+    \resumeItem{Built frontend UI.}
+  \resumeItemListEnd
+
+  \resumeProject{Project Beta}{Java, Spring Boot}
+  \resumeItemListStart
+    \resumeItem{Built microservice.}
+  \resumeItemListEnd
+
+  \resumeProject{Project Gamma}{Python, FastAPI}
+  \resumeItemListStart
+    \resumeItem{Built API service.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\section{EDUCATION}
+"""
+    capped = cap_projects_at_max(three_projects_latex, max_projects=2)
+    assert "Project Alpha" in capped
+    assert "Project Beta" in capped
+    assert "Project Gamma" not in capped
+    assert r"\resumeSubHeadingListEnd" in capped
+
+
+def test_custom_resume_project_preserved(monkeypatch):
+    from backend.app.models.schemas import RewriteRequest
+    from backend.app.services import rewrite as rewrite_service
+
+    custom_resume = r"""
+\documentclass{article}
+\begin{document}
+\section{EXPERIENCE}
+\begin{itemize}\item Cognizant Java Developer\end{itemize}
+\section{PROJECTS}
+\begin{itemize}
+  \item Custom Java Payment Gateway Integration (Java, Spring Boot)
+\end{itemize}
+\section{SKILLS}
+\begin{itemize}\item Java Spring Boot PostgreSQL\end{itemize}
+\end{document}
+"""
+    llm_output = r"""
+\documentclass{article}
+\begin{document}
+\section{EXPERIENCE}
+\begin{itemize}\item Cognizant Java Developer\end{itemize}
+\section{PROJECTS}
+\begin{itemize}
+  \item Custom Java Payment Gateway Integration (Java, Spring Boot)
+\end{itemize}
+\section{SKILLS}
+\begin{itemize}\item Java Spring Boot PostgreSQL\end{itemize}
+\end{document}
+"""
+    monkeypatch.setattr(
+        rewrite_service,
+        "generate_rewrite",
+        lambda prompt, align_titles=False: (llm_output, "test"),
+    )
+
+    response = rewrite_service.rewrite_resume(
+        RewriteRequest(
+            job_description="Java Developer. Spring Boot PostgreSQL.",
+            resume_latex=custom_resume,
+            rewrite_mode="transferable",
+        )
+    )
+
+    assert "Custom Java Payment Gateway Integration" in response.rewritten_latex
+
+
+def test_irrelevant_project_replaced_with_catalog(monkeypatch):
+    from backend.app.models.schemas import RewriteRequest
+    from backend.app.services import rewrite as rewrite_service
+
+    irrelevant_resume = r"""
+\documentclass{article}
+\begin{document}
+\section{EXPERIENCE}
+\begin{itemize}\item Cognizant Java Developer\end{itemize}
+\section{PROJECTS}
+\begin{itemize}
+  \item Autonomous Multi-Agent Prompt Registry with LangGraph
+\end{itemize}
+\section{SKILLS}
+\begin{itemize}\item Java Spring Boot PostgreSQL\end{itemize}
+\end{document}
+"""
+    llm_output = irrelevant_resume
+
+    monkeypatch.setattr(
+        rewrite_service,
+        "generate_rewrite",
+        lambda prompt, align_titles=False: (llm_output, "test"),
+    )
+
+    response = rewrite_service.rewrite_resume(
+        RewriteRequest(
+            job_description="Java Developer. Spring Boot PostgreSQL.",
+            resume_latex=irrelevant_resume,
+            rewrite_mode="transferable",
+        )
+    )
+
+    assert "Prompt Registry" not in response.rewritten_latex
+    assert "LangGraph" not in response.rewritten_latex
+    assert "Configuration Management" in response.rewritten_latex or "High-Throughput" in response.rewritten_latex or "Distributed Workflow" in response.rewritten_latex

@@ -102,6 +102,7 @@ class RewriteRequest(BaseModel):
     selected_industry: str | None = None
     selected_role_category: str | None = None
     selected_stack_override: str | None = None
+    target_location: str | None = None
 
 
 class RewriteResponse(BaseModel):

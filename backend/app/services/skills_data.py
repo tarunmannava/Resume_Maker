@@ -29,6 +29,8 @@ def get_skills_template_for_stack(stack: str) -> dict[str, Any] | None:
         return SKILLS_TEMPLATES.get("ai")
     if key in ("python", "fastapi", "django"):
         return SKILLS_TEMPLATES.get("python")
+    if key in ("dotnet", ".net", "c#", "csharp"):
+        return SKILLS_TEMPLATES.get("dotnet")
     if key in ("node", "node.js", "react", "typescript", "fullstack", "fullstack_engineer"):
         return SKILLS_TEMPLATES.get("node")
     return SKILLS_TEMPLATES.get("python")

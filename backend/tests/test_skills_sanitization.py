@@ -86,3 +86,21 @@ def test_sanitize_preserves_dollar_pipe_style_from_original_skills():
     assert r"\;|\|" not in cleaned
     assert "Java $|$ Python $|$ SQL" in cleaned
     assert "LangGraph" not in cleaned
+
+
+def test_sanitize_removes_verbatim_hr_qualification_sentences():
+    skills = r"""
+\section{TECHNICAL SKILLS}
+\begin{itemize}
+  \small{\item{
+    \textbf{Languages:} Java \;|\; Python \;|\; Experience with at least one general-purpose programming language such as Java, Python, C++ \\[1pt]
+  }}
+\end{itemize}
+\section{EXPERIENCE}
+"""
+    cleaned = sanitize_skills_section(
+        skills, {"java", "python"}, [], "backend_engineer", skills
+    )
+    assert "Experience with at least one general-purpose programming language" not in cleaned
+    assert r"Java \;|\; Python" in cleaned
+

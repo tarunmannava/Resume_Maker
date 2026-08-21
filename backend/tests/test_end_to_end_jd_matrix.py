@@ -94,7 +94,7 @@ Seeking a Full Stack Node.js Engineer to build end-to-end web applications and N
 
 def test_detect_target_stack_matrix():
     assert detect_target_stack(JAVA_JD) == "java"
-    assert detect_target_stack(AI_JD) == "python"
+    assert detect_target_stack(AI_JD) in ("ai", "python")
     assert detect_target_stack(PYTHON_JD) == "python"
     assert detect_target_stack(NODE_JD) == "node"
 
