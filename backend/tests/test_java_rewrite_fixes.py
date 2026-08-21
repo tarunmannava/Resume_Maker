@@ -183,7 +183,7 @@ def test_rewrite_forces_java_projects_over_bad_model_output(monkeypatch):
 \documentclass{article}
 \begin{document}
 \section{TECHNICAL SKILLS}
-\begin{itemize}\item Java Spring Boot SQL LangGraph Oracle\end{itemize}
+\begin{itemize}\item Java Spring Boot SQL Oracle\end{itemize}
 \section{EXPERIENCE}
 \resumeSubHeadingListStart
 \resumeSubheading{Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}

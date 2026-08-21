@@ -46,23 +46,23 @@ WINDOWS_RESERVED_NAMES = {
 }
 
 
-def sanitize_filename_part(value: str) -> str:
+def sanitize_filename_part(value: str, default: str = "") -> str:
     cleaned = re.sub(r"[^A-Za-z0-9]+", "_", value.strip())
     cleaned = re.sub(r"_+", "_", cleaned).strip("_")
     if not cleaned:
-        cleaned = "Resume"
+        cleaned = default
     if cleaned.upper() in WINDOWS_RESERVED_NAMES:
-        cleaned = f"{cleaned}_Resume"
+        cleaned = f"{cleaned}_File"
     return cleaned[:80]
 
 
-def build_filename_base(candidate_name: str, company_name: str, role_name: str) -> str:
-    parts = [
-        sanitize_filename_part(candidate_name),
-        sanitize_filename_part(company_name),
-        sanitize_filename_part(role_name),
-    ]
-    return "_".join(parts)
+def build_filename_base(candidate_name: str, company_name: str = "", role_name: str = "") -> str:
+    cand = sanitize_filename_part(candidate_name, default="TarunMannava")
+    comp = sanitize_filename_part(company_name, default="")
+    role = sanitize_filename_part(role_name, default="SoftwareEngineer")
+    if comp:
+        return f"{cand}_{comp}_{role}"
+    return f"{cand}_{role}"
 
 
 def safe_relative(path: Path) -> str:
