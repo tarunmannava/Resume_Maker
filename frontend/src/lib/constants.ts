@@ -1,5 +1,6 @@
 export const sampleResume = `%-------------------------
 % Tarun Mannava - Resume in LaTeX
+% ATS-Friendly Resume Template
 %-------------------------
 
 \\documentclass[a4paper,10pt]{article}
@@ -20,6 +21,7 @@ export const sampleResume = `%-------------------------
 \\usepackage{mathptmx}
 \\usepackage{geometry}
 \\usepackage{setspace}
+\\usepackage{anyfontsize}
 
 % Standardized thin margins to maximize space safely
 \\geometry{
@@ -31,6 +33,9 @@ export const sampleResume = `%-------------------------
 }
 
 \\setstretch{1.0}
+\\renewcommand{\\normalsize}{\\fontsize{10}{12}\\selectfont}
+\\renewcommand{\\small}{\\fontsize{10}{12}\\selectfont}
+\\normalsize
 
 \\pagestyle{fancy}
 \\fancyhf{}
@@ -43,21 +48,16 @@ export const sampleResume = `%-------------------------
 \\raggedright
 \\setlength{\\tabcolsep}{0in}
 
-% Further reduced section gap (pulled up higher, tighter below the rule)
+% Section title formatting
 \\titleformat{\\section}{
   \\vspace{-10pt}\\scshape\\raggedright\\large
 }{}{0em}{}[\\color{black}\\titlerule \\vspace{-7pt}]
 
+\\newcommand{\\resumeSep}{\\textbullet}
+
 \\newcommand{\\resumeItem}[1]{
   \\item\\small{#1}
 }
-
-\\usepackage{anyfontsize}
-\\renewcommand{\\normalsize}{\\fontsize{10.5}{12.6}\\selectfont}
-\\renewcommand{\\small}{\\fontsize{10.5}{12.6}\\selectfont}
-\\normalsize
-
-\\newcommand{\\resumeSep}{\\textbullet}
 
 % Experience / education: stacked lines parse cleanly in PDF-to-text
 \\newcommand{\\resumeSubheading}[4]{%
@@ -68,13 +68,16 @@ export const sampleResume = `%-------------------------
   \\vspace{2pt}
 }
 
-% Projects: title + tech stack
+% Projects: 2 arguments (Title, Tech Stack)
 \\newcommand{\\resumeProject}[2]{%
   \\vspace{0pt}\\item[]
   \\textbf{#1} \\\\
   \\small\\textit{#2}
   \\vspace{2pt}
 }
+
+\\newcommand{\\resumeSubHeadingListStart}{\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]}
+\\newcommand{\\resumeSubHeadingListEnd}{\\end{itemize}}
 
 \\newcommand{\\resumeItemListStart}{%
   \\begin{itemize}[leftmargin=0.15in, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt, label={$\\bullet$}]%
@@ -85,9 +88,6 @@ export const sampleResume = `%-------------------------
   Tampa, FL \\hspace{0.4em}\\resumeSep\\hspace{0.4em}+1 (656) 203-7074 \\hspace{0.4em}\\resumeSep\\hspace{0.4em}\\href{mailto:mannava.tarun34@gmail.com}{mannava.tarun34@gmail.com} \\hspace{0.4em}\\resumeSep\\hspace{0.4em}\\href{https://linkedin.com/in/tarunmannava}{LinkedIn} \\hspace{0.4em}\\resumeSep\\hspace{0.4em}\\href{https://github.com/tarunmannava}{GitHub}%
 }
 
-\\newcommand{\\resumeSubHeadingListStart}{\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]}
-\\newcommand{\\resumeSubHeadingListEnd}{\\end{itemize}}
-
 %-------------------------------------------
 \\begin{document}
 
@@ -96,7 +96,7 @@ export const sampleResume = `%-------------------------
   {\\Huge \\textbf{Tarun Mannava}} \\\\[4pt]
   \\small
   \\resumeHeadingContact \\\\[4pt]
-  \\textit{Software Engineer with 2+ years of experience building scalable Java and Spring Boot backend systems. Experienced in RESTful microservices, concurrent processing, distributed caching, secure authentication, and high-throughput data platforms using PostgreSQL, Redis, AWS, and modern software engineering practices.}
+  \\textit{Software Engineer with 3+ years of experience building backend and full-stack applications using Java, Spring Boot, Python, and FastAPI. Experienced in REST APIs, microservices, asynchronous processing, distributed systems, and AI-enabled applications.}
 \\end{center}
 
 \\vspace{-10pt}
@@ -105,12 +105,15 @@ export const sampleResume = `%-------------------------
 \\section{SKILLS}
 \\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
   \\small{\\item{
-    \\textbf{Backend:} Java, Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, REST APIs, Microservices \\\\[1pt]
-    \\textbf{Concurrency:} CompletableFuture, ExecutorService \\\\[1pt]
+    \\textbf{Languages:} Java, Python, TypeScript, JavaScript, SQL \\\\[1pt]
+    \\textbf{Backend:} Spring Boot, Spring MVC, Spring Security, FastAPI, SQLAlchemy, REST APIs, Microservices \\\\[1pt]
+    \\textbf{AI/ML:} LLMs, RAG, LangGraph, LangChain, Prompt Engineering, Embeddings, Hugging Face, Transformers, PyTorch, NLP, Computer Vision, scikit-learn \\\\[1pt]
     \\textbf{Databases:} PostgreSQL, MongoDB, SQL Server, Redis, jOOQ \\\\[1pt]
-    \\textbf{Cloud \\& DevOps:} AWS (Cognito, S3), Docker, GitHub Actions, Linux \\\\[1pt]
-    \\textbf{Testing:} JUnit, Cucumber \\\\[1pt]
-    \\textbf{Frontend:} React, JavaScript, HTML, CSS
+    \\textbf{Messaging \\& Distributed Systems:} RabbitMQ, Asynchronous Processing, Event-Driven Architecture \\\\[1pt]
+    \\textbf{Cloud \\& Infrastructure:} AWS, Cloudflare R2, Docker, Linux, GitHub Actions \\\\[1pt]
+    \\textbf{Authentication:} OAuth2, JWT, Neon Auth \\\\[1pt]
+    \\textbf{Testing:} JUnit, Cucumber, Pytest \\\\[1pt]
+    \\textbf{Frontend:} React, HTML, CSS
   }}
 \\end{itemize}
 
@@ -121,23 +124,22 @@ export const sampleResume = `%-------------------------
   \\resumeSubheading
     {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
   \\resumeItemListStart
-    \\resumeItem{Developed \\textbf{Java 11}/\\textbf{Spring Boot} microservices for policy onboarding and validation (persisting client metadata in \\textbf{MongoDB}), contributing to a service on a distributed insurance platform handling 20K+ hourly transactions.}
-    \\resumeItem{Enhanced asynchronous validation workflows built with \\textbf{CompletableFuture} and \\textbf{ExecutorService}, improving request latency through parallel task execution.}
-    \\resumeItem{Implemented \\textbf{Redis}-backed caching strategies and cache warm-up mechanisms, reducing \\textbf{SQL Server} load and improving p95 API response latency by 30\\% during peak onboarding traffic.}
-    \\resumeItem{Optimized complex queries for policy audit reporting using \\textbf{jOOQ} and SQL across \\textbf{PostgreSQL} and \\textbf{SQL Server}, eliminating N+1 query patterns and reducing database round trips.}
+    \\resumeItem{Developed Java 11/Spring Boot microservices for policy onboarding and validation (persisting client metadata in MongoDB), contributing to a service on a distributed insurance platform handling 20K+ hourly transactions.}
+    \\resumeItem{Enhanced asynchronous validation workflows built with CompletableFuture and ExecutorService, improving request latency through parallel task execution.}
+    \\resumeItem{Implemented Redis-backed caching strategies and cache warm-up mechanisms, reducing SQL Server load and improving p95 API response latency by 30\\% during peak onboarding traffic.}
+    \\resumeItem{Optimized policy audit and reporting queries using jOOQ and SQL across PostgreSQL and SQL Server, eliminating N+1 query patterns and reducing database round trips.}
     \\resumeItem{Contributed to refactoring duplicate business logic across 8+ microservices into reusable Spring service-layer components with centralized exception handling.}
-    \\resumeItem{Implemented \\textbf{Spring Security} OAuth2 integration with \\textbf{AWS Cognito} by adding new authorization features and securing REST endpoints with JWT-based authentication.}
-    \\resumeItem{Developed \\textbf{JUnit} and \\textbf{Cucumber} test suites covering business-critical workflows, achieving 70\\% backend code coverage while reducing production regressions.}
+    \\resumeItem{Implemented Spring Security OAuth2 integration with AWS Cognito by adding new authorization features and securing REST endpoints with JWT-based authentication.}
+    \\resumeItem{Developed JUnit and Cucumber test suites covering business-critical workflows, achieving 70\\% backend code coverage while reducing production regressions.}
   \\resumeItemListEnd
 
   \\resumeSubheading
     {University of South Florida}{Graduate Researcher, Software Engineer}{Jan 2025}{May 2026}
   \\resumeItemListStart
-    \\resumeItem{Delivered a production web platform end to end, translating requirements from faculty and research stakeholders into 13 interactive modules built with \\textbf{React} and \\textbf{TypeScript}, serving 60+ students, instructors, and researchers at USF SHIELD Lab.}
-    \\resumeItem{Developed a \\textbf{Python/Flask} REST API for AI assisted learning workflows, integrating \\textbf{Groq} and \\textbf{Gemini} with task based grading rubrics and response caching, supporting 60+ concurrent users with sub 2s response latency.}
-    \\resumeItem{Integrated \\textbf{Supabase} (\\textbf{PostgreSQL}) for authentication, enrollment, progress tracking, and quiz persistence, supporting multi role access patterns across student, instructor, and researcher personas.}
-    \\resumeItem{Delivered adaptive student exercises and instructor curriculum tools with \\textbf{React} role based routing and \\textbf{Flask} server side validation, covering 13 active learning modules across multiple course semesters.}
-    \\resumeItem{Shipped 8+ major module updates on 2 week \\textbf{Agile} iteration cycles using \\textbf{Git} based workflows and code reviews, maintaining zero downtime during live classroom usage.}
+    \\resumeItem{Architected and deployed a production AI \\& Health Literacy web platform for USF SHIELD Lab across 13 interactive modules in React and TypeScript, serving 60+ biomedical students and faculty.}
+    \\resumeItem{Engineered a Python/Flask backend and real-time dual-model sandbox integrating Groq and Hugging Face LLM APIs, featuring semantic grading rubrics, milestone detection, and response caching under 2s latency.}
+    \\resumeItem{Built an in-browser prompt evaluation engine using Transformers.js (WASM / ONNX) for local cosine similarity embedding scoring, providing zero-latency pedagogical feedback on prompt structure and constraints.}
+    \\resumeItem{Integrated Hugging Face OAuth2 (PKCE) for session authentication and engineered Supabase (PostgreSQL) relational schemas and server-side RPCs for secure access code verification, quiz scoring, and deterministic chat logging.}
   \\resumeItemListEnd
 
 \\resumeSubHeadingListEnd
@@ -146,12 +148,20 @@ export const sampleResume = `%-------------------------
 \\section{PROJECTS}
 \\resumeSubHeadingListStart
 
-  \\resumeProject{Java Issue Tracking and Team Workflow Management Application}{Java, Spring Boot, Spring Security, PostgreSQL, JUnit}
+  \\resumeProject{SkillBeacon -- Skills and Career Development Platform $|$ \\href{https://skillbeacon-six.vercel.app/}{\\underline{Link}}}{Python, FastAPI, React, PostgreSQL, SQLAlchemy, Cloudflare R2, Neon Auth}
   \\resumeItemListStart
-    \\resumeItem{Built a \\textbf{Java}/\\textbf{Spring Boot} backend exposing REST APIs with \\textbf{PostgreSQL} persistence through Spring Data JPA and Hibernate.}
-    \\resumeItem{Designed normalized \\textbf{PostgreSQL} schemas with foreign key constraints and indexes supporting efficient filtering, pagination, and audit logging.}
-    \\resumeItem{Designed and implemented a backend state machine to enforce issue-lifecycle transitions with validation rules and role-scoped access controls.}
-    \\resumeItem{Achieved over 80\\% backend test coverage using \\textbf{JUnit} unit and integration tests validating CRUD operations, state transitions, and business logic.}
+    \\resumeItem{Built a full-stack skills and career platform with a FastAPI/SQLAlchemy backend and React frontend, supporting student, mentor, employer, and administrator workflows.}
+    \\resumeItem{Implemented a Skill Passport with skill levels, evidence submissions, mentor and employer verification, and confidence scoring based on approved evidence and verification signals.}
+    \\resumeItem{Implemented role-based access controls across profiles, applications, mentorships, employer challenges, opportunities, notifications, and administrative workflows using PostgreSQL and JWT-based authentication.}
+    \\resumeItem{Integrated Cloudflare R2 through its S3-compatible API for resumes, employer logos, skill evidence, and challenge submissions, including file validation, size limits, storage quotas, presigned downloads, and secure file handling.}
+  \\resumeItemListEnd
+
+  \\resumeProject{AutoDocs -- PR-Triggered Multi-Agent Documentation System}{Python, FastAPI, GitHub Webhooks, Supabase, RabbitMQ}
+  \\resumeItemListStart
+    \\resumeItem{Built an event-driven PR-triggered documentation system that receives merged pull-request events through a FastAPI webhook and validates GitHub HMAC-SHA256 signatures.}
+    \\resumeItem{Implemented idempotent webhook processing using GitHub delivery IDs, persisting webhook deliveries and documentation runs in Supabase before publishing pull-request jobs to RabbitMQ.}
+    \\resumeItem{Implemented asynchronous job processing with RabbitMQ, separating webhook ingestion from repository analysis and long-running documentation workflows with retry and failure handling.}
+    \\resumeItem{Implemented a conditional multi-agent workflow that analyzes pull-request changes, routes relevant changes to specialized documentation agents, aggregates structured outputs, performs consistency validation, and generates documentation updates.}
   \\resumeItemListEnd
 
 \\resumeSubHeadingListEnd
@@ -167,10 +177,9 @@ export const sampleResume = `%-------------------------
 \\section{CERTIFICATIONS}
 \\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
   \\small{\\item{
-    \\textbf{AWS Certified Cloud Practitioner} -- Amazon, Nov 2023
+    AWS Certified Cloud Practitioner -- Amazon, Nov 2023
   }}
 \\end{itemize}
 
 %-------------------------------------------
-\\end{document}
-`;
+\\end{document}`;
