@@ -177,10 +177,11 @@ def resolve_industry(
 def detect_target_stack(
     job_description: str,
     user_override: str | None = None,
+    role_name: str | None = None,
 ) -> str:
     """
     Detects target technical stack (dotnet, java, node, python, ai) from job description,
-    or respects manual user_override.
+    role_name, or respects manual user_override.
     """
     if user_override:
         ov = user_override.strip().lower()
@@ -189,19 +190,42 @@ def detect_target_stack(
         if ov in ("c#", "csharp", ".net"):
             return "dotnet"
 
-    text_lower = job_description.lower()
+    if role_name:
+        rn_lower = role_name.lower()
+        if any(p in rn_lower for p in (".net", "c#", "csharp", "dotnet", "asp.net")):
+            return "dotnet"
+        if any(p in rn_lower for p in ("java", "spring")):
+            return "java"
+        if any(p in rn_lower for p in ("node", "react", "frontend", "full stack", "fullstack", "typescript")):
+            return "node"
+        if any(p in rn_lower for p in ("ai engineer", "genai", "llm", "ai platform", "machine learning", "ml engineer")):
+            return "ai"
+
+    combined_text = (job_description + "\n" + (role_name or "")).lower()
     
-    dotnet_patterns = [r"\.net\b", r"(?:^|\s|\b)c#(?:\b|\s|[,\.;]|$)", r"\basp\.net\b", r"\bentity framework\b", r"\blinq\b", r"\bsql server\b", r"\bdotnet\b", r"\bcsharp\b"]
+    dotnet_patterns = [
+        r"\.net\b",
+        r"(?:^|[^\w])c#(?=[^\w]|$)",
+        r"\basp\.net\b",
+        r"\bentity framework\b",
+        r"\blinq\b",
+        r"\bsql server\b",
+        r"\bdotnet\b",
+        r"\bcsharp\b",
+        r"\brazor\b",
+        r"\bnunit\b",
+        r"\bxunit\b",
+    ]
     ai_patterns = [r"\bllm\b", r"\bllms\b", r"\brag\b", r"\blangchain\b", r"\bvector search\b", r"\bvector database\b", r"\bembeddings\b", r"\blanggraph\b", r"\bllamaindex\b"]
     java_patterns = [r"\bjava\b", r"\bspring boot\b", r"\bspring framework\b", r"\bj2ee\b", r"\bjdbc\b", r"\bhibernate\b", r"\bmaven\b", r"\bgradle\b"]
     node_patterns = [r"\bnode\.?js\b", r"\breact\.?js\b", r"\breact\b", r"\btypescript\b", r"\bexpress\.?js\b", r"\bfastify\b", r"\bnext\.?js\b", r"\bnpm\b"]
     python_patterns = [r"\bpython\b", r"\bfastapi\b", r"\bdjango\b", r"\bflask\b", r"\bpandas\b", r"\bnumpy\b", r"\bpytorch\b", r"\btensorflow\b", r"\bscikit-learn\b"]
 
-    dotnet_score = sum(len(re.findall(p, text_lower)) for p in dotnet_patterns)
-    ai_score = sum(len(re.findall(p, text_lower)) for p in ai_patterns)
-    java_score = sum(len(re.findall(p, text_lower)) for p in java_patterns)
-    node_score = sum(len(re.findall(p, text_lower)) for p in node_patterns)
-    python_score = sum(len(re.findall(p, text_lower)) for p in python_patterns)
+    dotnet_score = sum(len(re.findall(p, combined_text)) for p in dotnet_patterns)
+    ai_score = sum(len(re.findall(p, combined_text)) for p in ai_patterns)
+    java_score = sum(len(re.findall(p, combined_text)) for p in java_patterns)
+    node_score = sum(len(re.findall(p, combined_text)) for p in node_patterns)
+    python_score = sum(len(re.findall(p, combined_text)) for p in python_patterns)
 
     scores = {
         "dotnet": dotnet_score,
