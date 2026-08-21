@@ -114,7 +114,7 @@ def compile_latex_to_pdf(
     compiler: str | None = None
 
     try:
-        if compiler_available("latexmk"):
+        if compiler_available("latexmk") and compiler_available("perl"):
             compiler = "latexmk"
             result = run_command(
                 [
@@ -208,6 +208,41 @@ def compile_latex_to_pdf(
         if (result.returncode == 0 and pdf_path.exists())
         else None,
         compiler=compiler,
+        errors=errors,
+        warnings=warnings,
+    )
+
+
+def compile_latex_to_docx(
+    latex_code: str,
+    candidate_name: str,
+    company_name: str,
+    role_name: str,
+) -> CompileResponse:
+    GENERATED_ROOT.mkdir(parents=True, exist_ok=True)
+    filename_base = build_filename_base(candidate_name, company_name, role_name)
+    output_dir = GENERATED_ROOT / filename_base
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    tex_path = output_dir / f"{filename_base}.tex"
+    docx_path = output_dir / f"{filename_base}.docx"
+    tex_path.write_text(latex_code, encoding="utf-8")
+
+    errors: list[str] = []
+    warnings: list[str] = []
+    try:
+        from .docx import convert_tex_to_docx
+        convert_tex_to_docx(tex_path, docx_path)
+    except Exception as e:
+        errors.append(f"DOCX conversion failed: {e}")
+
+    success = docx_path.exists()
+    return CompileResponse(
+        success=success,
+        filename_base=filename_base,
+        tex_path=safe_relative(tex_path),
+        docx_path=safe_relative(docx_path) if success else None,
+        docx_download_url=f"/api/files/{filename_base}/{filename_base}.docx" if success else None,
         errors=errors,
         warnings=warnings,
     )

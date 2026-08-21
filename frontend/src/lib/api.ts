@@ -171,6 +171,25 @@ export async function compileLatex(
   return response.json();
 }
 
+export async function compileDocx(
+  payload: CompileRequest,
+): Promise<CompileResponse> {
+  const response = await fetch(`${API_BASE_URL}/api/compile-docx`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    const detail = await response.text();
+    throw new Error(`DOCX Export failed: ${detail}`);
+  }
+
+  return response.json();
+}
+
 export async function healthCheck(): Promise<boolean> {
   try {
     const response = await fetch(`${API_BASE_URL}/api/health`);

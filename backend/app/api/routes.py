@@ -18,7 +18,7 @@ from ..models.schemas import (
 )
 from ..services.keyword_extractor import extract_keywords, seniority_signals
 from ..services.latex import ats_warnings, find_sections, latex_to_text
-from ..services.pdf import compile_latex_to_pdf, resolve_generated_file
+from ..services.pdf import compile_latex_to_pdf, compile_latex_to_docx, resolve_generated_file
 from ..services.rewrite import rewrite_resume
 from ..services.scoring import score_keywords
 from ..services.job_analyzer import detect_details_with_ai, resolve_industry
@@ -106,6 +106,17 @@ def rewrite(request: RewriteRequest, response: Response) -> RewriteResponse:
 @router.post("/compile")
 def compile_latex(request: CompileRequest):
     result = compile_latex_to_pdf(
+        latex_code=request.latex_code,
+        candidate_name=request.candidate_name,
+        company_name=request.company_name,
+        role_name=request.role_name,
+    )
+    return result
+
+
+@router.post("/compile-docx")
+def compile_docx(request: CompileRequest):
+    result = compile_latex_to_docx(
         latex_code=request.latex_code,
         candidate_name=request.candidate_name,
         company_name=request.company_name,

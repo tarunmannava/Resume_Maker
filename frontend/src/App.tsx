@@ -5,6 +5,7 @@ import {
   rewriteResume,
   analyzeJob,
   compileLatex,
+  compileDocx,
   toAbsoluteApiUrl,
   answerScreeningQuestion,
 } from "./lib/api";
@@ -255,6 +256,9 @@ export default function App() {
   const [compiling, setCompiling] = useState(false);
   const [compileResult, setCompileResult] = useState<CompileResponse | null>(null);
   const [compileError, setCompileError] = useState<string | null>(null);
+  const [exportingDocx, setExportingDocx] = useState(false);
+  const [docxResult, setDocxResult] = useState<CompileResponse | null>(null);
+  const [docxError, setDocxError] = useState<string | null>(null);
   const [extraNotes, setExtraNotes] = useState(
     "Keep it ATS friendly and preserve LaTeX structure.",
   );
@@ -323,6 +327,35 @@ export default function App() {
       setCompileError(caught instanceof Error ? caught.message : "Unknown compilation error");
     } finally {
       setCompiling(false);
+    }
+  }
+
+  async function handleExportDocx() {
+    if (!result?.rewritten_latex) return;
+    setExportingDocx(true);
+    setDocxError(null);
+    try {
+      const res = await compileDocx({
+        latex_code: result.rewritten_latex,
+        candidate_name: candidateName || "Resume",
+        company_name: companyName || "General",
+        role_name: roleName || "Position",
+      });
+      setDocxResult(res);
+      if (res.success && res.docx_download_url) {
+        const link = document.createElement("a");
+        link.href = toAbsoluteApiUrl(res.docx_download_url);
+        link.download = `${res.filename_base || "Resume"}.docx`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else if (!res.success) {
+        setDocxError(res.errors.join("\n") || "Failed to generate DOCX");
+      }
+    } catch (caught) {
+      setDocxError(caught instanceof Error ? caught.message : "DOCX export error");
+    } finally {
+      setExportingDocx(false);
     }
   }
 
@@ -708,29 +741,17 @@ export default function App() {
               </span>
             </div>
             <div className="button-row">
+              <button
+                type="button"
+                style={{ background: "#2563eb", color: "#fff", fontWeight: 600 }}
+                onClick={handleExportDocx}
+                disabled={exportingDocx}
+              >
+                {exportingDocx ? "Exporting DOCX..." : "📝 Download Word (.docx)"}
+              </button>
               <button type="button" className="secondary" onClick={downloadTex}>
                 Download .tex
               </button>
-              {compileResult?.docx_download_url && (
-                <a
-                  href={toAbsoluteApiUrl(compileResult.docx_download_url)}
-                  download={`${compileResult.filename_base || "Resume"}.docx`}
-                  className="secondary button-link"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    padding: "8px 14px",
-                    borderRadius: "8px",
-                    background: "#2563eb",
-                    color: "#fff",
-                    textDecoration: "none",
-                    fontSize: "14px",
-                    fontWeight: 500,
-                  }}
-                >
-                  Download .docx
-                </a>
-              )}
               <button type="button" onClick={copyLatex}>
                 {copied ? "Copied" : "Copy LaTeX"}
               </button>
@@ -744,63 +765,62 @@ export default function App() {
             </section>
             <div className="report-stack">
               <section className="card small-card">
-                <h3>Document Compilation (PDF & DOCX)</h3>
-                <div style={{ display: "grid", gap: "10px" }}>
-                  <button 
-                    type="button" 
-                    onClick={handleCompile} 
-                    disabled={compiling}
-                    style={{ background: "#177a3d" }}
-                  >
-                    {compiling ? "Compiling PDF & DOCX..." : "Compile to PDF & DOCX"}
-                  </button>
-                  
-                  {compileError && (
-                    <div className="error" style={{ fontSize: "14px", marginTop: "8px" }}>
-                      <strong>Compile Error:</strong>
-                      <pre style={{ whiteSpace: "pre-wrap", margin: "4px 0 0 0", maxHeight: "150px", overflow: "auto", fontSize: "12px", fontFamily: "monospace" }}>
-                        {compileError}
-                      </pre>
-                    </div>
-                  )}
+                <h3>Document Export</h3>
+                <div style={{ display: "grid", gap: "12px" }}>
+                  {/* DOCX Export Button */}
+                  <div>
+                    <button 
+                      type="button" 
+                      onClick={handleExportDocx} 
+                      disabled={exportingDocx}
+                      style={{ background: "#2563eb", width: "100%", fontWeight: 600 }}
+                    >
+                      {exportingDocx ? "Exporting DOCX..." : "📝 Export & Download Word (.docx)"}
+                    </button>
+                    {docxError && (
+                      <div className="error" style={{ fontSize: "13px", marginTop: "6px" }}>
+                        <strong>DOCX Error:</strong> {docxError}
+                      </div>
+                    )}
+                    {docxResult?.success && docxResult.docx_download_url && (
+                      <div style={{ color: "#177a3d", fontSize: "13px", marginTop: "6px" }}>
+                        ✓ DOCX generated! <a href={toAbsoluteApiUrl(docxResult.docx_download_url)} download={`${docxResult.filename_base || "Resume"}.docx`} style={{ fontWeight: "bold", color: "#2563eb" }}>Click here to re-download</a>
+                      </div>
+                    )}
+                  </div>
 
-                  {compileResult && (
-                    <div style={{ fontSize: "14px", marginTop: "8px" }}>
-                      {compileResult.success ? (
-                        <div style={{ color: "#177a3d", display: "grid", gap: "6px" }}>
-                          <div>✓ Document generated successfully!</div>
-                          {compileResult.pdf_download_url && (
-                            <a 
-                              href={toAbsoluteApiUrl(compileResult.pdf_download_url)} 
-                              target="_blank" 
-                              rel="noreferrer"
-                              style={{ display: "inline-block", fontWeight: "bold", color: "#5164ff" }}
-                            >
-                              📄 Download PDF File
-                            </a>
-                          )}
-                          {compileResult.docx_download_url && (
-                            <a 
-                              href={toAbsoluteApiUrl(compileResult.docx_download_url)} 
-                              download={`${compileResult.filename_base || "Resume"}.docx`}
-                              style={{ display: "inline-block", fontWeight: "bold", color: "#2563eb" }}
-                            >
-                              📝 Download DOCX File (Word)
-                            </a>
-                          )}
-                        </div>
-                      ) : (
-                        <div className="error">
-                          <strong>Compilation Failed:</strong>
-                          <ul style={{ margin: "4px 0 0 0", paddingLeft: "20px", fontSize: "12px" }}>
-                            {compileResult.errors.map((err: string, i: number) => (
-                              <li key={i}>{err}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  )}
+                  <hr style={{ border: 0, borderTop: "1px solid #333", margin: "4px 0" }} />
+
+                  {/* PDF Compile Button */}
+                  <div>
+                    <button 
+                      type="button" 
+                      onClick={handleCompile} 
+                      disabled={compiling}
+                      style={{ background: "#177a3d", width: "100%" }}
+                    >
+                      {compiling ? "Compiling PDF..." : "📄 Compile LaTeX to PDF"}
+                    </button>
+                    
+                    {compileError && (
+                      <div className="error" style={{ fontSize: "13px", marginTop: "6px" }}>
+                        <strong>Compile Error:</strong>
+                        <pre style={{ whiteSpace: "pre-wrap", margin: "4px 0 0 0", maxHeight: "150px", overflow: "auto", fontSize: "12px", fontFamily: "monospace" }}>
+                          {compileError}
+                        </pre>
+                      </div>
+                    )}
+
+                    {compileResult && (
+                      <div style={{ fontSize: "13px", marginTop: "6px" }}>
+                        {compileResult.success && compileResult.pdf_download_url ? (
+                          <div style={{ color: "#177a3d" }}>
+                            ✓ PDF Compiled! <a href={toAbsoluteApiUrl(compileResult.pdf_download_url)} target="_blank" rel="noreferrer" style={{ fontWeight: "bold", color: "#5164ff" }}>Open / Download PDF</a>
+                          </div>
+                        ) : null}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </section>
               <KeywordTable
