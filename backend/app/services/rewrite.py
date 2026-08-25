@@ -169,8 +169,8 @@ def build_user_prompt(
         usf_projects_instruction = (
             "USF & PROJECTS (AI / GENAI TARGET STACK - AUTHENTIC RAG & AGENTIC WORKFLOWS): "
             "1. USF Research Assistant: Explicitly feature the candidate's authentic RAG work: "
-            "(a) Developed a RAG-based conversational assistant using FastAPI, structuring a domain-specific knowledge base and MongoDB state management; "
-            "(b) Designed a multi-layer LLM safety and retrieval architecture combining cosine similarity semantic relevance filtering and rate-limit-aware caching with Google Gemini and Groq APIs; "
+            "(a) Contributed to a RAG-based nutrition chatbot for MyFoodRx, structuring a domain-specific knowledge base and retrieval workflows; "
+            "(b) Designed a multi-layer LLM safety and retrieval architecture combining query classification, cosine similarity semantic relevance filtering, and rate-limit-aware caching with Google Gemini; "
             "(c) Built an in-browser prompt evaluation engine using Transformers.js (WASM / ONNX) for local cosine similarity embedding scoring. "
             "2. AutoDocs Project: Highlight context-aware RAG pipelines powered by Model Context Protocol (MCP) servers, AST codebase chunking and vector retrieval, Agent-to-Agent (A2A) multi-agent dynamic task routing, and RabbitMQ asynchronous queues. "
             "3. SkillBeacon Project: Highlight semantic skill matching with vector embeddings and multi-party confidence scoring."
