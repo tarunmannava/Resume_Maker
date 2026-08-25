@@ -622,6 +622,21 @@ def adapt_resume_for_java(latex: str, request: RewriteRequest) -> str:
     return latex
 
 
+def adapt_resume_for_node(latex: str, request: RewriteRequest) -> str:
+    """Ensures Node.js/TypeScript skills and summary are properly reflected for Node/Fullstack roles."""
+    section_match = re.search(
+        r"(\\section\{(?:TECHNICAL )?SKILLS\}.*?)(?=\\section\{|\Z)",
+        latex,
+        flags=re.DOTALL | re.IGNORECASE,
+    )
+    if section_match:
+        sec = section_match.group(1)
+        if "Node.js" not in sec and "Node" not in sec:
+            from .latex_skills import inject_canonical_skills_section
+            latex = inject_canonical_skills_section(latex, "node")
+    return latex
+
+
 def rewrite_resume(request: RewriteRequest) -> RewriteResponse:
     resume_text = latex_to_text(request.resume_latex)
     job_keywords = extract_keywords(
@@ -708,6 +723,10 @@ def rewrite_resume(request: RewriteRequest) -> RewriteResponse:
     # If target stack is .NET, strictly enforce C#/.NET 8 in Cognizant, USF, Skills, and Summary
     if target_stack == "dotnet":
         rewritten = adapt_resume_for_dotnet(rewritten, request)
+
+    # If target stack is Node, ensure NODE_STACK_SKILLS are applied
+    if target_stack == "node":
+        rewritten = adapt_resume_for_node(rewritten, request)
 
     # Sanitize banned skills in skills section if provided
     if request.banned_skills:
