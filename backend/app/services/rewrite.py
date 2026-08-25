@@ -83,6 +83,12 @@ MANDATORY OPERATIONAL RULES:
 6. SYNTAX INTEGRITY:
    - Escape all percentages as \% (e.g. 30\%, 70\%) and ampersands as \& (e.g. Cloud \& DevOps).
    - Always preserve CERTIFICATIONS section if present in the base resume.
+7. IMPACTFUL PROFESSIONAL SUMMARY HEADLINES (USE THESE RICH TEMPLATES):
+   - For .NET roles: "Software Engineer specializing in C\#, .NET 8 / ASP.NET Core, and distributed systems. Experienced in building enterprise Web APIs, Entity Framework Core query optimization, SQL Server architectures, and cloud microservices with a strong focus on high throughput, low latency, and robust test-driven development."
+   - For Java roles: "Backend Software Engineer with enterprise microservices experience building scalable, distributed systems using Java 11/17, Spring Boot, and cloud infrastructure. Strong expertise in RESTful API design, database query optimization (PostgreSQL, MongoDB, SQL Server), Redis caching, and event-driven architectures with RabbitMQ."
+   - For Python roles: "Backend Software Developer specializing in Python 3.10+, FastAPI, AsyncIO, and distributed systems. Experienced in architecting asynchronous REST APIs, relational and NoSQL data modeling with SQLAlchemy, PostgreSQL, and MongoDB, and building scalable background task pipelines with RabbitMQ and Redis."
+   - For Node.js / Fullstack roles: "Full Stack Software Engineer with expertise in TypeScript, React 18, Next.js, and Node.js backend architectures. Experienced in building end-to-end web applications, real-time WebSocket interfaces, REST/GraphQL APIs, and event-driven pipelines backed by PostgreSQL, MongoDB, and Redis caching."
+   - For AI / ML roles: "AI / Machine Learning Platform Engineer with expertise in LLM applications, RAG pipelines, LangGraph multi-agent orchestration, and Model Context Protocol (MCP) systems. Experienced in building scalable Python/FastAPI backends, vector search architectures, and client-side WASM neural inference."
 """
 
 SYSTEM_PROMPT_TITLE_ALIGNMENT = """
