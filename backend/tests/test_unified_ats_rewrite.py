@@ -137,7 +137,6 @@ def test_prompt_construction_injects_ats_gap_list_and_guardrails():
     )
 
     assert "IDENTIFIED ATS CRITERIA & KEYWORD GAPS TO RESOLVE: Kafka, Kubernetes" in prompt
-    assert "CONTEXTUAL ATS CRITERIA AUDIT & GAP RESOLUTION" in prompt
     assert "COGNIZANT EXPERIENCE (JAVA TARGET STACK)" in prompt
     assert "USF & PROJECTS RULE (JAVA): Adapt USF Graduate Researcher to Java 17, Spring Boot" in prompt
     assert "San Francisco, CA" in prompt
@@ -150,13 +149,14 @@ def test_prompt_construction_injects_ats_gap_list_and_guardrails():
 def test_system_prompt_ats_screener_and_ground_truths():
     system_prompt = rewrite_service.build_system_prompt(align_titles=False)
 
-    assert "CONTEXTUAL ATS SCREENER REASONING" in system_prompt
-    assert "INTERNAL ATS AUDIT & GAP RECONCILIATION" in system_prompt
-    assert "Tier 1 Knockout Requirements" in system_prompt
-    assert "Tier 2 Contextual Evidence" in system_prompt
-    assert "STRICTLY NO BOLDING OR HIGHLIGHTING KEYWORDS IN BULLETS" in system_prompt
-    assert "COGNIZANT ROLE & DEFENSIBILITY GUARDRAIL" in system_prompt
-    assert "USF & PROJECTS STACK & ARCHITECTURE MATRIX" in system_prompt
+    assert "CANONICAL SKILLS TEMPLATES (JSON SCHEMAS BY STACK)" in system_prompt
+    assert "JAVA_STACK_SKILLS" in system_prompt
+    assert "DOTNET_STACK_SKILLS" in system_prompt
+    assert "PYTHON_STACK_SKILLS" in system_prompt
+    assert "NODE_STACK_SKILLS" in system_prompt
+    assert "AI_STACK_SKILLS" in system_prompt
+    assert "CLEAN BULLETS (ZERO INLINE BOLDING)" in system_prompt
+    assert "STACK-SPECIFIC EXPERIENCE & SKILLS RULES" in system_prompt
 
 
 # ---------------------------------------------------------------------------
