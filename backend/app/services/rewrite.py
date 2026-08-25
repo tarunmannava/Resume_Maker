@@ -48,8 +48,8 @@ MANDATORY RULES:
    - For .NET roles: USF Graduate Researcher adapts to C#, .NET 8 / ASP.NET Core, React, and TypeScript.
    - For Java roles: USF Graduate Researcher adapts to Java 17, Spring Boot, React, and TypeScript.
    - For Python roles: USF is Python (FastAPI, AsyncIO, data/backend).
-   - For Node.js / Fullstack roles: USF and Projects adapt to Node.js / TypeScript / React.
-   - For AI / ML roles: USF and Projects adapt to Python / AI (LLMs, RAG, LangChain, vector search).
+   - For Node.js / Fullstack roles: USF adapts to Node.js, TypeScript, and React. Projects (AutoDocs, SkillBeacon) showcase TypeScript, Node.js / React fullstack workflows while preserving their event-driven architecture, webhook verification, RabbitMQ, and agentic / multi-agent systems.
+   - For AI / ML roles: USF and Projects adapt to Python / AI (LLMs, RAG, LangChain, vector search, multi-agent systems).
 6. ACTION-ORIENTED X-Y-Z BULLET FORMAT (FULL TECHNICAL DEPTH & EVIDENCE):
    - Each bullet MUST be a substantial, comprehensive 1.5 to 2-line technical accomplishment. DO NOT over-shorten bullets into terse 1-liners.
    - Every bullet must follow the X-Y-Z structure: [Strong Past Action Verb] + [Specific Technologies, Frameworks & Architecture Details] + [Quantifiable Impact, % Improvement, Throughput, or Latency Bound].
@@ -148,8 +148,9 @@ def build_user_prompt(
             "(do NOT change to Node.js)."
         )
         usf_projects_instruction = (
-            "USF & PROJECTS (NODE.JS): Adapt USF Graduate Researcher and Projects to Node.js, TypeScript, React, "
-            "Express/NestJS full-stack web platforms."
+            "USF & PROJECTS (NODE.JS): Adapt USF Graduate Researcher to Node.js, TypeScript, and React. "
+            "In Projects, showcase TypeScript, Node.js / React full-stack integration while PRESERVING AutoDocs's "
+            "agentic multi-agent architecture, event-driven webhooks, and RabbitMQ pipeline."
         )
     elif target_stack == "ai":
         cognizant_instruction = (
@@ -446,29 +447,29 @@ def preserve_certifications_section(original_latex: str, rewritten_latex: str) -
 DOTNET_COGNIZANT_BLOCK = r"""  \resumeSubheading
     {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
   \resumeItemListStart
-    \resumeItem{Developed .NET 8/ASP.NET Core Web API microservices in C\# for insurance policy onboarding and validation, persisting client metadata to SQL Server through Entity Framework Core, within a distributed platform handling 20K+ peak hourly transactions.}
-    \resumeItem{Engineered asynchronous validation workflows using Task Parallel Library, async/await, and concurrent queues, parallelizing document and policy processing and improving throughput by 25\%.}
-    \resumeItem{Implemented Redis-backed caching strategies with cache-aside pattern and TTL policies, reducing SQL Server read bottlenecks and improving p95 API response times by 30\% during peak onboarding cycles.}
-    \resumeItem{Designed and optimized database interactions in SQL Server using Entity Framework Core, LINQ, and indexed queries, eliminating N+1 query patterns and minimizing database round trips.}
-    \resumeItem{Refactored validation and business logic across 6+ microservices into reusable .NET Core service components with centralized exception handling and standardized REST error responses.}
-    \resumeItem{Secured REST endpoints using ASP.NET Core Identity, JWT-based authentication, and role-based access control, integrating with centralized identity providers.}
-    \resumeItem{Authored comprehensive NUnit and xUnit automated test suites covering business-critical paths, establishing 70\%+ backend test coverage and reducing production regressions.}
+    \resumeItem{Developed scalable C\# and .NET 8 / ASP.NET Core microservices for insurance policy onboarding, validation, and customer transactions, supporting distributed services handling 20K+ peak hourly requests.}
+    \resumeItem{Engineered asynchronous validation and enrichment pipelines using async/await and Task Parallel Library (TPL), improving transaction processing latency through parallel task execution.}
+    \resumeItem{Implemented Redis-backed caching strategies and cache warm-up routines, reducing SQL Server read bottlenecks and improving p95 API response times by 30\% during peak onboarding cycles.}
+    \resumeItem{Designed and optimized database interactions across SQL Server (T-SQL) and MongoDB using Entity Framework Core and indexed queries, eliminating N+1 query patterns and minimizing database round trips.}
+    \resumeItem{Refactored validation and business logic across 6+ microservices into reusable .NET service components with centralized exception handling and standardized RESTful Web API error responses.}
+    \resumeItem{Secured REST endpoints using ASP.NET Core Identity, JWT authentication, and role-based access control (RBAC), integrating with enterprise identity providers.}
+    \resumeItem{Authored comprehensive automated test suites using xUnit, NUnit, and Moq covering business-critical paths, establishing 70\%+ backend test coverage and reducing production regressions.}
   \resumeItemListEnd"""
 
 DOTNET_USF_BLOCK = r"""  \resumeSubheading
     {University of South Florida}{Graduate Researcher, Software Engineer}{Jan 2025}{May 2026}
   \resumeItemListStart
-    \resumeItem{Architected and deployed an AI-enabled Health Literacy web platform for USF SHIELD Lab across 13 interactive modules in ASP.NET Core Web API, C\#, React, and TypeScript, serving 60+ biomedical students and faculty.}
-    \resumeItem{Engineered a .NET 8/C\# backend and real-time dual-model sandbox integrating LLM APIs and semantic grading rubrics, achieving sub-2s response latency with memory caching and asynchronous endpoints.}
-    \resumeItem{Built an in-browser evaluation engine using ONNX Runtime Web and TypeScript for local embedding and cosine similarity scoring, providing zero-latency pedagogical feedback on prompt structure and constraints.}
-    \resumeItem{Integrated OAuth2/JWT session authentication and engineered SQL Server and PostgreSQL relational schemas with Entity Framework Core and LINQ for secure access code verification, quiz scoring, and chat audit logging.}
+    \resumeItem{Architected and deployed a production AI \& Health Literacy web platform for USF SHIELD Lab across 13 interactive modules in React and TypeScript, serving 60+ biomedical students and faculty.}
+    \resumeItem{Engineered an ASP.NET Core (C\#) Web API backend and real-time dual-model sandbox integrating Groq and Hugging Face LLM APIs, featuring semantic grading rubrics, milestone detection, and response caching under 2s latency.}
+    \resumeItem{Built an in-browser prompt evaluation engine using Transformers.js (WASM / ONNX) and TypeScript for local cosine similarity embedding scoring, providing zero-latency pedagogical feedback on prompt structure and constraints.}
+    \resumeItem{Integrated OAuth2 (PKCE) session authentication and engineered PostgreSQL / SQL Server relational schemas with Entity Framework Core for secure access code verification, quiz scoring, and deterministic chat logging.}
   \resumeItemListEnd"""
 
 JAVA_USF_BLOCK = r"""  \resumeSubheading
     {University of South Florida}{Graduate Researcher, Software Engineer}{Jan 2025}{May 2026}
   \resumeItemListStart
-    \resumeItem{Architected and deployed an AI-enabled Health Literacy web platform for USF SHIELD Lab across 13 interactive modules in Java 17, Spring Boot, React, and TypeScript, serving 60+ biomedical students and faculty.}
-    \resumeItem{Engineered a Java 17/Spring Boot REST backend and real-time dual-model sandbox integrating LLM APIs and semantic grading rubrics, achieving sub-2s response latency with Redis caching and asynchronous CompletableFuture pipelines.}
+    \resumeItem{Architected and deployed a production AI \& Health Literacy web platform for USF SHIELD Lab across 13 interactive modules in React and TypeScript, serving 60+ biomedical students and faculty.}
+    \resumeItem{Engineered a Java 17 and Spring Boot microservice backend with a real-time dual-model sandbox integrating Groq and Hugging Face LLM APIs, featuring semantic grading rubrics, milestone detection, and response caching under 2s latency.}
     \resumeItem{Built an in-browser evaluation engine using Transformers.js (WASM / ONNX) and TypeScript for local cosine similarity embedding scoring, providing zero-latency pedagogical feedback on prompt structure and constraints.}
     \resumeItem{Integrated OAuth2 (PKCE) session authentication and engineered PostgreSQL relational schemas with Spring Data JPA and Hibernate for secure access code verification, quiz scoring, and deterministic chat logging.}
   \resumeItemListEnd"""
@@ -662,18 +663,9 @@ def rewrite_resume(request: RewriteRequest) -> RewriteResponse:
     # Sanitize unescaped % and special characters in bullets/body
     rewritten = sanitize_latex_escaping(rewritten)
 
-    # If target stack is Java, ensure Cognizant appears before USF, adapt USF to Java, and guard against AI jargon in projects
+    # If target stack is Java, ensure Cognizant appears before USF and adapt USF to Java
     if target_stack == "java":
         rewritten = adapt_resume_for_java(rewritten, request)
-        from .latex_projects import projects_contain_ai_jargon, force_replace_projects_section
-        from .projects_data import PROJECTS
-        if projects_contain_ai_jargon(rewritten):
-            rewritten = force_replace_projects_section(
-                rewritten,
-                [PROJECTS[2], PROJECTS[1]],
-                request.resume_latex,
-                "backend_engineer",
-            )
 
     # If target stack is .NET, strictly enforce C#/.NET 8 in Cognizant, USF, Skills, and Summary
     if target_stack == "dotnet":

@@ -107,7 +107,7 @@
   \small{\item{
     \textbf{Languages:} Java, Python, TypeScript, JavaScript, SQL \\[1pt]
     \textbf{Backend:} Spring Boot, Spring MVC, Spring Security, FastAPI, SQLAlchemy, REST APIs, Microservices \\[1pt]
-    \textbf{AI/ML:} LLMs, RAG, LangGraph, LangChain, Prompt Engineering, Embeddings, Hugging Face, Transformers, PyTorch, NLP, Computer Vision, scikit-learn \\[1pt]
+    \textbf{AI Developer Tools \& GenAI:} Claude Code, Cursor, GitHub Copilot, LLMs, RAG, LangGraph, LangChain, Prompt Engineering, Embeddings, Hugging Face, Transformers, PyTorch \\[1pt]
     \textbf{Databases:} PostgreSQL, MongoDB, SQL Server, Redis, jOOQ \\[1pt]
     \textbf{Messaging \& Distributed Systems:} RabbitMQ, Asynchronous Processing, Event-Driven Architecture \\[1pt]
     \textbf{Cloud \& Infrastructure:} AWS, Cloudflare R2, Docker, Linux, GitHub Actions \\[1pt]
@@ -122,6 +122,15 @@
 \resumeSubHeadingListStart
 
   \resumeSubheading
+    {University of South Florida}{Graduate Researcher, Software Engineer}{Jan 2025}{May 2026}
+  \resumeItemListStart
+    \resumeItem{Architected and deployed a production AI \& Health Literacy web platform for USF SHIELD Lab across 13 interactive modules in React and TypeScript, serving 60+ biomedical students and faculty.}
+    \resumeItem{Engineered a Python/Flask backend and real-time dual-model sandbox integrating Groq and Hugging Face LLM APIs, featuring semantic grading rubrics, milestone detection, and response caching under 2s latency.}
+    \resumeItem{Built an in-browser prompt evaluation engine using Transformers.js (WASM / ONNX) for local cosine similarity embedding scoring, providing zero-latency pedagogical feedback on prompt structure and constraints.}
+    \resumeItem{Integrated Hugging Face OAuth2 (PKCE) for session authentication and engineered Supabase (PostgreSQL) relational schemas and server-side RPCs for secure access code verification, quiz scoring, and deterministic chat logging.}
+  \resumeItemListEnd
+
+  \resumeSubheading
     {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
   \resumeItemListStart
     \resumeItem{Developed Java 11/Spring Boot microservices for policy onboarding, validation, and customer transactions, supporting distributed insurance services handling 20K+ peak hourly requests.}
@@ -131,15 +140,6 @@
     \resumeItem{Refactored validation and business logic across 6+ microservices into reusable Spring service components with centralized exception handling and standardized REST error responses.}
     \resumeItem{Secured REST endpoints using Spring Security and JWT-based authentication, integrating role-based access control with centralized identity providers.}
     \resumeItem{Authored comprehensive JUnit and Cucumber automated test suites covering business-critical paths, establishing 70\%+ backend test coverage and reducing production regressions.}
-  \resumeItemListEnd
-
-  \resumeSubheading
-    {University of South Florida}{Graduate Researcher, Software Engineer}{Jan 2025}{May 2026}
-  \resumeItemListStart
-    \resumeItem{Architected and deployed a production AI \& Health Literacy web platform for USF SHIELD Lab across 13 interactive modules in React and TypeScript, serving 60+ biomedical students and faculty.}
-    \resumeItem{Engineered a Python/Flask backend and real-time dual-model sandbox integrating Groq and Hugging Face LLM APIs, featuring semantic grading rubrics, milestone detection, and response caching under 2s latency.}
-    \resumeItem{Built an in-browser prompt evaluation engine using Transformers.js (WASM / ONNX) for local cosine similarity embedding scoring, providing zero-latency pedagogical feedback on prompt structure and constraints.}
-    \resumeItem{Integrated Hugging Face OAuth2 (PKCE) for session authentication and engineered Supabase (PostgreSQL) relational schemas and server-side RPCs for secure access code verification, quiz scoring, and deterministic chat logging.}
   \resumeItemListEnd
 
 \resumeSubHeadingListEnd
@@ -156,12 +156,12 @@
     \resumeItem{Integrated Cloudflare R2 through its S3-compatible API for resumes, employer logos, skill evidence, and challenge submissions, including file validation, size limits, storage quotas, presigned downloads, and secure file handling.}
   \resumeItemListEnd
 
-  \resumeProject{AutoDocs -- PR-Triggered Multi-Agent Documentation System}{Python, FastAPI, GitHub Webhooks, Supabase, RabbitMQ}
+  \resumeProject{AutoDocs -- Event-Driven MCP \& Multi-Agent Documentation System}{Python, FastAPI, MCP Protocol, A2A Protocol, RabbitMQ, Supabase, GitHub Webhooks}
   \resumeItemListStart
-    \resumeItem{Built an event-driven PR-triggered documentation system that receives merged pull-request events through a FastAPI webhook and validates GitHub HMAC-SHA256 signatures.}
-    \resumeItem{Implemented idempotent webhook processing using GitHub delivery IDs, persisting webhook deliveries and documentation runs in Supabase before publishing pull-request jobs to RabbitMQ.}
+    \resumeItem{Built an event-driven documentation system receiving pull-request webhooks via FastAPI, validating GitHub HMAC-SHA256 signatures, and enforcing idempotent delivery persistence in Supabase.}
     \resumeItem{Implemented asynchronous job processing with RabbitMQ, separating webhook ingestion from repository analysis and long-running documentation workflows with retry and failure handling.}
-    \resumeItem{Implemented a conditional multi-agent workflow that analyzes pull-request changes, routes relevant changes to specialized documentation agents, aggregates structured outputs, performs consistency validation, and generates documentation updates.}
+    \resumeItem{Architected Model Context Protocol (MCP) servers exposing git diffs, AST parsing, and codebase resources to LLM agents for secure, context-aware repository inspection.}
+    \resumeItem{Engineered an Agent-to-Agent (A2A) communication workflow routing tasks across specialized diff-analysis, API-spec, and architectural-review agents with structured state exchange and consistency checks.}
   \resumeItemListEnd
 
 \resumeSubHeadingListEnd

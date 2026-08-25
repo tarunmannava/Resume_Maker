@@ -33,6 +33,19 @@ EQUIVALENTS: dict[str, list[str]] = {
     "bigquery": ["snowflake", "redshift", "databricks", "data warehouse"],
     "redshift": ["snowflake", "bigquery", "databricks", "data warehouse"],
     "airflow": ["prefect", "dagster", "data pipeline"],
+    # .NET Ecosystem Equivalents
+    "asp.net": ["asp.net core", ".net", "c#", "entity framework", "web api", "mvc"],
+    "asp.net core": ["asp.net", ".net core", ".net", "c#", "entity framework", "web api"],
+    ".net": ["asp.net", "asp.net core", ".net core", "c#", ".net 8"],
+    ".net core": [".net", "asp.net core", "c#", ".net 8"],
+    "razor pages": ["asp.net", "asp.net core", "mvc", "react", "frontend"],
+    "entity framework": ["ef core", "orm", "linq", "sql server", "sql"],
+    # Reporting & BI Equivalents
+    "power bi": ["tableau", "data visualization", "reporting", "dashboards", "sql"],
+    "tableau": ["power bi", "data visualization", "reporting", "dashboards", "sql"],
+    "data modeling": ["database design", "schema design", "relational database", "entity framework", "sql"],
+    "data dictionary": ["data modeling", "schema design", "database documentation", "metadata"],
+    "systems analysis": ["system design", "requirements gathering", "software engineering", "architecture"],
     # AI Engineering Equivalents
     "llm": ["generative ai", "nlp", "transformers", "openai", "anthropic"],
     "generative ai": ["llm", "nlp", "transformers", "openai", "anthropic"],

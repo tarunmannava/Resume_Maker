@@ -35,6 +35,13 @@ KEYWORD_CATALOG: dict[str, tuple[str, float]] = {
     "rest api": ("backend", 4),
     "graphql": ("backend", 4),
     "microservices": ("backend", 4),
+    "asp.net": ("backend", 5),
+    "asp.net core": ("backend", 5),
+    ".net": ("backend", 4),
+    ".net core": ("backend", 4),
+    "razor pages": ("backend", 4),
+    "entity framework": ("backend", 4),
+    "linq": ("backend", 3),
     # Databases
     "postgresql": ("database", 4),
     "mysql": ("database", 4),
@@ -42,6 +49,13 @@ KEYWORD_CATALOG: dict[str, tuple[str, float]] = {
     "redis": ("database", 3),
     "oracle": ("database", 3),
     "sql server": ("database", 3),
+    "stored procedures": ("database", 3),
+    # Reporting & BI
+    "power bi": ("data", 4),
+    "tableau": ("data", 4),
+    "data modeling": ("data", 4),
+    "data dictionary": ("data", 3),
+    "reporting": ("data", 3),
     # Cloud/devops
     "aws": ("cloud", 5),
     "gcp": ("cloud", 5),
@@ -53,6 +67,7 @@ KEYWORD_CATALOG: dict[str, tuple[str, float]] = {
     "github actions": ("devops", 3),
     "jenkins": ("devops", 3),
     # Systems/concepts
+    "systems analysis": ("concept", 3),
     "data structures": ("concept", 4),
     "algorithms": ("concept", 4),
     "object-oriented": ("concept", 3),

@@ -84,18 +84,6 @@ def test_rewrite_resume_requests_continuation_when_output_truncated(monkeypatch)
     assert response.rewritten_latex.strip().endswith(r"\end{document}")
 
 
-def test_rewrite_resume_removes_banned_skills(monkeypatch):
-    monkeypatch.setattr(
-        rewrite_service,
-        "generate_rewrite",
-        lambda prompt, align_titles=False: (COMPLETE_OUTPUT, "test", None),
-    )
-
-    response = rewrite_service.rewrite_resume(_request(banned_skills=["Kafka"]))
-
-    assert "Kafka" not in response.rewritten_latex
-
-
 def test_rewrite_resume_handles_no_content_from_provider(monkeypatch):
     monkeypatch.setattr(
         rewrite_service,

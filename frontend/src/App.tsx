@@ -286,11 +286,11 @@ export default function App() {
       });
       setDetectedIndustry(response.detected_industry);
       setDetectedRoleCategory(response.detected_role_category);
-      
+
       if (response.detected_role_category) {
         setSelectedRoleCategory(response.detected_role_category);
       }
-      
+
       if (response.detected_industry) {
         setSelectedIndustry(response.detected_industry);
         setShowIndustryWarning(false);
@@ -313,13 +313,22 @@ export default function App() {
     try {
       const res = await compileLatex({
         latex_code: result.rewritten_latex,
-        candidate_name: candidateName || "Resume",
-        company_name: companyName || "General",
-        role_name: roleName || "Position",
+        candidate_name: candidateName.trim() || "TarunMannava",
+        company_name: "",
+        role_name: roleName.trim() || "SoftwareEngineer",
       });
       setCompileResult(res);
       if (res.success && res.pdf_download_url) {
-        window.open(toAbsoluteApiUrl(res.pdf_download_url), "_blank");
+        const namePart = candidateName.trim() ? candidateName.trim().replace(/\s+/g, "") : "TarunMannava";
+        const rolePart = roleName.trim() ? roleName.trim().replace(/\s+/g, "") : "SoftwareEngineer";
+        const link = document.createElement("a");
+        link.href = toAbsoluteApiUrl(res.pdf_download_url);
+        link.download = `${namePart}_${rolePart}.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        setTimeout(() => {
+          document.body.removeChild(link);
+        }, 150);
       } else if (!res.success) {
         setCompileError(res.errors.join("\n"));
       }
@@ -335,20 +344,26 @@ export default function App() {
     setExportingDocx(true);
     setDocxError(null);
     try {
+      const namePart = candidateName.trim() ? candidateName.trim().replace(/\s+/g, "") : "TarunMannava";
+      const rolePart = roleName.trim() ? roleName.trim().replace(/\s+/g, "") : "SoftwareEngineer";
+      const docxFilename = `${namePart}_${rolePart}.docx`;
+
       const res = await compileDocx({
         latex_code: result.rewritten_latex,
-        candidate_name: candidateName || "Resume",
-        company_name: companyName || "General",
-        role_name: roleName || "Position",
+        candidate_name: candidateName.trim() || "TarunMannava",
+        company_name: companyName.trim() || "",
+        role_name: roleName.trim() || "SoftwareEngineer",
       });
       setDocxResult(res);
       if (res.success && res.docx_download_url) {
         const link = document.createElement("a");
         link.href = toAbsoluteApiUrl(res.docx_download_url);
-        link.download = `${res.filename_base || "Resume"}.docx`;
+        link.download = docxFilename;
         document.body.appendChild(link);
         link.click();
-        document.body.removeChild(link);
+        setTimeout(() => {
+          document.body.removeChild(link);
+        }, 150);
       } else if (!res.success) {
         setDocxError(res.errors.join("\n") || "Failed to generate DOCX");
       }
@@ -360,15 +375,21 @@ export default function App() {
   }
 
   function downloadTex() {
-    if (!result?.rewritten_latex) return;
-    const blob = new Blob([result.rewritten_latex], { type: "text/plain;charset=utf-8" });
+    const textToDownload = result?.rewritten_latex || resumeLatex;
+    if (!textToDownload) return;
+    const blob = new Blob([textToDownload], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    const safeName = candidateName ? candidateName.replace(/\s+/g, "_") : "Resume";
-    link.download = `${safeName}.tex`;
+    const namePart = candidateName.trim() ? candidateName.trim().replace(/\s+/g, "") : "TarunMannava";
+    const rolePart = roleName.trim() ? roleName.trim().replace(/\s+/g, "") : "SoftwareEngineer";
+    link.download = `${namePart}_${rolePart}.tex`;
+    document.body.appendChild(link);
     link.click();
-    URL.revokeObjectURL(url);
+    setTimeout(() => {
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }, 150);
   }
 
   useEffect(() => {
@@ -424,7 +445,7 @@ export default function App() {
     await navigator.clipboard.writeText(result.rewritten_latex);
     setCopied(true);
   }
-  
+
   function toggleMissingSkill(term: string) {
     setSelectedMissingSkills((prev) =>
       prev.includes(term) ? prev.filter((t) => t !== term) : [...prev, term],
@@ -476,46 +497,46 @@ export default function App() {
 
       <form className="workspace" onSubmit={handleSubmit}>
         <div className="editor-grid">
-        <section className="card editor-card job-editor">
-          <div className="section-heading">
-            <div>
-              <span className="section-kicker">Step 1</span>
-              <h2>Job description</h2>
+          <section className="card editor-card job-editor">
+            <div className="section-heading">
+              <div>
+                <span className="section-kicker">Step 1</span>
+                <h2>Job description</h2>
+              </div>
+              <div className="editor-tools">
+                <button
+                  type="button"
+                  className="secondary"
+                  style={{ padding: "6px 12px", borderRadius: "8px", fontSize: "12px" }}
+                  onClick={handleAnalyzeJob}
+                  disabled={jobDescription.length < 20 || analyzingJob}
+                >
+                  {analyzingJob ? "Analyzing..." : "Detect Role & Industry"}
+                </button>
+                <span className="editor-count">{jobDescription.length.toLocaleString()} chars</span>
+              </div>
             </div>
-            <div className="editor-tools">
-              <button
-                type="button"
-                className="secondary"
-                style={{ padding: "6px 12px", borderRadius: "8px", fontSize: "12px" }}
-                onClick={handleAnalyzeJob}
-                disabled={jobDescription.length < 20 || analyzingJob}
-              >
-                {analyzingJob ? "Analyzing..." : "Detect Role & Industry"}
-              </button>
-              <span className="editor-count">{jobDescription.length.toLocaleString()} chars</span>
-            </div>
-          </div>
-          <textarea
-            value={jobDescription}
-            onChange={(event) => setJobDescription(event.target.value)}
-            onBlur={handleAnalyzeJob}
-            placeholder="Paste the job description here..."
-          />
-        </section>
+            <textarea
+              value={jobDescription}
+              onChange={(event) => setJobDescription(event.target.value)}
+              onBlur={handleAnalyzeJob}
+              placeholder="Paste the job description here..."
+            />
+          </section>
 
-        <section className="card editor-card resume-editor">
-          <div className="section-heading">
-            <div>
-              <span className="section-kicker">Step 2</span>
-              <h2>Current LaTeX resume</h2>
+          <section className="card editor-card resume-editor">
+            <div className="section-heading">
+              <div>
+                <span className="section-kicker">Step 2</span>
+                <h2>Current LaTeX resume</h2>
+              </div>
+              <span className="editor-count">{resumeLatex.length.toLocaleString()} chars</span>
             </div>
-            <span className="editor-count">{resumeLatex.length.toLocaleString()} chars</span>
-          </div>
-          <textarea
-            value={resumeLatex}
-            onChange={(event) => setResumeLatex(event.target.value)}
-          />
-        </section>
+            <textarea
+              value={resumeLatex}
+              onChange={(event) => setResumeLatex(event.target.value)}
+            />
+          </section>
         </div>
 
         <section className="card settings-card">
@@ -607,14 +628,14 @@ export default function App() {
                     {stack === "auto"
                       ? "⚡ Auto-Detect"
                       : stack === "dotnet"
-                      ? ".NET / C#"
-                      : stack === "java"
-                      ? "Java / Spring"
-                      : stack === "node"
-                      ? "Node / React"
-                      : stack === "ai"
-                      ? "AI / ML"
-                      : "Python / FastAPI"}
+                        ? ".NET / C#"
+                        : stack === "java"
+                          ? "Java / Spring"
+                          : stack === "node"
+                            ? "Node / React"
+                            : stack === "ai"
+                              ? "AI / ML"
+                              : "Python / FastAPI"}
                   </button>
                 ))}
               </div>
@@ -769,9 +790,9 @@ export default function App() {
                 <div style={{ display: "grid", gap: "12px" }}>
                   {/* DOCX Export Button */}
                   <div>
-                    <button 
-                      type="button" 
-                      onClick={handleExportDocx} 
+                    <button
+                      type="button"
+                      onClick={handleExportDocx}
                       disabled={exportingDocx}
                       style={{ background: "#2563eb", width: "100%", fontWeight: 600 }}
                     >
@@ -784,7 +805,7 @@ export default function App() {
                     )}
                     {docxResult?.success && docxResult.docx_download_url && (
                       <div style={{ color: "#177a3d", fontSize: "13px", marginTop: "6px" }}>
-                        ✓ DOCX generated! <a href={toAbsoluteApiUrl(docxResult.docx_download_url)} download={`${docxResult.filename_base || "Resume"}.docx`} style={{ fontWeight: "bold", color: "#2563eb" }}>Click here to re-download</a>
+                        ✓ DOCX generated! <a href={toAbsoluteApiUrl(docxResult.docx_download_url)} download={`${candidateName.trim().replace(/\s+/g, "") || "TarunMannava"}_${roleName.trim().replace(/\s+/g, "") || "SoftwareEngineer"}.docx`} style={{ fontWeight: "bold", color: "#2563eb" }}>Click here to re-download</a>
                       </div>
                     )}
                   </div>
@@ -793,15 +814,15 @@ export default function App() {
 
                   {/* PDF Compile Button */}
                   <div>
-                    <button 
-                      type="button" 
-                      onClick={handleCompile} 
+                    <button
+                      type="button"
+                      onClick={handleCompile}
                       disabled={compiling}
-                      style={{ background: "#177a3d", width: "100%" }}
+                      style={{ background: "#177a3d", width: "100%", fontWeight: 600 }}
                     >
-                      {compiling ? "Compiling PDF..." : "📄 Compile LaTeX to PDF"}
+                      {compiling ? "Compiling PDF..." : "📄 Compile & Download PDF (.pdf)"}
                     </button>
-                    
+
                     {compileError && (
                       <div className="error" style={{ fontSize: "13px", marginTop: "6px" }}>
                         <strong>Compile Error:</strong>
@@ -815,11 +836,25 @@ export default function App() {
                       <div style={{ fontSize: "13px", marginTop: "6px" }}>
                         {compileResult.success && compileResult.pdf_download_url ? (
                           <div style={{ color: "#177a3d" }}>
-                            ✓ PDF Compiled! <a href={toAbsoluteApiUrl(compileResult.pdf_download_url)} target="_blank" rel="noreferrer" style={{ fontWeight: "bold", color: "#5164ff" }}>Open / Download PDF</a>
+                            ✓ PDF Compiled! <a href={toAbsoluteApiUrl(compileResult.pdf_download_url)} download={`${candidateName.trim().replace(/\s+/g, "") || "TarunMannava"}_${roleName.trim().replace(/\s+/g, "") || "SoftwareEngineer"}.pdf`} target="_blank" rel="noreferrer" style={{ fontWeight: "bold", color: "#2563eb" }}>Click here to re-download PDF</a>
                           </div>
                         ) : null}
                       </div>
                     )}
+                  </div>
+
+                  <hr style={{ border: 0, borderTop: "1px solid #333", margin: "4px 0" }} />
+
+                  {/* LaTeX .tex Download Button */}
+                  <div>
+                    <button
+                      type="button"
+                      onClick={downloadTex}
+                      className="secondary"
+                      style={{ width: "100%", fontWeight: 600 }}
+                    >
+                      📥 Download LaTeX Source (.tex)
+                    </button>
                   </div>
                 </div>
               </section>

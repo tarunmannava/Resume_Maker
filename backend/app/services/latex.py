@@ -97,8 +97,12 @@ def latex_to_text(latex: str) -> str:
         cleaned_lines.append(line)
     text = "\n".join(cleaned_lines)
 
-    # 4. Convert custom resume macros into readable structured text
-    # Use balanced-brace extraction for nested content
+    # 4. Clean environments and spacing commands upfront
+    text = re.sub(r"\\(begin|end)\{[^}]+\}(?:\[[^\]]*\])?", " ", text)
+    text = re.sub(r"\\(?:vspace|hspace|fontsize|selectfont)\*?\{[^}]*\}", " ", text)
+    text = re.sub(r"\\\\(?:\[[^\]]*\])?", "\n", text)
+
+    # 5. Convert custom resume macros into readable structured text
     text = _replace_macro(text, "resumeSubheading", 4, lambda args: f"\n\n{args[0]} | {args[1]} | {args[2]} - {args[3]}\n")
     text = _replace_macro(text, "resumeProject", 2, lambda args: f"\n\n{args[0]} ({args[1]})\n")
     text = _replace_macro(text, "resumeItem", 1, lambda args: f"\n* {args[0]}")
@@ -118,7 +122,6 @@ def latex_to_text(latex: str) -> str:
 
     # Replace formatting symbols
     text = text.replace("~", " ")
-    text = text.replace(r"\\", "\n")
     text = re.sub(r"[{}\$^]", " ", text)
     text = re.sub(r"[ \t]+", " ", text)
     text = re.sub(r"\n\s*\n\s*\n+", "\n\n", text)
@@ -172,7 +175,22 @@ def sanitize_latex_escaping(latex: str) -> str:
         if line.strip().startswith("%"):
             sanitized_lines.append(line)
             continue
-        sanitized = re.sub(r"(?<!\\)%", r"\%", line)
+        # Escape unescaped % only if not a trailing line-continuation comment
+        if not line.rstrip().endswith("%"):
+            sanitized = re.sub(r"(?<!\\)%", r"\%", line)
+        else:
+            content = line.rstrip()[:-1]
+            sanitized = re.sub(r"(?<!\\)%", r"\%", content) + "%"
+        # Escape unescaped & inside \resumeItem or \textbf headers if not in tabular columns
+        if r"\begin{tabular" not in sanitized and r"\end{tabular" not in sanitized:
+            if r"\resumeItem" in sanitized:
+                def fix_item_amp(m: re.Match) -> str:
+                    return re.sub(r"(?<!\\)&", r"\&", m.group(0))
+                sanitized = re.sub(r"\\resumeItem\{.*?\}", fix_item_amp, sanitized)
+            elif r"\textbf{" in sanitized and not re.search(r"&\s*\\", sanitized):
+                def fix_bold_amp(m: re.Match) -> str:
+                    return re.sub(r"(?<!\\)&", r"\&", m.group(0))
+                sanitized = re.sub(r"\\textbf\{.*?\}", fix_bold_amp, sanitized)
         sanitized_lines.append(sanitized)
 
     return preamble_part + "\n".join(sanitized_lines)

@@ -149,7 +149,7 @@ def test_sanitize_preserves_dollar_pipe_style_from_original_skills():
     assert "LangGraph" not in cleaned
 
 
-def test_rewrite_forces_java_projects_over_bad_model_output(monkeypatch):
+def test_rewrite_preserves_java_experience_and_projects(monkeypatch):
     original = r"""
 \documentclass{article}
 \newcommand{\resumeItem}[1]{\item #1}
@@ -170,16 +170,16 @@ def test_rewrite_forces_java_projects_over_bad_model_output(monkeypatch):
 \resumeSubHeadingListEnd
 \section{PROJECTS}
 \resumeSubHeadingListStart
-\resumeProjectHeading{Centralized Prompt Registry for Clinical AI Experimentation}
+\resumeProjectHeading{AutoDocs PR Documentation System}
 \resumeItemListStart
-\resumeItem{Built prompt registry workflows with LangGraph and multi-agent orchestration.}
+\resumeItem{Built documentation workflows with FastAPI and RabbitMQ.}
 \resumeItemListEnd
 \resumeSubHeadingListEnd
 \section{SKILLS}
 \begin{itemize}\item Java Spring Boot SQL Redis JUnit Cucumber React TypeScript\end{itemize}
 \end{document}
 """
-    bad_model_output = r"""
+    model_output = r"""
 \documentclass{article}
 \begin{document}
 \section{TECHNICAL SKILLS}
@@ -193,13 +193,9 @@ def test_rewrite_forces_java_projects_over_bad_model_output(monkeypatch):
 \resumeSubHeadingListEnd
 \section{PROJECTS}
 \resumeSubHeadingListStart
-\resumeProjectHeading{Centralized Prompt Registry for Adaptive Learning AI Experimentation}
+\resumeProjectHeading{AutoDocs PR Documentation System}
 \resumeItemListStart
-\resumeItem{Developed prompt registry services for AI applications.}
-\resumeItemListEnd
-\resumeProjectHeading{Autonomous Multi-Agent Research for Curriculum Design}
-\resumeItemListStart
-\resumeItem{Engineered multi-agent orchestration with LangGraph.}
+\resumeItem{Developed documentation workflows with asynchronous message queues.}
 \resumeItemListEnd
 \resumeSubHeadingListEnd
 \section{EDUCATION}
@@ -209,7 +205,7 @@ def test_rewrite_forces_java_projects_over_bad_model_output(monkeypatch):
     monkeypatch.setattr(
         rewrite_service,
         "generate_rewrite",
-        lambda prompt, align_titles=False: (bad_model_output, "test"),
+        lambda prompt, align_titles=False: (model_output, "test"),
     )
 
     response = rewrite_service.rewrite_resume(
@@ -220,7 +216,6 @@ def test_rewrite_forces_java_projects_over_bad_model_output(monkeypatch):
         )
     )
 
-    assert "Configuration Management" in response.rewritten_latex or "High-Throughput" in response.rewritten_latex or "Distributed Workflow" in response.rewritten_latex
-    assert "Prompt Registry" not in response.rewritten_latex
-    assert "Multi-Agent" not in response.rewritten_latex
-    assert "LangGraph" not in response.rewritten_latex
+    assert "Cognizant" in response.rewritten_latex
+    assert "AutoDocs" in response.rewritten_latex
+

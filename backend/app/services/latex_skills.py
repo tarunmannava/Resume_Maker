@@ -173,6 +173,14 @@ def sanitize_skills_section(
             if b_term.strip():
                 updated = _remove_skill_term(updated, b_term.strip(), preferred_separator)
 
+    # Strip verbose HR qualification sentences accidentally included in skills
+    updated = re.sub(
+        r"(?:\\;\|\s*|\$\|\$\s*|,?\s*)Experience with [^\\\n\r}]+",
+        "",
+        updated,
+        flags=re.IGNORECASE,
+    )
+
     updated = _normalize_skill_separators(updated, preferred_separator)
 
     if updated != section:

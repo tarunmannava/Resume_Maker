@@ -107,7 +107,7 @@
   \small{\item{
     \textbf{Languages:} Java, Python, TypeScript, JavaScript, SQL \\[1pt]
     \textbf{Backend:} Spring Boot, Spring MVC, Spring Security, FastAPI, SQLAlchemy, REST APIs, Microservices \\[1pt]
-    \textbf{AI/ML:} LLMs, RAG, LangGraph, LangChain, Prompt Engineering, Embeddings, Hugging Face, Transformers, PyTorch, NLP, Computer Vision, scikit-learn \\[1pt]
+    \textbf{AI Developer Tools \& GenAI:} Claude Code, Cursor, GitHub Copilot, LLMs, RAG, LangGraph, LangChain, Prompt Engineering, Embeddings, Hugging Face, Transformers, PyTorch \\[1pt]
     \textbf{Databases:} PostgreSQL, MongoDB, SQL Server, Redis, jOOQ \\[1pt]
     \textbf{Messaging \& Distributed Systems:} RabbitMQ, Asynchronous Processing, Event-Driven Architecture \\[1pt]
     \textbf{Cloud \& Infrastructure:} AWS, Cloudflare R2, Docker, Linux, GitHub Actions \\[1pt]
@@ -156,12 +156,12 @@
     \resumeItem{Integrated Cloudflare R2 through its S3-compatible API for resumes, employer logos, skill evidence, and challenge submissions, including file validation, size limits, storage quotas, presigned downloads, and secure file handling.}
   \resumeItemListEnd
 
-  \resumeProject{AutoDocs -- PR-Triggered Multi-Agent Documentation System}{Python, FastAPI, GitHub Webhooks, Supabase, RabbitMQ}
+  \resumeProject{AutoDocs -- Event-Driven MCP \& Multi-Agent Documentation System}{Python, FastAPI, MCP Protocol, A2A Protocol, RabbitMQ, Supabase, GitHub Webhooks}
   \resumeItemListStart
-    \resumeItem{Built an event-driven PR-triggered documentation system that receives merged pull-request events through a FastAPI webhook and validates GitHub HMAC-SHA256 signatures.}
-    \resumeItem{Implemented idempotent webhook processing using GitHub delivery IDs, persisting webhook deliveries and documentation runs in Supabase before publishing pull-request jobs to RabbitMQ.}
+    \resumeItem{Built an event-driven documentation system receiving pull-request webhooks via FastAPI, validating GitHub HMAC-SHA256 signatures, and enforcing idempotent delivery persistence in Supabase.}
     \resumeItem{Implemented asynchronous job processing with RabbitMQ, separating webhook ingestion from repository analysis and long-running documentation workflows with retry and failure handling.}
-    \resumeItem{Implemented a conditional multi-agent workflow that analyzes pull-request changes, routes relevant changes to specialized documentation agents, aggregates structured outputs, performs consistency validation, and generates documentation updates.}
+    \resumeItem{Architected Model Context Protocol (MCP) servers exposing git diffs, AST parsing, and codebase resources to LLM agents for secure, context-aware repository inspection.}
+    \resumeItem{Engineered an Agent-to-Agent (A2A) communication workflow routing tasks across specialized diff-analysis, API-spec, and architectural-review agents with structured state exchange and consistency checks.}
   \resumeItemListEnd
 
 \resumeSubHeadingListEnd

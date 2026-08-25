@@ -166,24 +166,24 @@ def test_custom_resume_project_preserved(monkeypatch):
     assert "Custom Java Payment Gateway Integration" in response.rewritten_latex
 
 
-def test_irrelevant_project_replaced_with_catalog(monkeypatch):
+def test_input_project_preserved_in_place(monkeypatch):
     from backend.app.models.schemas import RewriteRequest
     from backend.app.services import rewrite as rewrite_service
 
-    irrelevant_resume = r"""
+    project_resume = r"""
 \documentclass{article}
 \begin{document}
 \section{EXPERIENCE}
 \begin{itemize}\item Cognizant Java Developer\end{itemize}
 \section{PROJECTS}
 \begin{itemize}
-  \item Autonomous Multi-Agent Prompt Registry with LangGraph
+  \item AutoDocs Documentation System (Python, FastAPI, RabbitMQ)
 \end{itemize}
 \section{SKILLS}
 \begin{itemize}\item Java Spring Boot PostgreSQL\end{itemize}
 \end{document}
 """
-    llm_output = irrelevant_resume
+    llm_output = project_resume
 
     monkeypatch.setattr(
         rewrite_service,
@@ -194,11 +194,10 @@ def test_irrelevant_project_replaced_with_catalog(monkeypatch):
     response = rewrite_service.rewrite_resume(
         RewriteRequest(
             job_description="Java Developer. Spring Boot PostgreSQL.",
-            resume_latex=irrelevant_resume,
+            resume_latex=project_resume,
             rewrite_mode="transferable",
         )
     )
 
-    assert "Prompt Registry" not in response.rewritten_latex
-    assert "LangGraph" not in response.rewritten_latex
-    assert "Configuration Management" in response.rewritten_latex or "High-Throughput" in response.rewritten_latex or "Distributed Workflow" in response.rewritten_latex
+    assert "AutoDocs" in response.rewritten_latex
+

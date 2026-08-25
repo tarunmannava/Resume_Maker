@@ -130,7 +130,7 @@ def get_file(folder: str, filename: str):
     file_path = resolve_generated_file(folder, filename)
     if not file_path:
         raise HTTPException(status_code=404, detail="File not found")
-    return FileResponse(file_path)
+    return FileResponse(file_path, filename=filename)
 
 
 @router.post("/screening/answer", response_model=ScreeningAnswerResponse)

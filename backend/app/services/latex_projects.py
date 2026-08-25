@@ -22,12 +22,6 @@ def _format_bullet(bullet: str) -> str:
     return _escape_latex_text(bullet)
 
 
-def _max_bullets_per_project(target_role_identity: str) -> int:
-    if target_role_identity in ("backend_engineer", "frontend_engineer", "fullstack_engineer"):
-        return 3
-    return 4
-
-
 def _tech_stack_line(project: dict, max_items: int = 6) -> str:
     return ", ".join(project.get("tech_stack", [])[:max_items])
 
@@ -43,7 +37,7 @@ def build_single_project_block(
 ) -> str:
     title = _escape_latex_text(project["title"])
     stack = _escape_latex_text(_tech_stack_line(project))
-    bullets = project.get("bullets", [])[: _max_bullets_per_project(target_role_identity)]
+    bullets = project.get("bullets", [])
 
     lines: list[str] = []
 
@@ -214,3 +208,29 @@ def projects_section_was_replaced(original: str, rewritten: str, projects: list[
         return False
     title_fragment = projects[0]["title"][:30].lower()
     return title_fragment in rewritten.lower()
+
+
+def cap_projects_at_max(latex: str, max_projects: int = 2) -> str:
+    """Cap number of projects in PROJECTS section to max_projects (default 2)."""
+    section_match = re.search(
+        r"(\\section\{(?:PROJECTS|Technical Projects)\}\s*"
+        r"(?:%[^\n]*\n\s*)*\\resumeSubHeadingListStart\s*)"
+        r"(.*?)"
+        r"(\s*\\resumeSubHeadingListEnd)",
+        latex,
+        flags=re.DOTALL | re.IGNORECASE,
+    )
+    if not section_match:
+        return latex
+
+    header = section_match.group(1)
+    body = section_match.group(2)
+    footer = section_match.group(3)
+
+    proj_starts = list(re.finditer(r"(\\resumeProject(?:Heading)?\{|\\item\b)", body))
+    if len(proj_starts) <= max_projects:
+        return latex
+
+    cutoff_idx = proj_starts[max_projects].start()
+    trimmed_body = body[:cutoff_idx].rstrip()
+    return latex[: section_match.start(0)] + header + "\n" + trimmed_body + "\n" + footer + latex[section_match.end(0) :]

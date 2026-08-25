@@ -16,7 +16,7 @@
       },
       {
         "label": "Databases & Cloud",
-        "skills": ["PostgreSQL", "SQL Server", "MySQL", "AWS (EC2, S3, RDS)", "Docker", "GitHub Actions", "Linux"]
+        "skills": ["PostgreSQL", "MongoDB", "SQL Server", "MySQL", "AWS (EC2, S3, RDS)", "Docker", "GitHub Actions", "Linux"]
       },
       {
         "label": "AI Developer Tools",
@@ -27,7 +27,7 @@
         "skills": ["JUnit 5", "Mockito", "Postman", "Maven", "Gradle", "React"]
       }
     ],
-    "raw_latex": "\\section{SKILLS}\n\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]\n  \\small{\\item{\n    \\textbf{Languages:} Java (11/17/21), SQL, Python, JavaScript, TypeScript \\\\[1pt]\n    \\textbf{Backend \\& Frameworks:} Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, REST APIs, Microservices \\\\[1pt]\n    \\textbf{Messaging \\& Caching:} RabbitMQ, Redis, CompletableFuture, ExecutorService \\\\[1pt]\n    \\textbf{Databases \\& Cloud:} PostgreSQL, SQL Server, MySQL, AWS (EC2, S3, RDS), Docker, GitHub Actions, Linux \\\\[1pt]\n    \\textbf{AI Developer Tools:} Claude Code, Cursor, GitHub Copilot, RAG, Prompt Engineering \\\\[1pt]\n    \\textbf{Testing \\& Tools:} JUnit 5, Mockito, Postman, Maven, Gradle, React\n  }}\n\\end{itemize}"
+    "raw_latex": "\\section{SKILLS}\n\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]\n  \\small{\\item{\n    \\textbf{Languages:} Java (11/17/21), SQL, Python, JavaScript, TypeScript \\\\[1pt]\n    \\textbf{Backend \\& Frameworks:} Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, REST APIs, Microservices \\\\[1pt]\n    \\textbf{Messaging \\& Caching:} RabbitMQ, Redis, CompletableFuture, ExecutorService \\\\[1pt]\n    \\textbf{Databases \\& Cloud:} PostgreSQL, MongoDB, SQL Server, MySQL, AWS (EC2, S3, RDS), Docker, GitHub Actions, Linux \\\\[1pt]\n    \\textbf{AI Developer Tools:} Claude Code, Cursor, GitHub Copilot, RAG, Prompt Engineering \\\\[1pt]\n    \\textbf{Testing \\& Tools:} JUnit 5, Mockito, Postman, Maven, Gradle, React\n  }}\n\\end{itemize}"
   },
   "ai": {
     "name": "AI Engineer",
