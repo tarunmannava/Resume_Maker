@@ -22,42 +22,42 @@ Use the structured JSON schema corresponding to the identified target stack as t
 {
   "JAVA_STACK_SKILLS": {
     "Languages": ["Java (11/17/21)", "SQL", "Python", "JavaScript", "TypeScript"],
-    "Backend & Frameworks": ["Spring Boot", "Spring MVC", "Spring Security", "Spring Data JPA", "Hibernate", "REST APIs", "Microservices"],
-    "Messaging & Caching": ["RabbitMQ", "Redis", "CompletableFuture", "ExecutorService"],
-    "Databases & Cloud": ["PostgreSQL", "MongoDB", "SQL Server", "MySQL", "AWS (EC2, S3, RDS)", "Docker", "GitHub Actions", "Linux"],
-    "AI Developer Tools": ["Claude Code", "Cursor", "GitHub Copilot", "RAG", "Prompt Engineering"],
-    "Testing & Tools": ["JUnit 5", "Mockito", "Postman", "Maven", "Gradle", "React"]
+    "Backend & Frameworks": ["Spring Boot", "Spring MVC", "Spring Security", "Spring Data JPA", "Hibernate", "FastAPI", "REST APIs", "Microservices"],
+    "AI Developer Tools & GenAI": ["Claude Code", "Cursor", "GitHub Copilot", "LLMs", "RAG", "LangGraph", "LangChain", "Multi-Agent Systems", "Model Context Protocol (MCP)", "Prompt Engineering"],
+    "Messaging & Distributed Systems": ["RabbitMQ", "Redis", "CompletableFuture", "Asynchronous Processing", "Event-Driven Architecture"],
+    "Databases & Cloud": ["PostgreSQL", "MongoDB", "SQL Server", "AWS", "Cloudflare R2", "Docker", "Linux", "GitHub Actions", "jOOQ"],
+    "Testing & Frontend": ["JUnit 5", "Mockito", "Pytest", "Postman", "React", "HTML5", "CSS3"]
   },
   "DOTNET_STACK_SKILLS": {
-    "Languages & Core": ["C#", ".NET 8 / .NET Core", "ASP.NET Core", "Entity Framework Core", "LINQ", "SQL", "Python", "JavaScript"],
-    "Backend & APIs": ["RESTful APIs", "Web API", "Microservices", "RabbitMQ", "Redis Caching", "OAuth2", "Azure AD"],
-    "Databases & Cloud": ["SQL Server (T-SQL)", "PostgreSQL", "MongoDB", "Azure (App Services, DevOps)", "Docker", "CI/CD", "Git"],
-    "AI Developer Tools": ["Claude Code", "Cursor", "GitHub Copilot", "RAG", "Prompt Engineering"],
-    "Testing & Frontend": ["xUnit", "NUnit", "Moq", "Postman", "React", "HTML5", "CSS3"]
+    "Languages & Core": ["C#", ".NET 8 / .NET Core", "ASP.NET Core", "Entity Framework Core", "LINQ", "SQL", "Python", "TypeScript", "JavaScript"],
+    "Backend & APIs": ["RESTful APIs", "Web API", "Microservices", "FastAPI", "RabbitMQ", "Redis Caching", "OAuth2", "JWT"],
+    "AI Developer Tools & GenAI": ["Claude Code", "Cursor", "GitHub Copilot", "LLMs", "RAG", "LangGraph", "LangChain", "Multi-Agent Systems", "Model Context Protocol (MCP)", "Prompt Engineering"],
+    "Databases & Cloud": ["SQL Server (T-SQL)", "PostgreSQL", "MongoDB", "AWS", "Cloudflare R2", "Docker", "Linux", "GitHub Actions", "CI/CD"],
+    "Testing & Frontend": ["xUnit", "NUnit", "Moq", "Pytest", "Postman", "React", "HTML5", "CSS3"]
   },
   "PYTHON_STACK_SKILLS": {
     "Languages": ["Python (3.10+)", "SQL", "Java", "TypeScript", "JavaScript", "Bash"],
-    "Backend & APIs": ["FastAPI", "Flask", "Django", "Pydantic", "AsyncIO", "REST APIs", "Microservices"],
-    "Messaging & Data": ["RabbitMQ", "Redis", "PostgreSQL", "MySQL", "MongoDB", "SQLAlchemy", "Alembic"],
-    "Cloud & DevOps": ["AWS (ECS, Lambda, S3)", "Docker", "GitHub Actions", "CI/CD Pipelines", "Linux", "Nginx"],
-    "AI Developer Tools": ["Claude Code", "Cursor", "GitHub Copilot", "RAG", "Prompt Engineering"],
-    "Testing & Frontend": ["pytest", "unittest", "Postman", "Swagger", "React", "Next.js"]
+    "Backend & APIs": ["FastAPI", "Flask", "Django", "Pydantic", "AsyncIO", "SQLAlchemy", "REST APIs", "Microservices", "Spring Boot"],
+    "AI Developer Tools & GenAI": ["Claude Code", "Cursor", "GitHub Copilot", "LLMs", "RAG", "LangGraph", "LangChain", "Multi-Agent Systems", "Model Context Protocol (MCP)", "Prompt Engineering", "Embeddings"],
+    "Messaging & Distributed Systems": ["RabbitMQ", "Redis", "Asynchronous Processing", "Event-Driven Architecture"],
+    "Databases & Cloud": ["PostgreSQL", "MongoDB", "SQL Server", "AWS", "Cloudflare R2", "Docker", "Linux", "GitHub Actions", "CI/CD"],
+    "Testing & Frontend": ["pytest", "unittest", "JUnit", "Postman", "React", "Next.js", "HTML5", "CSS3"]
   },
   "NODE_STACK_SKILLS": {
     "Languages": ["TypeScript", "JavaScript (ES2022+)", "Python", "Java", "SQL", "HTML5", "CSS3"],
-    "Backend & APIs": ["Node.js", "Express.js", "NestJS", "REST APIs", "GraphQL", "WebSocket / Socket.io", "Microservices"],
+    "Backend & APIs": ["Node.js", "Express.js", "NestJS", "FastAPI", "REST APIs", "GraphQL", "WebSocket / Socket.io", "Microservices"],
     "Frontend": ["React 18", "Next.js", "Redux Toolkit", "React Query", "Tailwind CSS"],
-    "Messaging & Storage": ["RabbitMQ", "Redis (Pub/Sub, Caching)", "PostgreSQL", "MongoDB", "Prisma ORM"],
-    "AI Developer Tools": ["Claude Code", "Cursor", "GitHub Copilot", "RAG", "Prompt Engineering"],
-    "DevOps & Testing": ["AWS (S3, CloudFront)", "Docker", "GitHub Actions", "Jest", "Supertest", "OAuth2", "JWT"]
+    "AI Developer Tools & GenAI": ["Claude Code", "Cursor", "GitHub Copilot", "LLMs", "RAG", "LangGraph", "LangChain", "Multi-Agent Systems", "Model Context Protocol (MCP)", "Prompt Engineering"],
+    "Messaging & Databases": ["RabbitMQ", "Redis (Pub/Sub, Caching)", "PostgreSQL", "MongoDB", "Prisma ORM", "SQL Server"],
+    "Cloud & Testing": ["AWS", "Cloudflare R2", "Docker", "Linux", "GitHub Actions", "Jest", "Supertest", "Pytest", "OAuth2", "JWT"]
   },
   "AI_STACK_SKILLS": {
-    "Languages": ["Python", "SQL", "TypeScript", "Java"],
-    "GenAI & LLM Frameworks": ["LangChain", "LlamaIndex", "LangGraph", "RAG Pipelines", "Multi-Agent Systems", "Prompt Engineering"],
-    "Vector DBs & Search": ["Pinecone", "Qdrant", "ChromaDB", "Semantic Search", "Hybrid Search", "Embeddings"],
-    "Backend & Messaging": ["FastAPI", "AsyncIO", "RabbitMQ", "Redis", "REST APIs", "PostgreSQL", "MongoDB"],
-    "AI Developer Tools": ["Claude Code", "Cursor", "GitHub Copilot", "OpenAI Codex", "Weights & Biases", "MLflow"],
-    "Cloud & MLOps": ["AWS", "Docker", "Kubernetes", "GitHub Actions", "CI/CD", "Prometheus", "Grafana"]
+    "Languages": ["Python", "SQL", "TypeScript", "JavaScript", "Java"],
+    "GenAI & LLM Frameworks": ["LangChain", "LlamaIndex", "LangGraph", "RAG Pipelines", "Multi-Agent Systems", "Model Context Protocol (MCP)", "A2A Protocol", "Prompt Engineering"],
+    "Vector DBs & Search": ["Pinecone", "Qdrant", "ChromaDB", "Semantic Search", "Hybrid Search", "Embeddings", "Transformers.js (WASM/ONNX)"],
+    "Backend & Messaging": ["FastAPI", "AsyncIO", "RabbitMQ", "Redis", "REST APIs", "PostgreSQL", "MongoDB", "SQLAlchemy"],
+    "AI Developer Tools": ["Claude Code", "Cursor", "GitHub Copilot", "OpenAI Codex", "Weights & Biases", "MLflow", "Hugging Face"],
+    "Cloud & MLOps": ["AWS", "Cloudflare R2", "Docker", "Kubernetes", "Linux", "GitHub Actions", "CI/CD", "Pytest"]
   }
 }
 
@@ -65,7 +65,11 @@ MANDATORY OPERATIONAL RULES:
 1. OUTPUT: Return pure compilable LaTeX starting from \documentclass to \end{document}. No markdown fences (no ```latex), no conversational text.
 2. IN-PLACE PRESERVATION (PROJECTS & EXPERIENCE):
    - Rewrite ONLY the candidate's actual existing projects (SkillBeacon and AutoDocs).
-   - STRICTLY FORBIDDEN: Do NOT invent or inject fake external projects (such as ByteRoute, Issue Tracker, etc.).
+   - IMMUTABLE PROJECT TECH STACKS (CRITICAL):
+     * SkillBeacon tech stack is ALWAYS: Python, FastAPI, React, PostgreSQL, SQLAlchemy, Cloudflare R2, Neon Auth.
+     * AutoDocs tech stack is ALWAYS: Python, FastAPI, MCP Protocol, A2A Protocol, RabbitMQ, Supabase, GitHub Webhooks, Multi-Agent Systems.
+     * STRICTLY FORBIDDEN: NEVER change the technology stack, frameworks, or titles of SkillBeacon or AutoDocs to .NET, C#, or Java. Projects MUST showcase the candidate's genuine multi-agent, MCP, and asynchronous systems across ALL resumes. Only reword bullet accomplishment text in-place to highlight relevant engineering depth and criteria.
+     * STRICTLY FORBIDDEN: Do NOT invent or inject fake external projects (such as ByteRoute, Issue Tracker, etc.).
    - Preserve candidate companies and degrees (Master's and Bachelor's).
 3. CLEAN BULLETS (ZERO INLINE BOLDING):
    - All text inside \resumeItem{...} MUST be 100% clean plain text. ZERO \textbf{...} tags inside bullet items.
@@ -73,7 +77,7 @@ MANDATORY OPERATIONAL RULES:
    - Each bullet must be 1.5–2 lines: [Strong Action Verb] + [Specific Technologies & Architecture] + [Quantifiable Impact / Metrics / Latency].
    - NO 1-page restriction. Output at least 5 bullets for Cognizant, at least 5 for USF Graduate Researcher, and at least 4 for each project.
 5. STACK-SPECIFIC EXPERIENCE & SKILLS RULES:
-   - For .NET roles: Adapt Cognizant and USF to C#, .NET 8 / ASP.NET Core, Entity Framework Core, SQL Server, MongoDB, and xUnit/NUnit. Use DOTNET_STACK_SKILLS (strictly purge Java/Spring from SKILLS).
+   - For .NET roles: Adapt Cognizant and USF to C#, .NET 8 / ASP.NET Core, Entity Framework Core, SQL Server, MongoDB, and xUnit/NUnit. Use DOTNET_STACK_SKILLS (strictly purge Java/Spring from SKILLS, but PRESERVE FastAPI, RabbitMQ, MCP, Multi-Agent, and Cloudflare R2 from projects).
    - For Java roles: Preserve Cognizant as Java 11 / Spring Boot microservices with MongoDB/SQL Server (order Cognizant before USF). Adapt USF to Java 17 / Spring Boot. Use JAVA_STACK_SKILLS.
    - For Python, Node.js, and AI roles: Retain Cognizant as Java 11 / Spring Boot enterprise microservices foundation. Use PYTHON_STACK_SKILLS, NODE_STACK_SKILLS, or AI_STACK_SKILLS respectively.
 6. SYNTAX INTEGRITY:
@@ -117,22 +121,24 @@ def build_user_prompt(
         cognizant_instruction = (
             "COGNIZANT EXPERIENCE (.NET / C# TARGET STACK - MANDATORY): Adapt Cognizant Technology Solutions from Java to C#, .NET 8 / ASP.NET Core, "
             "Entity Framework Core, SQL Server, REST APIs, and NUnit/xUnit testing. "
-            "SKILLS PURGE: Remove all Java-specific frameworks and tools (Spring Boot, Spring MVC, Spring Security, jOOQ, JUnit) from the SKILLS section "
-            "and replace them entirely with .NET/C# technologies: C#, .NET 8, ASP.NET Core, Entity Framework Core, LINQ, SQL Server, TypeScript, NUnit, xUnit. "
-            "DO NOT combine Spring Boot with .NET."
+            "SKILLS PURGE: Remove all Java-specific frameworks (Spring Boot, Spring MVC, Spring Security, jOOQ, JUnit) from SKILLS "
+            "and replace them with DOTNET_STACK_SKILLS. DO NOT combine Spring Boot with .NET."
         )
         usf_projects_instruction = (
             "USF & PROJECTS RULE (.NET): Adapt USF Graduate Researcher to C#, .NET 8, ASP.NET Core Web API, React, and TypeScript. "
-            "Projects (SkillBeacon, AutoDocs) keep their core architecture without adding fake external projects."
+            "IMMUTABLE PROJECTS TECH STACKS: SkillBeacon is ALWAYS Python/FastAPI/React/PostgreSQL/Cloudflare R2. "
+            "AutoDocs is ALWAYS Python/FastAPI/MCP Protocol/A2A Protocol/RabbitMQ/Multi-Agent Systems. "
+            "DO NOT rewrite the projects' technology stacks or titles into .NET/C#. Keep project tech stacks 100% authentic."
         )
     elif target_stack == "java":
         cognizant_instruction = (
             "COGNIZANT EXPERIENCE (JAVA TARGET STACK): Cognizant Technology Solutions MUST be Java / Spring Boot, "
-            "Microservices, REST APIs, and SQL/PostgreSQL."
+            "Microservices, REST APIs, and SQL/PostgreSQL/MongoDB (order Cognizant before USF)."
         )
         usf_projects_instruction = (
             "USF & PROJECTS RULE (JAVA): Adapt USF Graduate Researcher to Java 17, Spring Boot, React, and TypeScript. "
-            "Projects (SkillBeacon, AutoDocs) keep their core architecture without adding fake external projects."
+            "IMMUTABLE PROJECTS TECH STACKS: SkillBeacon (Python/FastAPI/PostgreSQL/Cloudflare R2) and "
+            "AutoDocs (Python/FastAPI/MCP/A2A/RabbitMQ/Multi-Agent) keep their authentic tech stacks without adding fake projects."
         )
     elif target_stack == "node":
         cognizant_instruction = (
@@ -141,25 +147,23 @@ def build_user_prompt(
         )
         usf_projects_instruction = (
             "USF & PROJECTS (NODE.JS): Adapt USF Graduate Researcher to Node.js, TypeScript, and React. "
-            "In Projects, showcase TypeScript, Node.js / React full-stack integration while PRESERVING AutoDocs's "
-            "agentic multi-agent architecture, event-driven webhooks, and RabbitMQ pipeline."
+            "IMMUTABLE PROJECTS TECH STACKS: Keep SkillBeacon (Python/FastAPI/React) and AutoDocs (Python/FastAPI/MCP/A2A/RabbitMQ/Multi-Agent) authentic."
         )
     elif target_stack == "ai":
         cognizant_instruction = (
-            "COGNIZANT EXPERIENCE (AI / ML TARGET STACK): Cognizant Technology Solutions MUST remain Java / Spring Boot."
+            "COGNIZANT EXPERIENCE (AI / ML TARGET STACK): Cognizant Technology Solutions MUST remain Java / Spring Boot enterprise foundation."
         )
         usf_projects_instruction = (
-            "USF & PROJECTS (AI): Adapt USF Graduate Researcher and Projects to Python / AI (LLMs, RAG pipelines, "
-            "LangChain, vector search, multi-agent systems)."
+            "USF & PROJECTS (AI): USF features dual-model LLM sandbox & Transformers.js WASM embedding evaluation. "
+            "Projects feature AutoDocs (MCP Protocol, A2A Protocol, Multi-Agent Systems, RabbitMQ) and SkillBeacon."
         )
     else:  # python
         cognizant_instruction = (
-            "COGNIZANT EXPERIENCE (PYTHON TARGET STACK): Cognizant Technology Solutions MUST remain Java / Spring Boot "
-            "(do NOT change to Python)."
+            "COGNIZANT EXPERIENCE (PYTHON TARGET STACK): Cognizant Technology Solutions MUST remain Java / Spring Boot."
         )
         usf_projects_instruction = (
-            "USF & PROJECTS (PYTHON): USF Graduate Researcher and Projects MUST BE Python, FastAPI, AsyncIO, "
-            "data/backend architectures, and agents."
+            "USF & PROJECTS (PYTHON): USF Graduate Researcher is Python/FastAPI/AsyncIO. "
+            "Projects feature SkillBeacon (Python/FastAPI/PostgreSQL/Cloudflare R2) and AutoDocs (Python/FastAPI/MCP/A2A/RabbitMQ/Multi-Agent)."
         )
 
     missing_str = ", ".join(missing_terms) if missing_terms else "None (strong initial keyword match)"

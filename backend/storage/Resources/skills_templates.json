@@ -8,56 +8,52 @@
       },
       {
         "label": "Backend & Frameworks",
-        "skills": ["Spring Boot", "Spring MVC", "Spring Security", "Spring Data JPA", "Hibernate", "REST APIs", "Microservices"]
+        "skills": ["Spring Boot", "Spring MVC", "Spring Security", "Spring Data JPA", "Hibernate", "FastAPI", "REST APIs", "Microservices"]
       },
       {
-        "label": "Messaging & Caching",
-        "skills": ["RabbitMQ", "Redis", "CompletableFuture", "ExecutorService"]
+        "label": "AI Developer Tools & GenAI",
+        "skills": ["Claude Code", "Cursor", "GitHub Copilot", "LLMs", "RAG", "LangGraph", "LangChain", "Multi-Agent Systems", "Model Context Protocol (MCP)", "Prompt Engineering"]
+      },
+      {
+        "label": "Messaging & Distributed Systems",
+        "skills": ["RabbitMQ", "Redis", "CompletableFuture", "Asynchronous Processing", "Event-Driven Architecture"]
       },
       {
         "label": "Databases & Cloud",
-        "skills": ["PostgreSQL", "MongoDB", "SQL Server", "MySQL", "AWS (EC2, S3, RDS)", "Docker", "GitHub Actions", "Linux"]
+        "skills": ["PostgreSQL", "MongoDB", "SQL Server", "AWS", "Cloudflare R2", "Docker", "Linux", "GitHub Actions", "jOOQ"]
       },
       {
-        "label": "AI Developer Tools",
-        "skills": ["Claude Code", "Cursor", "GitHub Copilot", "RAG", "Prompt Engineering"]
-      },
-      {
-        "label": "Testing & Tools",
-        "skills": ["JUnit 5", "Mockito", "Postman", "Maven", "Gradle", "React"]
+        "label": "Testing & Frontend",
+        "skills": ["JUnit 5", "Mockito", "Pytest", "Postman", "React", "HTML5", "CSS3"]
       }
     ],
-    "raw_latex": "\\section{SKILLS}\n\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]\n  \\small{\\item{\n    \\textbf{Languages:} Java (11/17/21), SQL, Python, JavaScript, TypeScript \\\\[1pt]\n    \\textbf{Backend \\& Frameworks:} Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, REST APIs, Microservices \\\\[1pt]\n    \\textbf{Messaging \\& Caching:} RabbitMQ, Redis, CompletableFuture, ExecutorService \\\\[1pt]\n    \\textbf{Databases \\& Cloud:} PostgreSQL, MongoDB, SQL Server, MySQL, AWS (EC2, S3, RDS), Docker, GitHub Actions, Linux \\\\[1pt]\n    \\textbf{AI Developer Tools:} Claude Code, Cursor, GitHub Copilot, RAG, Prompt Engineering \\\\[1pt]\n    \\textbf{Testing \\& Tools:} JUnit 5, Mockito, Postman, Maven, Gradle, React\n  }}\n\\end{itemize}"
+    "raw_latex": "\\section{SKILLS}\n\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]\n  \\small{\\item{\n    \\textbf{Languages:} Java (11/17/21), SQL, Python, JavaScript, TypeScript \\\\[1pt]\n    \\textbf{Backend \\& Frameworks:} Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, FastAPI, REST APIs, Microservices \\\\[1pt]\n    \\textbf{AI Developer Tools \\& GenAI:} Claude Code, Cursor, GitHub Copilot, LLMs, RAG, LangGraph, LangChain, Multi-Agent Systems, Model Context Protocol (MCP), Prompt Engineering \\\\[1pt]\n    \\textbf{Messaging \\& Distributed Systems:} RabbitMQ, Redis, CompletableFuture, Asynchronous Processing, Event-Driven Architecture \\\\[1pt]\n    \\textbf{Databases \\& Cloud:} PostgreSQL, MongoDB, SQL Server, AWS, Cloudflare R2, Docker, Linux, GitHub Actions, jOOQ \\\\[1pt]\n    \\textbf{Testing \\& Frontend:} JUnit 5, Mockito, Pytest, Postman, React, HTML5, CSS3\n  }}\n\\end{itemize}"
   },
-  "ai": {
-    "name": "AI Engineer",
+  "dotnet": {
+    "name": ".NET / C# Developer",
     "categories": [
       {
-        "label": "Languages",
-        "skills": ["Python", "SQL", "TypeScript", "Java"]
+        "label": "Languages & Core",
+        "skills": ["C#", ".NET 8 / .NET Core", "ASP.NET Core", "Entity Framework Core", "LINQ", "SQL", "Python", "TypeScript", "JavaScript"]
       },
       {
-        "label": "GenAI & LLM Frameworks",
-        "skills": ["LangChain", "LlamaIndex", "LangGraph", "RAG Pipelines", "Multi-Agent Systems", "Prompt Engineering"]
+        "label": "Backend & APIs",
+        "skills": ["RESTful APIs", "Web API", "Microservices", "FastAPI", "RabbitMQ", "Redis Caching", "OAuth2", "JWT"]
       },
       {
-        "label": "Vector DBs & Search",
-        "skills": ["Pinecone", "Qdrant", "ChromaDB", "Semantic Search", "Hybrid Search", "Embeddings"]
+        "label": "AI Developer Tools & GenAI",
+        "skills": ["Claude Code", "Cursor", "GitHub Copilot", "LLMs", "RAG", "LangGraph", "LangChain", "Multi-Agent Systems", "Model Context Protocol (MCP)", "Prompt Engineering"]
       },
       {
-        "label": "Backend & Messaging",
-        "skills": ["FastAPI", "AsyncIO", "RabbitMQ", "Redis", "REST APIs", "PostgreSQL"]
+        "label": "Databases & Cloud",
+        "skills": ["SQL Server (T-SQL)", "PostgreSQL", "MongoDB", "AWS", "Cloudflare R2", "Docker", "Linux", "GitHub Actions", "CI/CD"]
       },
       {
-        "label": "AI Developer Tools",
-        "skills": ["Claude Code", "Cursor", "GitHub Copilot", "Weights & Biases", "MLflow"]
-      },
-      {
-        "label": "Cloud & MLOps",
-        "skills": ["AWS", "Docker", "Kubernetes", "GitHub Actions", "CI/CD", "Prometheus", "Grafana"]
+        "label": "Testing & Frontend",
+        "skills": ["xUnit", "NUnit", "Moq", "Pytest", "Postman", "React", "HTML5", "CSS3"]
       }
     ],
-    "raw_latex": "\\section{SKILLS}\n\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]\n  \\small{\\item{\n    \\textbf{Languages:} Python, SQL, TypeScript, Java \\\\[1pt]\n    \\textbf{GenAI \\& LLM Frameworks:} LangChain, LlamaIndex, LangGraph, RAG Pipelines, Multi-Agent Systems, Prompt Engineering \\\\[1pt]\n    \\textbf{Vector DBs \\& Search:} Pinecone, Qdrant, ChromaDB, Semantic Search, Hybrid Search, Embeddings \\\\[1pt]\n    \\textbf{Backend \\& Messaging:} FastAPI, AsyncIO, RabbitMQ, Redis, REST APIs, PostgreSQL \\\\[1pt]\n    \\textbf{AI Developer Tools:} Claude Code, Cursor, GitHub Copilot, Weights \\& Biases, MLflow \\\\[1pt]\n    \\textbf{Cloud \\& MLOps:} AWS, Docker, Kubernetes, GitHub Actions, CI/CD, Prometheus, Grafana\n  }}\n\\end{itemize}"
+    "raw_latex": "\\section{SKILLS}\n\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]\n  \\small{\\item{\n    \\textbf{Languages \\& Core:} C\\#, .NET 8 / .NET Core, ASP.NET Core, Entity Framework Core, LINQ, SQL, Python, TypeScript, JavaScript \\\\[1pt]\n    \\textbf{Backend \\& APIs:} RESTful APIs, Web API, Microservices, FastAPI, RabbitMQ, Redis Caching, OAuth2, JWT \\\\[1pt]\n    \\textbf{AI Developer Tools \\& GenAI:} Claude Code, Cursor, GitHub Copilot, LLMs, RAG, LangGraph, LangChain, Multi-Agent Systems, Model Context Protocol (MCP), Prompt Engineering \\\\[1pt]\n    \\textbf{Databases \\& Cloud:} SQL Server (T-SQL), PostgreSQL, MongoDB, AWS, Cloudflare R2, Docker, Linux, GitHub Actions, CI/CD \\\\[1pt]\n    \\textbf{Testing \\& Frontend:} xUnit, NUnit, Moq, Pytest, Postman, React, HTML5, CSS3\n  }}\n\\end{itemize}"
   },
   "python": {
     "name": "Python Developer",
@@ -68,26 +64,26 @@
       },
       {
         "label": "Backend & APIs",
-        "skills": ["FastAPI", "Flask", "Django", "Pydantic", "AsyncIO", "REST APIs", "Microservices"]
+        "skills": ["FastAPI", "Flask", "Django", "Pydantic", "AsyncIO", "SQLAlchemy", "REST APIs", "Microservices", "Spring Boot"]
       },
       {
-        "label": "Messaging & Data",
-        "skills": ["RabbitMQ", "Redis", "PostgreSQL", "MySQL", "MongoDB", "SQLAlchemy", "Alembic"]
+        "label": "AI Developer Tools & GenAI",
+        "skills": ["Claude Code", "Cursor", "GitHub Copilot", "LLMs", "RAG", "LangGraph", "LangChain", "Multi-Agent Systems", "Model Context Protocol (MCP)", "Prompt Engineering", "Embeddings"]
       },
       {
-        "label": "Cloud & DevOps",
-        "skills": ["AWS (ECS, Lambda, S3)", "Docker", "GitHub Actions", "CI/CD Pipelines", "Linux", "Nginx"]
+        "label": "Messaging & Distributed Systems",
+        "skills": ["RabbitMQ", "Redis", "Asynchronous Processing", "Event-Driven Architecture"]
       },
       {
-        "label": "AI Developer Tools",
-        "skills": ["Claude Code", "Cursor", "GitHub Copilot", "RAG", "Prompt Engineering"]
+        "label": "Databases & Cloud",
+        "skills": ["PostgreSQL", "MongoDB", "SQL Server", "AWS", "Cloudflare R2", "Docker", "Linux", "GitHub Actions", "CI/CD"]
       },
       {
         "label": "Testing & Frontend",
-        "skills": ["pytest", "unittest", "Postman", "Swagger", "React", "Next.js"]
+        "skills": ["pytest", "unittest", "JUnit", "Postman", "React", "Next.js", "HTML5", "CSS3"]
       }
     ],
-    "raw_latex": "\\section{SKILLS}\n\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]\n  \\small{\\item{\n    \\textbf{Languages:} Python (3.10+), SQL, Java, TypeScript, JavaScript, Bash \\\\[1pt]\n    \\textbf{Backend \\& APIs:} FastAPI, Flask, Django, Pydantic, AsyncIO, REST APIs, Microservices \\\\[1pt]\n    \\textbf{Messaging \\& Data:} RabbitMQ, Redis, PostgreSQL, MySQL, MongoDB, SQLAlchemy, Alembic \\\\[1pt]\n    \\textbf{Cloud \\& DevOps:} AWS (ECS, Lambda, S3), Docker, GitHub Actions, CI/CD Pipelines, Linux, Nginx \\\\[1pt]\n    \\textbf{AI Developer Tools:} Claude Code, Cursor, GitHub Copilot, RAG, Prompt Engineering \\\\[1pt]\n    \\textbf{Testing \\& Frontend:} pytest, unittest, Postman, Swagger, React, Next.js\n  }}\n\\end{itemize}"
+    "raw_latex": "\\section{SKILLS}\n\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]\n  \\small{\\item{\n    \\textbf{Languages:} Python (3.10+), SQL, Java, TypeScript, JavaScript, Bash \\\\[1pt]\n    \\textbf{Backend \\& APIs:} FastAPI, Flask, Django, Pydantic, AsyncIO, SQLAlchemy, REST APIs, Microservices, Spring Boot \\\\[1pt]\n    \\textbf{AI Developer Tools \\& GenAI:} Claude Code, Cursor, GitHub Copilot, LLMs, RAG, LangGraph, LangChain, Multi-Agent Systems, Model Context Protocol (MCP), Prompt Engineering, Embeddings \\\\[1pt]\n    \\textbf{Messaging \\& Distributed Systems:} RabbitMQ, Redis, Asynchronous Processing, Event-Driven Architecture \\\\[1pt]\n    \\textbf{Databases \\& Cloud:} PostgreSQL, MongoDB, SQL Server, AWS, Cloudflare R2, Docker, Linux, GitHub Actions, CI/CD \\\\[1pt]\n    \\textbf{Testing \\& Frontend:} pytest, unittest, JUnit, Postman, React, Next.js, HTML5, CSS3\n  }}\n\\end{itemize}"
   },
   "node": {
     "name": "Node.js / Fullstack",
@@ -98,51 +94,55 @@
       },
       {
         "label": "Backend & APIs",
-        "skills": ["Node.js", "Express.js", "NestJS", "REST APIs", "GraphQL", "WebSocket / Socket.io", "Microservices"]
+        "skills": ["Node.js", "Express.js", "NestJS", "FastAPI", "REST APIs", "GraphQL", "WebSocket / Socket.io", "Microservices"]
       },
       {
         "label": "Frontend",
         "skills": ["React 18", "Next.js", "Redux Toolkit", "React Query", "Tailwind CSS"]
       },
       {
-        "label": "Messaging & Storage",
-        "skills": ["RabbitMQ", "Redis (Pub/Sub, Caching)", "PostgreSQL", "MongoDB", "Prisma ORM"]
+        "label": "AI Developer Tools & GenAI",
+        "skills": ["Claude Code", "Cursor", "GitHub Copilot", "LLMs", "RAG", "LangGraph", "LangChain", "Multi-Agent Systems", "Model Context Protocol (MCP)", "Prompt Engineering"]
       },
       {
-        "label": "AI Developer Tools",
-        "skills": ["Claude Code", "Cursor", "GitHub Copilot", "RAG", "Prompt Engineering"]
+        "label": "Messaging & Databases",
+        "skills": ["RabbitMQ", "Redis (Pub/Sub, Caching)", "PostgreSQL", "MongoDB", "Prisma ORM", "SQL Server"]
       },
       {
-        "label": "DevOps & Testing",
-        "skills": ["AWS (S3, CloudFront)", "Docker", "GitHub Actions", "Jest", "Supertest", "OAuth2", "JWT"]
+        "label": "Cloud & Testing",
+        "skills": ["AWS", "Cloudflare R2", "Docker", "Linux", "GitHub Actions", "Jest", "Supertest", "Pytest", "OAuth2", "JWT"]
       }
     ],
-    "raw_latex": "\\section{SKILLS}\n\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]\n  \\small{\\item{\n    \\textbf{Languages:} TypeScript, JavaScript (ES2022+), Python, Java, SQL, HTML5, CSS3 \\\\[1pt]\n    \\textbf{Backend \\& APIs:} Node.js, Express.js, NestJS, REST APIs, GraphQL, WebSocket / Socket.io, Microservices \\\\[1pt]\n    \\textbf{Frontend:} React 18, Next.js, Redux Toolkit, React Query, Tailwind CSS \\\\[1pt]\n    \\textbf{Messaging \\& Storage:} RabbitMQ, Redis (Pub/Sub, Caching), PostgreSQL, MongoDB, Prisma ORM \\\\[1pt]\n    \\textbf{AI Developer Tools:} Claude Code, Cursor, GitHub Copilot, RAG, Prompt Engineering \\\\[1pt]\n    \\textbf{DevOps \\& Testing:} AWS (S3, CloudFront), Docker, GitHub Actions, Jest, Supertest, OAuth2, JWT\n  }}\n\\end{itemize}"
+    "raw_latex": "\\section{SKILLS}\n\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]\n  \\small{\\item{\n    \\textbf{Languages:} TypeScript, JavaScript (ES2022+), Python, Java, SQL, HTML5, CSS3 \\\\[1pt]\n    \\textbf{Backend \\& APIs:} Node.js, Express.js, NestJS, FastAPI, REST APIs, GraphQL, WebSocket / Socket.io, Microservices \\\\[1pt]\n    \\textbf{Frontend:} React 18, Next.js, Redux Toolkit, React Query, Tailwind CSS \\\\[1pt]\n    \\textbf{AI Developer Tools \\& GenAI:} Claude Code, Cursor, GitHub Copilot, LLMs, RAG, LangGraph, LangChain, Multi-Agent Systems, Model Context Protocol (MCP), Prompt Engineering \\\\[1pt]\n    \\textbf{Messaging \\& Databases:} RabbitMQ, Redis (Pub/Sub, Caching), PostgreSQL, MongoDB, Prisma ORM, SQL Server \\\\[1pt]\n    \\textbf{Cloud \\& Testing:} AWS, Cloudflare R2, Docker, Linux, GitHub Actions, Jest, Supertest, Pytest, OAuth2, JWT\n  }}\n\\end{itemize}"
   },
-  "dotnet": {
-    "name": ".NET / C# Developer",
+  "ai": {
+    "name": "AI Engineer",
     "categories": [
       {
-        "label": "Languages & Core",
-        "skills": ["C#", ".NET 8 / .NET Core", "ASP.NET Core", "Entity Framework Core", "LINQ", "SQL", "Python", "JavaScript"]
+        "label": "Languages",
+        "skills": ["Python", "SQL", "TypeScript", "JavaScript", "Java"]
       },
       {
-        "label": "Backend & APIs",
-        "skills": ["RESTful APIs", "Web API", "Microservices", "RabbitMQ", "Redis Caching", "OAuth2", "Azure AD"]
+        "label": "GenAI & LLM Frameworks",
+        "skills": ["LangChain", "LlamaIndex", "LangGraph", "RAG Pipelines", "Multi-Agent Systems", "Model Context Protocol (MCP)", "A2A Protocol", "Prompt Engineering"]
       },
       {
-        "label": "Databases & Cloud",
-        "skills": ["SQL Server (T-SQL)", "PostgreSQL", "MongoDB", "Azure (App Services, DevOps)", "Docker", "CI/CD", "Git"]
+        "label": "Vector DBs & Search",
+        "skills": ["Pinecone", "Qdrant", "ChromaDB", "Semantic Search", "Hybrid Search", "Embeddings", "Transformers.js (WASM/ONNX)"]
+      },
+      {
+        "label": "Backend & Messaging",
+        "skills": ["FastAPI", "AsyncIO", "RabbitMQ", "Redis", "REST APIs", "PostgreSQL", "MongoDB", "SQLAlchemy"]
       },
       {
         "label": "AI Developer Tools",
-        "skills": ["Claude Code", "Cursor", "GitHub Copilot", "RAG", "Prompt Engineering"]
+        "skills": ["Claude Code", "Cursor", "GitHub Copilot", "OpenAI Codex", "Weights & Biases", "MLflow", "Hugging Face"]
       },
       {
-        "label": "Testing & Frontend",
-        "skills": ["xUnit", "NUnit", "Moq", "Postman", "React", "HTML5", "CSS3"]
+        "label": "Cloud & MLOps",
+        "skills": ["AWS", "Cloudflare R2", "Docker", "Kubernetes", "Linux", "GitHub Actions", "CI/CD", "Pytest"]
       }
     ],
-    "raw_latex": "\\section{SKILLS}\n\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]\n  \\small{\\item{\n    \\textbf{Languages \\& Core:} C\\#, .NET 8 / .NET Core, ASP.NET Core, Entity Framework Core, LINQ, SQL, Python, JavaScript \\\\[1pt]\n    \\textbf{Backend \\& APIs:} RESTful APIs, Web API, Microservices, RabbitMQ, Redis Caching, OAuth2, Azure AD \\\\[1pt]\n    \\textbf{Databases \\& Cloud:} SQL Server (T-SQL), PostgreSQL, MongoDB, Azure (App Services, DevOps), Docker, CI/CD, Git \\\\[1pt]\n    \\textbf{AI Developer Tools:} Claude Code, Cursor, GitHub Copilot, RAG, Prompt Engineering \\\\[1pt]\n    \\textbf{Testing \\& Frontend:} xUnit, NUnit, Moq, Postman, React, HTML5, CSS3\n  }}\n\\end{itemize}"
+    "raw_latex": "\\section{SKILLS}\n\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]\n  \\small{\\item{\n    \\textbf{Languages:} Python, SQL, TypeScript, JavaScript, Java \\\\[1pt]\n    \\textbf{GenAI \\& LLM Frameworks:} LangChain, LlamaIndex, LangGraph, RAG Pipelines, Multi-Agent Systems, Model Context Protocol (MCP), A2A Protocol, Prompt Engineering \\\\[1pt]\n    \\textbf{Vector DBs \\& Search:} Pinecone, Qdrant, ChromaDB, Semantic Search, Hybrid Search, Embeddings, Transformers.js (WASM/ONNX) \\\\[1pt]\n    \\textbf{Backend \\& Messaging:} FastAPI, AsyncIO, RabbitMQ, Redis, REST APIs, PostgreSQL, MongoDB, SQLAlchemy \\\\[1pt]\n    \\textbf{AI Developer Tools:} Claude Code, Cursor, GitHub Copilot, OpenAI Codex, Weights \\& Biases, MLflow, Hugging Face \\\\[1pt]\n    \\textbf{Cloud \\& MLOps:} AWS, Cloudflare R2, Docker, Kubernetes, Linux, GitHub Actions, CI/CD, Pytest\n  }}\n\\end{itemize}"
   }
 }

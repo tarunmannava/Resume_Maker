@@ -41,7 +41,7 @@ def test_inject_canonical_skills_section_dotnet():
     doc = "\\begin{document}\n\\section{EXPERIENCE}\n\\end{document}"
     injected = inject_canonical_skills_section(doc, "dotnet")
     assert "C\\#, .NET 8 / .NET Core, ASP.NET Core" in injected
-    assert "RabbitMQ, Redis Caching, OAuth2, Azure AD" in injected
+    assert "RabbitMQ, Redis Caching, OAuth2" in injected
 
 
 def test_inject_canonical_skills_section_java():
