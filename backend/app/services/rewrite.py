@@ -86,6 +86,7 @@ MANDATORY OPERATIONAL RULES:
    - For .NET roles: Adapt Cognizant and USF to C#, .NET 8 / ASP.NET Core, Entity Framework Core, SQL Server, MongoDB, and xUnit/NUnit. Use DOTNET_STACK_SKILLS (strictly purge Java/Spring from SKILLS, but PRESERVE FastAPI, RabbitMQ, MCP, Multi-Agent, and Cloudflare R2 from projects).
    - For Java roles: Preserve Cognizant as Java 11 / Spring Boot microservices with MongoDB/SQL Server (order Cognizant before USF). Adapt USF to Java 17 / Spring Boot. Use JAVA_STACK_SKILLS.
    - For Python, Node.js, and AI roles: Retain Cognizant as Java 11 / Spring Boot enterprise microservices foundation. Use PYTHON_STACK_SKILLS, NODE_STACK_SKILLS, or AI_STACK_SKILLS respectively.
+   - STRICTLY BANNED FROM COGNIZANT: Do NOT mention GitHub Actions, CI/CD pipelines, RabbitMQ, Cloudflare R2, or payment gateways in Cognizant. GitHub Actions and CI/CD belong strictly in USF and Projects.
 6. SYNTAX INTEGRITY:
    - Escape all percentages as \% (e.g. 30\%, 70\%) and ampersands as \& (e.g. Cloud \& DevOps).
    - Always preserve CERTIFICATIONS section if present in the base resume.
@@ -200,6 +201,7 @@ CRITICAL STACK & ROLE INSTRUCTIONS:
 - Clean bullets: Pure plain text with ZERO \\textbf{{...}} inside \\resumeItem{{...}}.
 - Minimum bullet depth: Output at least 5 bullets for Cognizant, at least 5 for USF, and at least 4 for each project.
 - Defensible metrics: Do NOT spam percentage numbers across every bullet (limit to at most 1-2 defensible percentages per section); prioritize real scale (20K+ requests, 60+ users), protocols, and architecture mechanisms.
+- Cognizant Scope: Do NOT claim GitHub Actions, CI/CD, or RabbitMQ in Cognizant (CI/CD and RabbitMQ belong in USF and Projects).
 {"- Location: Begin \\resumeHeadingContact with '" + target_location + "'." if target_location and target_location != "Not specified (preserve existing)" else ""}
 
 SOURCE LATEX RESUME TO REWRITE:
@@ -452,6 +454,26 @@ def preserve_certifications_section(original_latex: str, rewritten_latex: str) -
     return rewritten_latex
 
 
+def clean_cognizant_guardrails(latex: str) -> str:
+    """Removes any accidental mentions of GitHub Actions, CI/CD, RabbitMQ, or Cloudflare from Cognizant."""
+    cog_match = re.search(
+        r"(\\resumeSubheading\s*\{[^}]*Cognizant.*?)(\s*\\resumeSubheading|\s*\\resumeSubHeadingListEnd|\s*\\end\{itemize\}|\Z)",
+        latex,
+        flags=re.DOTALL | re.IGNORECASE,
+    )
+    if cog_match:
+        cog_block = cog_match.group(1)
+        cleaned_cog = re.sub(
+            r"\\resumeItem\{[^}]*(?:GitHub Actions|CI/CD|RabbitMQ|Cloudflare)[^}]*\}\s*",
+            "",
+            cog_block,
+            flags=re.IGNORECASE,
+        )
+        if cleaned_cog != cog_block:
+            latex = latex[: cog_match.start(1)] + cleaned_cog + latex[cog_match.start(2) :]
+    return latex
+
+
 DOTNET_COGNIZANT_BLOCK = r"""  \resumeSubheading
     {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
   \resumeItemListStart
@@ -670,6 +692,9 @@ def rewrite_resume(request: RewriteRequest) -> RewriteResponse:
 
     # Sanitize unescaped % and special characters in bullets/body
     rewritten = sanitize_latex_escaping(rewritten)
+
+    # Clean any accidental GitHub Actions or CI/CD mentions from Cognizant
+    rewritten = clean_cognizant_guardrails(rewritten)
 
     # If target stack is Java, ensure Cognizant appears before USF and adapt USF to Java
     if target_stack == "java":
