@@ -1,0 +1,181 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{mathptmx}
+\usepackage{geometry}
+\usepackage{setstretch}
+\usepackage{anyfontsize}
+
+% Standardized thin margins to maximize space safely
+\geometry{
+  a4paper,
+  top=0.35in,
+  bottom=0.35in,
+  left=0.4in,
+  right=0.4in
+}
+
+\setstretch{1.0}
+\renewcommand{\normalsize}{\fontsize{10}{12}\selectfont}
+\renewcommand{\small}{\fontsize{10}{12}\selectfont}
+\normalsize
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section title formatting
+\titleformat{\section}{
+  \vspace{-10pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+\newcommand{\resumeSep}{\textbullet}
+
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+% Experience / education: stacked lines parse cleanly in PDF-to-text
+\newcommand{\resumeSubheading}[4]{%
+  \vspace{0pt}\item
+  \textbf{#1} \\
+  \textit{\small #2} \\
+  \small #3 -- #4
+  \vspace{2pt}
+}
+
+% Projects: 2 arguments (Title, Tech Stack)
+\newcommand{\resumeProject}[2]{%
+  \vspace{0pt}\item[]
+  \textbf{#1} \\
+  \small\textit{#2}
+  \vspace{2pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+\newcommand{\resumeItemListStart}{%
+  \begin{itemize}[leftmargin=0.15in, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt, label={$\bullet$}]%
+}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{2pt}}
+
+\newcommand{\resumeHeadingContact}{%
+  Seattle, WA \hspace{0.4em}\resumeSep\hspace{0.4em}+1 (656) 203-7074 \hspace{0.4em}\resumeSep\hspace{0.4em}\href{mailto:mannava.tarun34@gmail.com}{mannava.tarun34@gmail.com} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://linkedin.com/in/tarunmannava}{LinkedIn} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://github.com/tarunmannava}{GitHub}%
+}
+
+%-------------------------------------------
+\begin{document}
+
+%---------- HEADING ----------
+\begin{center}
+  {\Huge \textbf{Tarun Mannava}} \\[4pt]
+  \small
+  \resumeHeadingContact \\[4pt]
+  \textit{Full Stack Software Engineer with expertise in TypeScript, React 18, Next.js, and Node.js backend architectures. Experienced in building end-to-end web applications, real-time WebSocket interfaces, REST/GraphQL APIs, and event-driven pipelines backed by PostgreSQL, MongoDB, and Redis caching.}
+\end{center}
+
+\vspace{-10pt}
+
+%---------- SKILLS ----------
+\section{SKILLS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    \textbf{Languages:} TypeScript, JavaScript (ES2022+), Python, Java, SQL, HTML5, CSS3 \\[1pt]
+    \textbf{Backend \& APIs:} Node.js, Express.js, NestJS, FastAPI, REST APIs, GraphQL, WebSocket / Socket.io, Microservices \\[1pt]
+    \textbf{Frontend:} React 18, Next.js, Redux Toolkit, React Query, Tailwind CSS \\[1pt]
+    \textbf{AI Developer Tools \& GenAI:} Claude Code, Cursor, GitHub Copilot, LLMs, RAG, LangGraph, LangChain, Multi-Agent Systems, Model Context Protocol (MCP), Prompt Engineering \\[1pt]
+    \textbf{Messaging \& Databases:} RabbitMQ, Redis (Pub/Sub, Caching), PostgreSQL, MongoDB, Prisma ORM, SQL Server \\[1pt]
+    \textbf{Cloud \& Infrastructure:} AWS, Cloudflare R2, Docker, Linux, GitHub Actions \\[1pt]
+    \textbf{Authentication:} OAuth2, JWT, Neon Auth \\[1pt]
+    \textbf{Testing:} Jest, Supertest, Pytest, JUnit
+  }}
+\end{itemize}
+
+%---------- EXPERIENCE ----------
+\section{EXPERIENCE}
+\resumeSubHeadingListStart
+
+  \resumeSubheading
+    {University of South Florida}{Research Assistant, Software Engineer}{Jan 2025}{May 2026}
+  \resumeItemListStart
+    \resumeItem{Architected and deployed a full-stack AI \& Health Literacy platform, leveraging React 18 and TypeScript for 13 interactive modules, serving 60+ biomedical students and faculty with sub-2s p95 latency.}
+    \resumeItem{Developed and integrated a RAG-based conversational assistant backend using Node.js and Express.js, structuring a domain-specific knowledge base and MongoDB for state management to deliver grounded recommendations.}
+    \resumeItem{Engineered a multi-layer LLM safety and retrieval workflow in Node.js, combining cosine similarity semantic filtering and Redis-backed rate-limit-aware caching with Google Gemini and Groq APIs to optimize latency and reduce redundant calls.}
+    \resumeItem{Built an in-browser prompt evaluation engine using TypeScript and Transformers.js (WASM / ONNX) for local cosine similarity embedding scoring, providing zero-latency pedagogical feedback on prompt structure and constraints.}
+    \resumeItem{Implemented secure session authentication via Hugging Face OAuth2 (PKCE) and engineered Supabase (PostgreSQL) relational schemas with Node.js server-side RPCs for secure access code verification, quiz scoring, and deterministic chat logging.}
+    \resumeItem{Established robust CI/CD pipelines using GitHub Actions for automated testing (Jest, Supertest) and deployment, ensuring continuous integration and delivery of application updates.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+    {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
+  \resumeItemListStart
+    \resumeItem{Developed and maintained Java 11/Spring Boot microservices for policy onboarding, validation, and customer transactions, supporting distributed insurance services handling 20K+ peak hourly requests.}
+    \resumeItem{Engineered asynchronous validation and enrichment pipelines using Java's CompletableFuture and ExecutorService, significantly improving request processing latency through parallel task execution.}
+    \resumeItem{Implemented Redis-backed caching strategies and cache warm-up routines, reducing SQL Server read bottlenecks and improving p95 API response times by 30\% during peak onboarding cycles.}
+    \resumeItem{Designed and optimized database interactions across MongoDB and SQL Server, leveraging indexed queries to eliminate N+1 query patterns and minimize database round trips for critical business operations.}
+    \resumeItem{Refactored complex validation and business logic across 6+ microservices into reusable Spring service components, establishing centralized exception handling and standardized REST error responses for improved maintainability.}
+    \resumeItem{Secured REST endpoints using Spring Security and JWT-based authentication, integrating robust role-based access control with enterprise identity providers to protect sensitive data.}
+    \resumeItem{Authored comprehensive JUnit automated test suites covering business-critical paths, establishing 70\%+ backend test coverage and significantly reducing production regressions.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%---------- PROJECTS ----------
+\section{PROJECTS}
+\resumeSubHeadingListStart
+
+  \resumeProject{SkillBeacon -- Skills and Career Development Platform $|$ \href{https://skillbeacon-six.vercel.app/}{\underline{Link}}}{Python, FastAPI, React, PostgreSQL, SQLAlchemy, Cloudflare R2, Neon Auth}
+  \resumeItemListStart
+    \resumeItem{Developed a full-stack skills and career platform, utilizing React for the interactive frontend and Python FastAPI/SQLAlchemy for the robust backend, supporting diverse student, mentor, employer, and administrator workflows.}
+    \resumeItem{Engineered a comprehensive Skill Passport system, enabling skill level tracking, evidence submissions, mentor/employer verification, and dynamic confidence scoring based on approved signals.}
+    \resumeItem{Implemented granular role-based access controls (RBAC) across critical modules (profiles, applications, mentorships, challenges) using PostgreSQL and JWT-based authentication to ensure data security and proper authorization.}
+    \resumeItem{Integrated Cloudflare R2 via its S3-compatible API for secure storage of resumes, employer logos, and skill evidence, implementing file validation, size limits, storage quotas, and presigned downloads.}
+  \resumeItemListEnd
+
+  \resumeProject{AutoDocs -- Event-Driven MCP \& Multi-Agent Documentation System}{Python, FastAPI, MCP Protocol, A2A Protocol, RabbitMQ, Supabase, GitHub Webhooks}
+  \resumeItemListStart
+    \resumeItem{Developed an event-driven documentation system using Python FastAPI to ingest GitHub pull-request webhooks, validating HMAC-SHA256 signatures and ensuring idempotent delivery persistence in Supabase.}
+    \resumeItem{Implemented asynchronous job processing with RabbitMQ, effectively decoupling webhook ingestion from long-running repository analysis and documentation generation workflows, incorporating retry mechanisms.}
+    \resumeItem{Architected Model Context Protocol (MCP) servers to expose granular git diffs, AST parsing, and codebase resources securely to LLM agents, facilitating context-aware and precise repository inspection.}
+    \resumeItem{Engineered an advanced Agent-to-Agent (A2A) communication workflow, orchestrating tasks across specialized diff-analysis, API-specification, and architectural-review agents with structured state exchange and consistency checks.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%---------- EDUCATION ----------
+\section{EDUCATION}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {University of South Florida, Tampa, United States}{Master of Science, Computer Science}{Aug 2024}{May 2026}
+\resumeSubHeadingListEnd
+
+%---------- CERTIFICATIONS ----------
+\section{CERTIFICATIONS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    AWS Certified Cloud Practitioner -- Amazon, Nov 2023
+  }}
+\end{itemize}
+
+%-------------------------------------------
+\end{document}

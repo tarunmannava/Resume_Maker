@@ -1,0 +1,154 @@
+\documentclass[a4paper,10.5pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{mathptmx}
+\usepackage{geometry}
+\usepackage{setspace}
+
+\geometry{
+  a4paper,
+  top=0.35in,
+  bottom=0.35in,
+  left=0.4in,
+  right=0.4in
+}
+
+\setstretch{1.0}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-8pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{0pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} $|$ \textit{\small#2} & \small #3 -- #4 \\
+    \end{tabular*}\vspace{1pt}
+}
+
+\newcommand{\resumeProject}[2]{
+  \vspace{-2pt}\item[]
+  \textbf{#1} \\
+  \small\textit{#2}\vspace{1pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=1pt, parsep=0pt, topsep=0pt, partopsep=0pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in, itemsep=1.2pt, parsep=0pt, topsep=1pt, partopsep=0pt, label=$\bullet$]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{3pt}}
+
+\begin{document}
+
+\begin{center}
+  {\Huge \textbf{Tarun Mannava}} \\[3pt]
+  \small
+  Tampa, FL \quad $|$ \quad
+  +1 (656) 203-7074 \quad $|$ \quad
+  \href{mailto:mannava.tarun34@gmail.com}{mannava.tarun34@gmail.com} \quad $|$ \quad
+  \href{https://linkedin.com/in/tarunmannava}{LinkedIn} \quad $|$ \quad
+  \href{https://github.com/tarunmannava}{GitHub}
+\end{center}
+
+\vspace{-12pt}
+
+\section{EDUCATION}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {University of South Florida}{Master of Science, Computer Science}{Aug 2024}{May 2026}
+\resumeSubHeadingListEnd
+
+\section{EXPERIENCE}
+\resumeSubHeadingListStart
+
+  \resumeSubheading
+    {University of South Florida}{Graduate Researcher -- Software Engineer (Python / FastAPI)}{Jan 2025}{Present}
+  \resumeItemListStart
+    \resumeItem{Architected and shipped a production biomedical learning platform end-to-end at USF SHIELD Lab, serving 60+ active students and instructors across 13 interactive modules.}
+    \resumeItem{Built high-performance Python / FastAPI REST microservices for live tutoring workflows, integrating Groq and Gemini LLM APIs with Pydantic response validation.}
+    \resumeItem{Designed normalized PostgreSQL database schemas for authentication, enrollment, progress tracking, and learning analytics across student, instructor, and researcher personas.}
+    \resumeItem{Implemented async background task processing with Celery and Redis for batch grading and response evaluation, maintaining sub-2s p95 latency.}
+    \resumeItem{Integrated shared API contracts and input validation using Pydantic and Pytest, reducing integration defects by 30\% across sprint cycles.}
+    \resumeItem{Shipped 8+ major module updates on 2-week Agile sprint cycles using Git-based branching and peer code reviews without disrupting live classroom usage.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+    {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
+  \resumeItemListStart
+    \resumeItem{Developed customer-facing Java/Spring Boot REST APIs for registration, validation, and authentication workflows supporting 20K+ hourly peak transactions across customer onboarding and account management.}
+    \resumeItem{Implemented business rules and input-validation services in Core Java using OOP abstractions, Collections, and exception handling, reducing downstream processing errors by 18\% across high-volume registration flows.}
+    \resumeItem{Authored parameterized SQL queries and stored-procedure integrations against SQL Server and MongoDB for customer profile and transactional data, supporting reliable reads/writes under peak onboarding traffic.}
+    \resumeItem{Leveraged Redis for session and token caching on authentication endpoints, improving p95 response times by 30\% and lowering database load on hot read paths.}
+    \resumeItem{Standardized REST request/response DTOs and error-handling contracts across microservices, cutting frontend-backend integration defects by 25\% and improving release stability for consuming web clients.}
+    \resumeItem{Built automated test coverage with JUnit and Cucumber BDD scenarios on critical auth paths, reaching 70\% backend coverage; debugged production registration failures in Agile sprints using Git-based feature branches.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\section{PROJECTS}
+\resumeSubHeadingListStart
+
+  \resumeProject{Intelligent Codebase QA \& Retrieval Assistant}{Python, FastAPI, AST Parsing, Tree-Sitter, PostgreSQL, pgvector, Ollama, Docker}
+  \resumeItemListStart
+    \resumeItem{Built a local QA assistant that traverses code repositories using AST and Tree-Sitter parsing to answer developer questions about the codebase.}
+    \resumeItem{Chunked source code by classes, functions, and module dependencies to preserve full technical context during retrieval.}
+    \resumeItem{Stored code embeddings and keyword indexes in PostgreSQL (pgvector) to support hybrid semantic and exact-match search.}
+    \resumeItem{Retrieved relevant code snippets and fed them into local Ollama LLMs to generate grounded answers for complex architecture and logic questions.}
+    \resumeItem{Implemented dependency tree traversal to trace function call hierarchies and variable usages across multi-file projects.}
+  \resumeItemListEnd
+
+  \resumeProject{Automated PR Documentation Agent with Dynamic Tool Calling}{Python, FastAPI, Pydantic, Celery, Redis, PostgreSQL, GitHub Webhooks, Docker}
+  \resumeItemListStart
+    \resumeItem{Built an automated PR documentation agent that listens to GitHub Webhooks and executes targeted doc tools based on file diffs.}
+    \resumeItem{Parsed PR code diffs (\texttt{unidiff}) to dynamically trigger specific tools for README updates, API schema docs, and database migration notes.}
+    \resumeItem{Configured HMAC-SHA256 verified GitHub webhooks and an async Celery/Redis queue to process PR events in the background.}
+    \resumeItem{Enforced strict Pydantic schemas on tool arguments and outputs to ensure generated doc updates remain valid before commenting on PRs.}
+    \resumeItem{Persisted PR events, file diffs, and tool execution logs in PostgreSQL to support retries and track documentation updates.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\section{SKILLS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=1pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    \textbf{Languages:} Python, TypeScript, SQL, Java, JavaScript, HTML/CSS \\[1.5pt]
+    \textbf{Backend \& Frameworks:} FastAPI, Flask, Pydantic, Celery, REST APIs, Microservices, Node.js, Spring Boot \\[1.5pt]
+    \textbf{Databases \& Caching:} PostgreSQL (pgvector), Supabase, Redis, MongoDB, SQL Server \\[1.5pt]
+    \textbf{AI \& Tooling:} Ollama, Groq, Gemini APIs, RAG, Tree-Sitter, GitHub Webhooks, Docker, Git, Linux, Agile \\[1.5pt]
+    \textbf{Testing:} Pytest, JUnit, Cucumber
+  }}
+\end{itemize}
+
+\section{CERTIFICATIONS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    \textbf{AWS Certified Cloud Practitioner} -- Amazon, Nov 2023
+  }}
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,180 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{mathptmx}
+\usepackage{geometry}
+\usepackage{setstretch}
+\usepackage{anyfontsize}
+
+% Standardized thin margins to maximize space safely
+\geometry{
+  a4paper,
+  top=0.35in,
+  bottom=0.35in,
+  left=0.4in,
+  right=0.4in
+}
+
+\setstretch{1.0}
+\renewcommand{\normalsize}{\fontsize{10}{12}\selectfont}
+\renewcommand{\small}{\fontsize{10}{12}\selectfont}
+\normalsize
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section title formatting
+\titleformat{\section}{
+  \vspace{-10pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+\newcommand{\resumeSep}{\textbullet}
+
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+% Experience / education: stacked lines parse cleanly in PDF-to-text
+\newcommand{\resumeSubheading}[4]{%
+  \vspace{0pt}\item
+  \textbf{#1} \\
+  \textit{\small #2} \\
+  \small #3 -- #4
+  \vspace{2pt}
+}
+
+% Projects: 2 arguments (Title, Tech Stack)
+\newcommand{\resumeProject}[2]{%
+  \vspace{0pt}\item[]
+  \textbf{#1} \\
+  \small\textit{#2}
+  \vspace{2pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+\newcommand{\resumeItemListStart}{%
+  \begin{itemize}[leftmargin=0.15in, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt, label={$\bullet$}]%
+}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{2pt}}
+
+\newcommand{\resumeHeadingContact}{%
+  Seattle, WA \hspace{0.4em}\resumeSep\hspace{0.4em}+1 (656) 203-7074 \hspace{0.4em}\resumeSep\hspace{0.4em}\href{mailto:mannava.tarun34@gmail.com}{mannava.tarun34@gmail.com} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://linkedin.com/in/tarunmannava}{LinkedIn} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://github.com/tarunmannava}{GitHub}%
+}
+
+%-------------------------------------------
+\begin{document}
+
+%---------- HEADING ----------
+\begin{center}
+  {\Huge \textbf{Tarun Mannava}} \\[4pt]
+  \small
+  \resumeHeadingContact \\[4pt]
+  \textit{Software Engineer specializing in C\#, .NET 8 / ASP.NET Core, and distributed systems. Experienced in building enterprise Web APIs, Entity Framework Core query optimization, SQL Server architectures, and cloud microservices with a strong focus on high throughput, low latency, and robust test-driven development.}
+\end{center}
+
+\vspace{-10pt}
+
+%---------- SKILLS ----------
+\section{SKILLS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    \textbf{Languages \& Core:} C\#, .NET 8 / .NET Core, ASP.NET Core, Entity Framework Core, LINQ, SQL, Python, TypeScript, JavaScript \\[1pt]
+    \textbf{Backend \& APIs:} RESTful APIs, Web API, Microservices, FastAPI, RabbitMQ, Redis Caching, OAuth2, JWT \\[1pt]
+    \textbf{AI Developer Tools \& GenAI:} Claude Code, Cursor, GitHub Copilot, LLMs, RAG, LangGraph, LangChain, Multi-Agent Systems, Model Context Protocol (MCP), Prompt Engineering \\[1pt]
+    \textbf{Databases \& Cloud:} SQL Server (T-SQL), PostgreSQL, MongoDB, AWS, Cloudflare R2, Docker, Linux, GitHub Actions, CI/CD \\[1pt]
+    \textbf{Testing \& Frontend:} xUnit, NUnit, Moq, Pytest, Postman, React, HTML5, CSS3
+  }}
+\end{itemize}
+
+\section{EXPERIENCE}
+\resumeSubHeadingListStart
+
+  \resumeSubheading
+    {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
+  \resumeItemListStart
+    \resumeItem{Developed and maintained enterprise microservices using C\#, .NET 8, and ASP.NET Core for policy onboarding, validation, and customer transactions, supporting distributed insurance services handling 20K+ peak hourly requests.}
+    \resumeItem{Engineered asynchronous processing pipelines utilizing .NET's Task Parallel Library and `async/await` patterns, significantly improving request processing latency and system throughput for complex validation and enrichment workflows.}
+    \resumeItem{Implemented Redis-backed distributed caching strategies and cache warm-up routines, reducing SQL Server read bottlenecks and improving p95 API response times by 30\% during peak onboarding cycles.}
+    \resumeItem{Designed and optimized database interactions across SQL Server and MongoDB using Entity Framework Core, eliminating N+1 query patterns and minimizing database round trips through efficient LINQ queries and indexed views.}
+    \resumeItem{Refactored critical validation and business logic across 6+ microservices into reusable .NET service components, establishing centralized exception handling and standardized REST API error responses for improved maintainability.}
+    \resumeItem{Secured RESTful APIs using ASP.NET Core Identity and JWT-based authentication, implementing robust role-based access control (RBAC) integrated with enterprise identity providers.}
+    \resumeItem{Authored comprehensive xUnit and Moq automated test suites covering business-critical paths, establishing 70\%+ backend test coverage and significantly reducing production regressions across core services.}
+    \resumeItem{Contributed to CI/CD pipeline enhancements on Azure DevOps, automating build, test, and deployment processes for .NET microservices, ensuring rapid and reliable delivery of new features.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+    {University of South Florida}{Graduate Researcher, Software Engineer}{Jan 2025}{May 2026}
+  \resumeItemListStart
+    \resumeItem{Architected and deployed a production AI \& Health Literacy web platform, leveraging an ASP.NET Core Web API backend and React/TypeScript frontend, serving 60+ biomedical students and faculty across 13 interactive modules.}
+    \resumeItem{Engineered a C\#/.NET 8 backend for a real-time dual-model sandbox, integrating Groq and Hugging Face LLM APIs, featuring semantic grading rubrics, milestone detection, and response caching under 2s latency.}
+    \resumeItem{Developed secure data persistence layers using Entity Framework Core to interact with PostgreSQL, managing relational schemas for quiz scoring, chat logging, and user profiles, ensuring data integrity and query efficiency.}
+    \resumeItem{Built an in-browser prompt evaluation engine using Transformers.js (WASM / ONNX) for local cosine similarity embedding scoring, providing zero-latency pedagogical feedback on prompt structure and constraints.}
+    \resumeItem{Integrated Hugging Face OAuth2 (PKCE) for session authentication within the ASP.NET Core application, implementing secure access code verification and user authorization flows.}
+    \resumeItem{Implemented robust logging and monitoring for the .NET Core backend, utilizing structured logging to track LLM interactions, user activity, and system performance, facilitating proactive issue resolution.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%---------- PROJECTS ----------
+\section{PROJECTS}
+\resumeSubHeadingListStart
+
+  \resumeProject{SkillBeacon -- Skills and Career Development Platform $|$ \href{https://skillbeacon-six.vercel.app/}{\underline{Link}}}{Python, FastAPI, React, PostgreSQL, SQLAlchemy, Cloudflare R2, Neon Auth}
+  \resumeItemListStart
+    \resumeItem{Developed a full-stack skills and career platform with a Python FastAPI backend and React frontend, supporting comprehensive student, mentor, employer, and administrator workflows through RESTful API design.}
+    \resumeItem{Implemented a robust Skill Passport system with granular skill levels, evidence submission, and multi-party verification (mentor, employer), dynamically calculating confidence scores based on approved evidence and verification signals.}
+    \resumeItem{Engineered role-based access controls (RBAC) across critical modules including profiles, applications, mentorships, employer challenges, and administrative functions, leveraging PostgreSQL and JWT-based authentication for secure data access.}
+    \resumeItem{Integrated Cloudflare R2 via its S3-compatible API for secure, scalable storage of resumes, employer logos, and skill evidence, implementing file validation, size limits, storage quotas, and presigned URLs for controlled access.}
+    \resumeItem{Designed and optimized PostgreSQL database schemas using SQLAlchemy ORM, ensuring efficient data retrieval and transaction management for complex relationships between users, skills, and evidence records.}
+  \resumeItemListEnd
+
+  \resumeProject{AutoDocs -- Event-Driven MCP \& Multi-Agent Documentation System}{Python, FastAPI, MCP Protocol, A2A Protocol, RabbitMQ, Supabase, GitHub Webhooks}
+  \resumeItemListStart
+    \resumeItem{Architected an event-driven documentation system using Python FastAPI to ingest GitHub pull-request webhooks, implementing HMAC-SHA256 signature validation and idempotent delivery persistence in Supabase to prevent duplicate processing.}
+    \resumeItem{Implemented asynchronous job processing with RabbitMQ, decoupling webhook ingestion from long-running repository analysis and documentation generation workflows, ensuring system responsiveness and fault tolerance with retry mechanisms.}
+    \resumeItem{Developed Model Context Protocol (MCP) servers that securely expose git diffs, Abstract Syntax Tree (AST) parsing results, and codebase resources to specialized LLM agents, enabling context-aware and precise code analysis.}
+    \resumeItem{Engineered an Agent-to-Agent (A2A) communication workflow, orchestrating tasks across distinct diff-analysis, API-specification, and architectural-review agents with structured state exchange and consistency checks for comprehensive documentation.}
+    \resumeItem{Utilized Supabase (PostgreSQL) for persistent storage of webhook events, agent states, and generated documentation artifacts, ensuring data integrity and traceability throughout the multi-agent workflow.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%---------- EDUCATION ----------
+\section{EDUCATION}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {University of South Florida, Tampa, United States}{Master of Science, Computer Science}{Aug 2024}{May 2026}
+\resumeSubHeadingListEnd
+
+%---------- CERTIFICATIONS ----------
+\section{CERTIFICATIONS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    AWS Certified Cloud Practitioner -- Amazon, Nov 2023
+  }}
+\end{itemize}
+
+%-------------------------------------------
+\end{document}

@@ -1,0 +1,179 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{mathptmx}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{anyfontsize}
+
+% Standardized thin margins to maximize space safely
+\geometry{
+  a4paper,
+  top=0.35in,
+  bottom=0.35in,
+  left=0.4in,
+  right=0.4in
+}
+
+\setstretch{1.0}
+\renewcommand{\normalsize}{\fontsize{10}{12}\selectfont}
+\renewcommand{\small}{\fontsize{10}{12}\selectfont}
+\normalsize
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section title formatting
+\titleformat{\section}{
+  \vspace{-10pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+\newcommand{\resumeSep}{\textbullet}
+
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+% Experience / education: stacked lines parse cleanly in PDF-to-text
+\newcommand{\resumeSubheading}[4]{%
+  \vspace{0pt}\item
+  \textbf{#1} \\
+  \textit{\small #2} \\
+  \small #3 -- #4
+  \vspace{2pt}
+}
+
+% Projects: 2 arguments (Title, Tech Stack)
+\newcommand{\resumeProject}[2]{%
+  \vspace{0pt}\item[]
+  \textbf{#1} \\
+  \small\textit{#2}
+  \vspace{2pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+\newcommand{\resumeItemListStart}{%
+  \begin{itemize}[leftmargin=0.15in, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt, label={$\bullet$}]%
+}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{2pt}}
+
+\newcommand{\resumeHeadingContact}{%
+  Seattle, WA \hspace{0.4em}\resumeSep\hspace{0.4em}+1 (656) 203-7074 \hspace{0.4em}\resumeSep\hspace{0.4em}\href{mailto:mannava.tarun34@gmail.com}{mannava.tarun34@gmail.com} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://linkedin.com/in/tarunmannava}{LinkedIn} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://github.com/tarunmannava}{GitHub}%
+}
+
+%-------------------------------------------
+\begin{document}
+
+%---------- HEADING ----------
+\begin{center}
+  {\Huge \textbf{Tarun Mannava}} \\[4pt]
+  \small
+  \resumeHeadingContact \\[4pt]
+  \textit{Backend Software Engineer with enterprise microservices experience building scalable, distributed systems using Java 11/17, Spring Boot, and cloud infrastructure. Strong expertise in RESTful API design, database query optimization (PostgreSQL, MongoDB, SQL Server), Redis caching, and event-driven architectures with RabbitMQ.}
+\end{center}
+
+\vspace{-10pt}
+
+%---------- SKILLS ----------
+\section{SKILLS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    \textbf{Languages:} Java (11/17/21), SQL, Python, JavaScript, TypeScript \\[1pt]
+    \textbf{Backend \& Frameworks:} Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, FastAPI, REST APIs, Microservices \\[1pt]
+    \textbf{AI Developer Tools \& GenAI:} Claude Code, Cursor, GitHub Copilot, LLMs, RAG, LangGraph, LangChain, Multi-Agent Systems, Model Context Protocol (MCP), Prompt Engineering \\[1pt]
+    \textbf{Messaging \& Distributed Systems:} RabbitMQ, Redis, CompletableFuture, Asynchronous Processing, Event-Driven Architecture \\[1pt]
+    \textbf{Databases \& Cloud:} PostgreSQL, MongoDB, SQL Server, AWS, Cloudflare R2, Docker, Linux, GitHub Actions, jOOQ \\[1pt]
+    \textbf{Testing \& Frontend:} JUnit 5, Mockito, Pytest, Postman, React, HTML5, CSS3
+  }}
+\end{itemize}
+
+%---------- EXPERIENCE ----------
+\section{EXPERIENCE}
+\resumeSubHeadingListStart
+
+  \resumeSubheading
+    {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
+  \resumeItemListStart
+    \resumeItem{Developed and maintained enterprise microservices using Java 11/Spring Boot for policy onboarding and customer transactions, supporting distributed insurance services handling 20K+ peak hourly requests.}
+    \resumeItem{Engineered asynchronous validation and enrichment pipelines with Java's CompletableFuture and ExecutorService, significantly improving request processing latency through parallel task execution.}
+    \resumeItem{Implemented robust Redis caching strategies and cache warm-up routines, reducing SQL Server read bottlenecks and improving p95 API response times by \textasciitilde25\% during peak onboarding cycles.}
+    \resumeItem{Designed and optimized complex database interactions across MongoDB and SQL Server using jOOQ and strategic indexing, eliminating N+1 query patterns and minimizing database round trips.}
+    \resumeItem{Refactored critical validation and business logic across 6+ microservices into reusable Spring service components, establishing centralized exception handling and standardized REST error responses.}
+    \resumeItem{Secured RESTful API endpoints using Spring Security and JWT-based authentication, integrating role-based access control (RBAC) with enterprise identity providers.}
+    \resumeItem{Authored comprehensive JUnit 5 and Mockito test suites for critical business paths, achieving 70\%+ backend test coverage and significantly reducing production regressions.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+    {University of South Florida}{Research Assistant, Software Engineer}{Jan 2025}{May 2026}
+  \resumeItemListStart
+    \resumeItem{Architected and deployed a production AI \& Health Literacy platform across 13 interactive modules using React and TypeScript, serving 60+ biomedical students and faculty.}
+    \resumeItem{Developed and integrated a RAG-based conversational assistant using Java 17 and Spring Boot, structuring a domain-specific knowledge base and MongoDB for state management to deliver grounded recommendations.}
+    \resumeItem{Designed a multi-layer LLM safety and retrieval workflow in Spring Boot, combining semantic filtering and rate-limit-aware caching with Google Gemini and Groq APIs to optimize latency and reduce redundant calls.}
+    \resumeItem{Implemented a robust backend service with Spring Boot for secure access code verification, quiz scoring, and deterministic chat logging, leveraging PostgreSQL for relational data management.}
+    \resumeItem{Integrated OAuth2 (PKCE) for session authentication within the Spring Boot backend, ensuring secure user access and data integrity across the platform.}
+    \resumeItem{Developed comprehensive automated tests using JUnit 5 and Mockito for critical backend services, ensuring high reliability and maintainability of the AI platform.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%---------- PROJECTS ----------
+\section{PROJECTS}
+\resumeSubHeadingListStart
+
+  \resumeProject{SkillBeacon -- Skills and Career Development Platform $|$ \href{https://skillbeacon-six.vercel.app/}{\underline{Link}}}{Python, FastAPI, React, PostgreSQL, SQLAlchemy, Cloudflare R2, Neon Auth}
+  \resumeItemListStart
+    \resumeItem{Engineered a full-stack skills and career development platform using Python/FastAPI backend and React frontend, supporting comprehensive student, mentor, employer, and administrator workflows.}
+    \resumeItem{Developed a robust Skill Passport system with dynamic skill levels, evidence submission, and multi-party verification, enabling confidence scoring based on approved signals.}
+    \resumeItem{Implemented fine-grained role-based access controls (RBAC) across critical modules (profiles, applications, mentorships, challenges) leveraging PostgreSQL and JWT for secure authentication and authorization.}
+    \resumeItem{Integrated Cloudflare R2 via its S3-compatible API for secure, scalable storage of resumes and evidence, implementing file validation, size limits, storage quotas, and presigned downloads.}
+  \resumeItemListEnd
+
+  \resumeProject{AutoDocs -- Event-Driven MCP \& Multi-Agent Documentation System}{Python, FastAPI, MCP Protocol, A2A Protocol, RabbitMQ, Supabase, GitHub Webhooks}
+  \resumeItemListStart
+    \resumeItem{Architected an event-driven documentation system using Python/FastAPI, processing GitHub pull-request webhooks with HMAC-SHA256 signature validation and idempotent delivery to Supabase.}
+    \resumeItem{Implemented asynchronous job processing with RabbitMQ, decoupling webhook ingestion from long-running repository analysis and documentation generation workflows with robust retry mechanisms.}
+    \resumeItem{Designed and deployed Model Context Protocol (MCP) servers to expose git diffs, AST parsing, and codebase resources securely to LLM agents, enabling context-aware repository inspection.}
+    \resumeItem{Engineered a sophisticated Agent-to-Agent (A2A) communication workflow, orchestrating tasks across specialized diff-analysis, API-spec, and architectural-review agents with structured state exchange and consistency checks.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%---------- EDUCATION ----------
+\section{EDUCATION}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {University of South Florida, Tampa, United States}{Master of Science, Computer Science}{Aug 2024}{May 2026}
+\resumeSubHeadingListEnd
+
+%---------- CERTIFICATIONS ----------
+\section{CERTIFICATIONS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    AWS Certified Cloud Practitioner -- Amazon, Nov 2023
+  }}
+\end{itemize}
+
+%-------------------------------------------
+\end{document}

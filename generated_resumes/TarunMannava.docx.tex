@@ -1,0 +1,181 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{mathptmx}
+\usepackage{geometry}
+\usepackage{setstretch}
+\usepackage{anyfontsize}
+
+% Standardized thin margins to maximize space safely
+\geometry{
+  a4paper,
+  top=0.35in,
+  bottom=0.35in,
+  left=0.4in,
+  right=0.4in
+}
+
+\setstretch{1.0}
+\renewcommand{\normalsize}{\fontsize{10}{12}\selectfont}
+\renewcommand{\small}{\fontsize{10}{12}\selectfont}
+\normalsize
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section title formatting
+\titleformat{\section}{
+  \vspace{-10pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+\newcommand{\resumeSep}{\textbullet}
+
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+% Experience / education: stacked lines parse cleanly in PDF-to-text
+\newcommand{\resumeSubheading}[4]{%
+  \vspace{0pt}\item
+  \textbf{#1} \\
+  \textit{\small #2} \\
+  \small #3 -- #4
+  \vspace{2pt}
+}
+
+% Projects: 2 arguments (Title, Tech Stack)
+\newcommand{\resumeProject}[2]{%
+  \vspace{0pt}\item[]
+  \textbf{#1} \\
+  \small\textit{#2}
+  \vspace{2pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+\newcommand{\resumeItemListStart}{%
+  \begin{itemize}[leftmargin=0.15in, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt, label={$\bullet$}]%
+}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{2pt}}
+
+\newcommand{\resumeHeadingContact}{%
+  Seattle, WA \hspace{0.4em}\resumeSep\hspace{0.4em}+1 (656) 203-7074 \hspace{0.4em}\resumeSep\hspace{0.4em}\href{mailto:mannava.tarun34@gmail.com}{mannava.tarun34@gmail.com} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://linkedin.com/in/tarunmannava}{LinkedIn} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://github.com/tarunmannava}{GitHub}%
+}
+
+%-------------------------------------------
+\begin{document}
+
+%---------- HEADING ----------
+\begin{center}
+  {\Huge \textbf{Tarun Mannava}} \\[4pt]
+  \small
+  \resumeHeadingContact \\[4pt]
+  \textit{AI / Machine Learning Platform Engineer with expertise in LLM applications, RAG pipelines, LangGraph multi-agent orchestration, and Model Context Protocol (MCP) systems. Experienced in building scalable Python/FastAPI backends, vector search architectures, and client-side WASM neural inference.}
+\end{center}
+
+\vspace{-10pt}
+
+%---------- SKILLS ----------
+\section{SKILLS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    \textbf{Languages:} Python, SQL, TypeScript, JavaScript, Java \\[1pt]
+    \textbf{GenAI \& LLM Frameworks:} LangChain, LlamaIndex, LangGraph, RAG Pipelines, Multi-Agent Systems, Model Context Protocol (MCP), A2A Protocol, Prompt Engineering \\[1pt]
+    \textbf{Vector DBs \& Search:} Pinecone, Qdrant, ChromaDB, Semantic Search, Hybrid Search, Embeddings, Transformers.js (WASM/ONNX) \\[1pt]
+    \textbf{Backend \& Messaging:} FastAPI, AsyncIO, RabbitMQ, Redis, REST APIs, PostgreSQL, MongoDB, SQLAlchemy \\[1pt]
+    \textbf{AI Developer Tools:} Claude Code, Cursor, GitHub Copilot, OpenAI Codex, Weights \& Biases, MLflow, Hugging Face \\[1pt]
+    \textbf{Cloud \& MLOps:} AWS, Cloudflare R2, Docker, Kubernetes, Linux, GitHub Actions, CI/CD, Pytest
+  }}
+\end{itemize}
+
+%---------- EXPERIENCE ----------
+\section{EXPERIENCE}
+\resumeSubHeadingListStart
+
+  \resumeSubheading
+    {University of South Florida}{Research Assistant, Software Engineer}{Jan 2025}{May 2026}
+  \resumeItemListStart
+    \resumeItem{Architected and deployed a production AI \& Health Literacy platform across 13 interactive modules in React and TypeScript, serving 60+ biomedical students and faculty with personalized learning paths.}
+    \resumeItem{Developed a RAG-based conversational assistant using FastAPI, structuring a domain-specific knowledge base with MongoDB state management to deliver grounded and contextually relevant recommendations.}
+    \resumeItem{Designed a multi-layer LLM safety and retrieval architecture, combining cosine similarity semantic relevance filtering and rate-limit-aware caching with Google Gemini and Groq APIs to optimize latency and reduce redundant calls.}
+    \resumeItem{Built an in-browser prompt evaluation engine using Transformers.js (WASM / ONNX) for local cosine similarity embedding scoring, providing zero-latency pedagogical feedback on prompt structure and constraints.}
+    \resumeItem{Implemented secure session authentication with Hugging Face OAuth2 (PKCE) and engineered Supabase (PostgreSQL) relational schemas and server-side RPCs for robust access code verification, quiz scoring, and deterministic chat logging.}
+    \resumeItem{Leveraged AsyncIO within FastAPI to manage concurrent requests for LLM interactions and database operations, ensuring high throughput and responsiveness for the conversational assistant.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+    {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
+  \resumeItemListStart
+    \resumeItem{Developed and maintained Java 11/Spring Boot microservices for critical policy onboarding, validation, and customer transaction workflows, supporting distributed insurance services handling 20K+ peak hourly requests.}
+    \resumeItem{Engineered asynchronous validation and enrichment pipelines using Java's CompletableFuture and ExecutorService, significantly improving request processing latency through parallel task execution.}
+    \resumeItem{Implemented Redis-backed caching strategies and cache warm-up routines, reducing SQL Server read bottlenecks and improving p95 API response times by 30\% during peak onboarding cycles.}
+    \resumeItem{Designed and optimized database interactions across MongoDB and SQL Server using jOOQ and indexed queries, eliminating N+1 query patterns and minimizing database round trips for core business logic.}
+    \resumeItem{Refactored complex validation and business logic across 6+ microservices into reusable Spring service components, establishing centralized exception handling and standardized REST error responses for improved maintainability.}
+    \resumeItem{Secured REST endpoints using Spring Security and JWT-based authentication, integrating role-based access control (RBAC) with centralized identity providers to enforce granular permissions.}
+    \resumeItem{Authored comprehensive JUnit and Cucumber automated test suites covering business-critical paths, establishing 70\%+ backend test coverage and significantly reducing production regressions.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%---------- PROJECTS ----------
+\section{PROJECTS}
+\resumeSubHeadingListStart
+
+  \resumeProject{SkillBeacon -- Skills and Career Development Platform $|$ \href{https://skillbeacon-six.vercel.app/}{\underline{Link}}}{Python, FastAPI, React, PostgreSQL, SQLAlchemy, Cloudflare R2, Neon Auth}
+  \resumeItemListStart
+    \resumeItem{Built a full-stack skills and career platform with a FastAPI/SQLAlchemy backend and React frontend, supporting student, mentor, employer, and administrator workflows with robust data integrity.}
+    \resumeItem{Implemented a Skill Passport featuring skill levels, evidence submissions, and multi-party confidence scoring based on approved evidence and verification signals, leveraging vector embeddings for semantic skill matching.}
+    \resumeItem{Integrated Cloudflare R2 through its S3-compatible API for secure storage of resumes, employer logos, skill evidence, and challenge submissions, including file validation, size limits, storage quotas, and presigned downloads.}
+    \resumeItem{Developed role-based access controls across profiles, applications, mentorships, employer challenges, opportunities, notifications, and administrative workflows using PostgreSQL and JWT-based authentication.}
+    \resumeItem{Utilized SQLAlchemy for efficient ORM operations and database schema management in PostgreSQL, ensuring performant data access for complex skill and user relationship queries.}
+  \resumeItemListEnd
+
+  \resumeProject{AutoDocs -- Event-Driven MCP \& Multi-Agent Documentation System}{Python, FastAPI, MCP Protocol, A2A Protocol, RabbitMQ, Supabase, GitHub Webhooks, Multi-Agent Systems}
+  \resumeItemListStart
+    \resumeItem{Built an event-driven documentation system receiving pull-request webhooks via FastAPI, validating GitHub HMAC-SHA256 signatures, and enforcing idempotent delivery persistence in Supabase.}
+    \resumeItem{Implemented asynchronous job processing with RabbitMQ, decoupling webhook ingestion from repository analysis and long-running documentation workflows with robust retry and failure handling mechanisms.}
+    \resumeItem{Architected Model Context Protocol (MCP) servers exposing git diffs, Abstract Syntax Tree (AST) parsing, and codebase resources to LLM agents for secure, context-aware RAG pipelines and repository inspection.}
+    \resumeItem{Engineered an Agent-to-Agent (A2A) communication workflow, dynamically routing tasks across specialized diff-analysis, API-spec, and architectural-review agents with structured state exchange and consistency checks for multi-agent orchestration.}
+    \resumeItem{Developed a vector retrieval system for codebase chunking, enabling efficient semantic search over AST-parsed code segments to provide relevant context to LLM agents during documentation generation.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%---------- EDUCATION ----------
+\section{EDUCATION}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {University of South Florida, Tampa, United States}{Master of Science, Computer Science}{Aug 2024}{May 2026}
+\resumeSubHeadingListEnd
+
+%---------- CERTIFICATIONS ----------
+\section{CERTIFICATIONS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    AWS Certified Cloud Practitioner -- Amazon, Nov 2023
+  }}
+\end{itemize}
+
+%-------------------------------------------
+\end{document}
