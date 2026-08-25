@@ -73,9 +73,15 @@ MANDATORY OPERATIONAL RULES:
    - Preserve candidate companies and degrees (Master's and Bachelor's).
 3. CLEAN BULLETS (ZERO INLINE BOLDING):
    - All text inside \resumeItem{...} MUST be 100% clean plain text. ZERO \textbf{...} tags inside bullet items.
-4. ACTION-ORIENTED X-Y-Z BULLET DEPTH (MINIMUM BUDGETS):
-   - Each bullet must be 1.5–2 lines: [Strong Action Verb] + [Specific Technologies & Architecture] + [Quantifiable Impact / Metrics / Latency].
+4. ACTION-ORIENTED X-Y-Z BULLETS & INTERVIEW-DEFENSIBLE METRICS:
+   - Each bullet must be 1.5–2 lines: [Strong Action Verb] + [Specific Technologies & Architecture] + [Concrete Outcome / Defensible Metric].
    - NO 1-page restriction. Output at least 5 bullets for Cognizant, at least 5 for USF Graduate Researcher, and at least 4 for each project.
+   - METRIC CALIBRATION & NO PERCENTAGE SPAMMING (CRITICAL FOR INTERVIEWS):
+     * DO NOT slap arbitrary percentage improvements (% gains, % reductions) onto every bullet. Having percentages on every point looks artificial and creates high interview risk.
+     * Limit percentage metrics to AT MOST 1–2 highly defensible, realistic metrics per role/project (e.g. "achieving 70%+ automated test coverage", "reducing p95 query latency by ~25% via Redis caching").
+     * Prioritize CONCRETE SCALE, ARCHITECTURE MECHANISMS & OUTCOMES:
+       - Scale & Throughput: "handling 20K+ peak hourly requests with 99.9% uptime", "serving 60+ biomedical students and faculty across 13 interactive modules", "sub-2s p95 latency".
+       - Engineering Outcomes: "eliminating N+1 database round-trips via index tuning", "enforcing idempotent delivery to prevent duplicate transaction processing", "decoupling ingestion with RabbitMQ asynchronous consumers", "establishing centralized error handling and RBAC authorization".
 5. STACK-SPECIFIC EXPERIENCE & SKILLS RULES:
    - For .NET roles: Adapt Cognizant and USF to C#, .NET 8 / ASP.NET Core, Entity Framework Core, SQL Server, MongoDB, and xUnit/NUnit. Use DOTNET_STACK_SKILLS (strictly purge Java/Spring from SKILLS, but PRESERVE FastAPI, RabbitMQ, MCP, Multi-Agent, and Cloudflare R2 from projects).
    - For Java roles: Preserve Cognizant as Java 11 / Spring Boot microservices with MongoDB/SQL Server (order Cognizant before USF). Adapt USF to Java 17 / Spring Boot. Use JAVA_STACK_SKILLS.
@@ -193,6 +199,7 @@ CRITICAL STACK & ROLE INSTRUCTIONS:
 - In-place adaptation: Adapt existing bullets & projects directly to answer the JD's criteria (X-Y-Z formula) without adding fake external projects.
 - Clean bullets: Pure plain text with ZERO \\textbf{{...}} inside \\resumeItem{{...}}.
 - Minimum bullet depth: Output at least 5 bullets for Cognizant, at least 5 for USF, and at least 4 for each project.
+- Defensible metrics: Do NOT spam percentage numbers across every bullet (limit to at most 1-2 defensible percentages per section); prioritize real scale (20K+ requests, 60+ users), protocols, and architecture mechanisms.
 {"- Location: Begin \\resumeHeadingContact with '" + target_location + "'." if target_location and target_location != "Not specified (preserve existing)" else ""}
 
 SOURCE LATEX RESUME TO REWRITE:
