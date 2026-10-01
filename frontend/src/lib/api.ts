@@ -275,8 +275,15 @@ export async function fetchQueueJobs(
   if (status && status !== "all") params.append("status", status);
   params.append("limit", String(limit));
   params.append("offset", String(offset));
+  params.append("_t", String(Date.now()));
 
-  const res = await fetch(`${API_BASE_URL}/api/queue/jobs?${params.toString()}`);
+  const res = await fetch(`${API_BASE_URL}/api/queue/jobs?${params.toString()}`, {
+    cache: "no-store",
+    headers: {
+      "Cache-Control": "no-cache, no-store, must-revalidate",
+      Pragma: "no-cache",
+    },
+  });
   if (!res.ok) {
     throw new Error(`Failed fetching queue jobs: ${await res.text()}`);
   }
@@ -284,7 +291,13 @@ export async function fetchQueueJobs(
 }
 
 export async function fetchQueueStats(): Promise<QueueStats> {
-  const res = await fetch(`${API_BASE_URL}/api/queue/stats`);
+  const res = await fetch(`${API_BASE_URL}/api/queue/stats?_t=${Date.now()}`, {
+    cache: "no-store",
+    headers: {
+      "Cache-Control": "no-cache, no-store, must-revalidate",
+      Pragma: "no-cache",
+    },
+  });
   if (!res.ok) {
     throw new Error(`Failed fetching queue stats: ${await res.text()}`);
   }
@@ -372,7 +385,13 @@ export async function flagJobWithGuardrail(
 }
 
 export async function fetchScreeningGuardrails(limit: number = 50): Promise<ScreeningGuardrailItem[]> {
-  const res = await fetch(`${API_BASE_URL}/api/queue/guardrails?limit=${limit}`);
+  const res = await fetch(`${API_BASE_URL}/api/queue/guardrails?limit=${limit}&_t=${Date.now()}`, {
+    cache: "no-store",
+    headers: {
+      "Cache-Control": "no-cache, no-store, must-revalidate",
+      Pragma: "no-cache",
+    },
+  });
   if (!res.ok) {
     throw new Error(`Failed fetching screening guardrails: ${await res.text()}`);
   }

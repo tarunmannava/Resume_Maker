@@ -1,5 +1,5 @@
 from typing import Any
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, Response
 
 
 from ..models.schemas import (
@@ -31,6 +31,12 @@ from ..services.job_worker import is_worker_running
 queue_router = APIRouter(prefix="/queue", tags=["Job Queue"])
 
 
+def _set_no_cache(response: Response) -> None:
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+
+
 @queue_router.post("/known", response_model=KnownIdsResponse)
 def get_known_job_ids(request: KnownIdsRequest) -> KnownIdsResponse:
     """Returns IDs that are already present in the database to prevent redundant JD fetches."""
@@ -52,18 +58,21 @@ def capture_job_batch(request: CaptureBatchRequest) -> CaptureBatchResponse:
 
 @queue_router.get("/jobs", response_model=list[QueueJob])
 def get_queued_jobs(
+    response: Response,
     status: str | None = Query(None, description="Filter by status (ready, flagged, failed, etc.)"),
     limit: int = Query(100, ge=1, le=500),
     offset: int = Query(0, ge=0),
 ) -> list[QueueJob]:
     """Lists jobs ordered by captured_at descending."""
+    _set_no_cache(response)
     raw_jobs = list_jobs(status=status, limit=limit, offset=offset)
     return [QueueJob(**j) for j in raw_jobs]
 
 
 @queue_router.get("/jobs/{job_id}", response_model=QueueJob)
-def get_single_queued_job(job_id: str) -> QueueJob:
+def get_single_queued_job(job_id: str, response: Response) -> QueueJob:
     """Retrieves a single job by ID."""
+    _set_no_cache(response)
     job = get_job(job_id)
     if not job:
         raise HTTPException(status_code=404, detail="Job not found")
@@ -71,8 +80,9 @@ def get_single_queued_job(job_id: str) -> QueueJob:
 
 
 @queue_router.get("/stats", response_model=QueueStatsResponse)
-def get_queue_stats() -> QueueStatsResponse:
+def get_queue_stats(response: Response) -> QueueStatsResponse:
     """Returns summary statistics across all job statuses."""
+    _set_no_cache(response)
     s = stats()
     return QueueStatsResponse(**s, worker_running=is_worker_running())
 
@@ -129,8 +139,9 @@ def flag_job_with_guardrail(job_id: str, request: FlagGuardrailRequest) -> dict[
 
 
 @queue_router.get("/guardrails", response_model=list[ScreeningGuardrailItem])
-def list_screening_guardrails(limit: int = Query(50, ge=1, le=200)) -> list[ScreeningGuardrailItem]:
+def list_screening_guardrails(response: Response, limit: int = Query(50, ge=1, le=200)) -> list[ScreeningGuardrailItem]:
     """Returns stored golden guardrails."""
+    _set_no_cache(response)
     raw = get_screening_guardrails(limit=limit)
     return [ScreeningGuardrailItem(**g) for g in raw]
 

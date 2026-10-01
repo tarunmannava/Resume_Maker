@@ -30,11 +30,12 @@ export function JobQueueDashboard({ onOpenInStudio }: JobQueueDashboardProps = {
   const [flagSuccessMsg, setFlagSuccessMsg] = useState<string | null>(null);
   const [isSubmittingGuardrail, setIsSubmittingGuardrail] = useState<boolean>(false);
 
-  const loadData = useCallback(async (tabToLoad: string = activeTab) => {
+  const loadData = useCallback(async (tabToLoad?: string) => {
+    const targetTab = tabToLoad ?? activeTab;
     try {
       const [newStats, newJobs] = await Promise.all([
         fetchQueueStats(),
-        fetchQueueJobs(tabToLoad === "processing" ? "queued,screening,rewriting" : tabToLoad),
+        fetchQueueJobs(targetTab === "processing" ? "queued,screening,rewriting" : targetTab),
       ]);
       setStats(newStats);
       setJobs(newJobs);
@@ -58,7 +59,11 @@ export function JobQueueDashboard({ onOpenInStudio }: JobQueueDashboardProps = {
     try {
       setActionLoading(jobId);
       await updateQueueJobStatus(jobId, status, appliedViaSimplify);
-      await loadData();
+      // Optimistic update: remove from current tab immediately
+      if (activeTab !== "all" && activeTab !== status) {
+        setJobs((prev) => prev.filter((j) => j.id !== jobId));
+      }
+      await loadData(activeTab);
     } catch (err: any) {
       alert(`Action failed: ${err.message}`);
     } finally {
@@ -70,7 +75,7 @@ export function JobQueueDashboard({ onOpenInStudio }: JobQueueDashboardProps = {
     try {
       setActionLoading(jobId);
       await toggleQueueJobSimplify(jobId, appliedViaSimplify);
-      await loadData();
+      await loadData(activeTab);
     } catch (err: any) {
       alert(`Toggle failed: ${err.message}`);
     } finally {
@@ -82,7 +87,7 @@ export function JobQueueDashboard({ onOpenInStudio }: JobQueueDashboardProps = {
     try {
       setActionLoading(jobId);
       await retryQueueJob(jobId, force);
-      await loadData();
+      await loadData(activeTab);
     } catch (err: any) {
       alert(`Retry failed: ${err.message}`);
     } finally {
@@ -105,14 +110,38 @@ export function JobQueueDashboard({ onOpenInStudio }: JobQueueDashboardProps = {
 
   const handleConfirmFlagGuardrail = async () => {
     if (!flagModalJob) return;
+    const targetJob = flagModalJob;
+    const previousStatus = targetJob.status;
     const finalReason = flagReason === "Other" ? (customReason.trim() || "Ineligible") : flagReason;
     try {
       setIsSubmittingGuardrail(true);
-      await flagJobWithGuardrail(flagModalJob.id, finalReason, overlookedSnippet.trim() || undefined);
+      await flagJobWithGuardrail(targetJob.id, finalReason, overlookedSnippet.trim() || undefined);
+
+      // Optimistic update: immediately remove card from active tab and update counters
+      if (activeTab !== "all" && activeTab !== "flagged") {
+        setJobs((prev) => prev.filter((j) => j.id !== targetJob.id));
+      } else {
+        setJobs((prev) =>
+          prev.map((j) =>
+            j.id === targetJob.id ? { ...j, status: "flagged", flag_reason: finalReason } : j
+          )
+        );
+      }
+      setStats((prev) => {
+        if (!prev) return null;
+        return {
+          ...prev,
+          ready: previousStatus === "ready" ? Math.max(0, prev.ready - 1) : prev.ready,
+          low_match: previousStatus === "low_match" ? Math.max(0, prev.low_match - 1) : prev.low_match,
+          applied: previousStatus === "applied" ? Math.max(0, prev.applied - 1) : prev.applied,
+          flagged: (prev.flagged || 0) + 1,
+        };
+      });
+
       setFlagSuccessMsg(`Job flagged as "${finalReason}" and saved to Golden Guardrails dataset.`);
       setTimeout(() => setFlagSuccessMsg(null), 5000);
       closeFlagModal();
-      await loadData();
+      await loadData(activeTab);
     } catch (err: any) {
       alert(`Flagging failed: ${err.message}`);
     } finally {

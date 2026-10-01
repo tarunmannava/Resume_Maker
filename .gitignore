@@ -29,3 +29,10 @@ backend/storage/*.db*
 *.out
 *.synctex.gz
 ~$*
+*.tsbuildinfo
+
+# Scratch, conductor, generated files
+scratch/
+conductor/
+generated_resumes/
+
