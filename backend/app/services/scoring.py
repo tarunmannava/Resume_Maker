@@ -26,13 +26,21 @@ EQUIVALENTS: dict[str, list[str]] = {
         "performance",
     ],
     "c": ["data structures", "algorithms", "memory management", "systems programming"],
-    # Data Engineering Equivalents
+    # Data Engineering & Ingestion Equivalents
     "spark": ["pyspark", "hadoop", "kafka", "data processing"],
     "pyspark": ["spark", "hadoop", "kafka", "data processing"],
     "snowflake": ["bigquery", "redshift", "databricks", "data warehouse"],
     "bigquery": ["snowflake", "redshift", "databricks", "data warehouse"],
     "redshift": ["snowflake", "bigquery", "databricks", "data warehouse"],
     "airflow": ["prefect", "dagster", "data pipeline"],
+    "data pipeline": ["data ingestion", "etl", "rabbitmq", "kafka", "pandas", "airflow", "asynchronous processing", "fastapi", "python"],
+    "data ingestion": ["data pipeline", "web scraping", "webhook", "rabbitmq", "fastapi", "etl", "asynchronous processing", "supabase"],
+    "ingestion": ["data ingestion", "data pipeline", "web scraping", "webhook", "rabbitmq", "fastapi"],
+    "web scraping": ["data ingestion", "scraping", "beautifulsoup", "requests", "playwright", "python", "fastapi"],
+    "backend": ["fastapi", "spring boot", "rest api", "microservices", "python", "java", "node.js"],
+    "data quality": ["validation", "pydantic", "pytest", "unit testing", "data processing", "sql"],
+    "structured data": ["postgresql", "sql", "relational database", "json", "pydantic", "sqlalchemy"],
+    "open source": ["github", "git", "side projects", "portfolio"],
     # .NET Ecosystem Equivalents
     "asp.net": ["asp.net core", ".net", "c#", "entity framework", "web api", "mvc"],
     "asp.net core": ["asp.net", ".net core", ".net", "c#", "entity framework", "web api"],

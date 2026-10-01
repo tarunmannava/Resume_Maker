@@ -24,7 +24,7 @@ def test_get_skills_template_for_stack():
     ai_tmpl = get_skills_template_for_stack("ai")
     assert ai_tmpl is not None
     assert ai_tmpl["name"] == "AI Engineer"
-    assert "\\textbf{GenAI \\& LLM Frameworks:}" in ai_tmpl["raw_latex"]
+    assert "\\textbf{GenAI \\& Agents:}" in ai_tmpl["raw_latex"]
 
     python_tmpl = get_skills_template_for_stack("python")
     assert python_tmpl is not None
@@ -40,8 +40,9 @@ def test_inject_canonical_skills_section_dotnet():
 
     doc = "\\begin{document}\n\\section{EXPERIENCE}\n\\end{document}"
     injected = inject_canonical_skills_section(doc, "dotnet")
-    assert "C\\#, .NET 8 / .NET Core, ASP.NET Core" in injected
+    assert "C\\#, .NET 6/8, ASP.NET Core" in injected
     assert "RabbitMQ, Redis Caching, OAuth2" in injected
+    assert "NUnit" not in injected
 
 
 def test_inject_canonical_skills_section_java():
@@ -49,7 +50,7 @@ def test_inject_canonical_skills_section_java():
 
     doc = "\\begin{document}\n\\section{EXPERIENCE}\n\\end{document}"
     injected = inject_canonical_skills_section(doc, "java")
-    assert "Spring Boot, Spring MVC, Spring Security" in injected
+    assert "Spring Boot 3, Spring MVC, Spring Security" in injected
     assert "RabbitMQ, Redis, CompletableFuture" in injected
 
 
@@ -58,7 +59,7 @@ def test_inject_canonical_skills_section_ai():
 
     doc = "\\begin{document}\n\\section{EXPERIENCE}\n\\end{document}"
     injected = inject_canonical_skills_section(doc, "ai")
-    assert "LangChain, LlamaIndex, LangGraph" in injected
+    assert "LangChain, LangGraph, Multi-Agent Systems" in injected
     assert "RabbitMQ" in injected
 
 
@@ -76,7 +77,7 @@ def test_inject_canonical_skills_section_node():
     doc = "\\begin{document}\n\\section{EXPERIENCE}\n\\end{document}"
     injected = inject_canonical_skills_section(doc, "node")
     assert "TypeScript, JavaScript" in injected
-    assert "\\textbf{Backend \\& APIs:} Node.js, Express.js" in injected
+    assert "\\textbf{Backend \\& Tooling:} Node.js, Express.js" in injected
 
 
 def test_inject_canonical_skills_section_banned_skills():

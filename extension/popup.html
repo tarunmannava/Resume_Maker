@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HiringCafe Capture</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      width: 340px;
+      padding: 16px;
+      background: #0f172a;
+      color: #f8fafc;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #38bdf8;
+      letter-spacing: -0.02em;
+    }
+    .badge {
+      font-size: 11px;
+      background: #1e293b;
+      color: #94a3b8;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      font-weight: 500;
+    }
+    .btn {
+      width: 100%;
+      padding: 11px 16px;
+      background: #0284c7;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.15s ease, transform 0.05s ease;
+    }
+    .btn:hover:not(:disabled) {
+      background: #0369a1;
+    }
+    .btn:active:not(:disabled) {
+      transform: scale(0.98);
+    }
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .status-card {
+      margin-top: 14px;
+      padding: 12px;
+      background: #1e293b;
+      border-radius: 8px;
+      border: 1px solid #334155;
+    }
+    .status-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .status-text {
+      font-size: 13px;
+      color: #e2e8f0;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+    .error-text {
+      color: #f87171 !important;
+    }
+    .success-text {
+      color: #4ade80 !important;
+    }
+    .progress-bar-container {
+      margin-top: 8px;
+      width: 100%;
+      height: 6px;
+      background: #334155;
+      border-radius: 9999px;
+      overflow: hidden;
+      display: none;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: #38bdf8;
+      width: 0%;
+      transition: width 0.2s ease;
+    }
+    .footer-link {
+      display: block;
+      margin-top: 14px;
+      text-align: center;
+      font-size: 12px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="title">Resume Maker Queue</div>
+    <div class="badge" id="hostBadge">HiringCafe</div>
+  </div>
+
+  <button id="captureBtn" class="btn">
+    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+    </svg>
+    <span>Capture This Page</span>
+  </button>
+
+  <div class="status-card">
+    <div class="status-title">Status</div>
+    <div id="statusText" class="status-text">Ready to capture jobs from current tab.</div>
+    <div class="progress-bar-container" id="progressContainer">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+  </div>
+
+  <a href="http://localhost:5173" target="_blank" class="footer-link">
+    Open Job Queue Dashboard &rarr;
+  </a>
+
+  <script src="popup.js"></script>
+</body>
+</html>

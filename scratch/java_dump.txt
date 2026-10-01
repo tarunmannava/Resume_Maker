@@ -1,0 +1,48 @@
+################### JAVA ###################
+Normal: Tarun Mannava
+Normal: Seattle, WA • +1 (656) 203-7074 • mannava.tarun34@gmail.com • LinkedIn • GitHub
+Normal: Full Stack Software Engineer with 3+ years of experience building high throughput microservices in Java 11/17 and Spring Boot alongside responsive React/TypeScript frontends. Proven track record in relational and NoSQL database optimization (PostgreSQL, MongoDB, SQL Server), event-driven messaging with RabbitMQ, and architecting AI solutions with AI-in-the-loop validation and custom AI skills.
+Normal: SKILLS
+Normal: Languages: Java (11/17/21), SQL, Python, JavaScript, TypeScript
+Normal: Backend & Frameworks: Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, FastAPI, REST APIs, Microservices
+Normal: AI Developer Tools & GenAI: Claude Code, Cursor, GitHub Copilot, LLMs, RAG, LangGraph, LangChain, Multi-Agent Systems, Model Context Protocol (MCP), Prompt Engineering
+Normal: Messaging & Distributed Systems: RabbitMQ, Redis, CompletableFuture, Asynchronous Processing, Event-Driven Architecture
+Normal: Databases & Cloud: PostgreSQL, MongoDB, SQL Server, AWS, GCP,Azure, Cloudflare R2, Docker, Linux, GitHub Actions, jOOQ
+Normal: Testing & Frontend: JUnit 5, Mockito, Pytest, Postman, React, HTML5, CSS3
+Normal: EXPERIENCE
+Normal: University of South Florida | Research Assistant, Software Engineer	Jan 2025 – May 2026
+List Bullet: Prototyped a Behavioral Health Workflow Platform supporting session tracking, therapist workflows, and clinic resource utilization for behavioral health services.
+List Bullet: Engineered Java 17 and Spring Boot microservices to model therapist productivity, billable vs. non-billable hours, session activity, and physical room utilization across daily, weekly, and monthly reporting periods.
+List Bullet: Built PostgreSQL data pipelines using jOOQ to organize session and operational data for utilization and financial analysis.
+List Bullet: Implemented AWS Cognito and PostgreSQL synchronization for role-based access, therapist accounts, and administrator profiles within the prototype.
+List Bullet: Designed session lifecycle workflows with state transitions, automated status restoration, granular session activity auditing, and Excel-based data exports using Apache POI.
+List Bullet: Built React 18 and TypeScript dashboards with utilization metrics, Recharts trend visualizations, custom date ranges reporting.
+List Bullet: Developed JUnit 5 and Mockito test suites to validate backend workflows, data processing, and session state transitions.
+Normal: Cognizant Technology Solutions | Software Development Engineer	Feb 2022 – Aug 2024
+List Bullet: Developed Java 11 and Spring Boot microservices for policy onboarding and validation with RESTful APIs, persisting client metadata in MongoDB and relational records in SQL Server, contributing to high-throughput healthcare platform handling 20K+ peak hourly requests.
+List Bullet: Enhanced asynchronous validation workflows using CompletableFuture and ExecutorService for parallel task execution, improving request latency.
+List Bullet: Implemented multi-tier Redis caching strategies with cache warm-up mechanisms to reduce SQL Server load and improve p95 API response latency during peak onboarding traffic.
+List Bullet: Optimized policy audit and reporting queries using Spring Data JPA with Hibernate across PostgreSQL and SQL Server, eliminating N+1 query patterns and reducing database round trips.
+List Bullet: Refactored duplicate business logic across 8+ microservices into reusable Spring Boot service-layer components with centralized exception handling and Spring MVC request validation.
+List Bullet: Implemented Spring Security OAuth2 integration with AWS Cognito, securing REST endpoints with JWT-based authentication and role-based access control for enterprise IAM.
+List Bullet: Developed comprehensive JUnit 5 and Mockito test suites covering business-critical workflows, achieving 70% backend code coverage while reducing production regressions.
+Normal: PROJECTS
+Normal: SkillBeacon -- Skills & Career Intelligence Platform | Link | Python, FastAPI, React, PostgreSQL, Cloudflare R2, Google OAuth2, Gmail API, Neon Auth
+List Bullet: Built a full-stack career platform with a Python/FastAPI backend and React frontend, supporting multi-role student, mentor, and employer workflows with PostgreSQL and SQLAlchemy ORM persistence.
+List Bullet: Implemented Skill Passport with skill proficiency tiers, evidence submissions, and multi-party confidence scoring algorithms based on mentor and employer verification signals.
+List Bullet: Architected an automated job intelligence engine with Next.js SSR data scraping, persistent CSV/JSON deduplication, and an intelligent soft-flagging system for qualification filtering.
+List Bullet: Engineered an asynchronous document generation microservice in FastAPI to dynamically tailor LaTeX templates and compile clean, ATS-compliant DOCX resumes under 2s latency.
+List Bullet: Integrated Google OAuth 2.0 with the Gmail REST API, building a scheduled background daemon that dispatches responsive, mobile-first multipart HTML email digests with direct application links.
+List Bullet: Integrated Cloudflare R2 via its S3-compatible API for resumes, logos, and evidence files, implementing presigned downloads, storage quotas, and Neon Auth JWT role-based access controls.
+Normal: AutoDocs -- Event-Driven MCP & Multi-Agent Documentation System | Python, FastAPI, MCP Protocol, A2A Protocol, RabbitMQ, Supabase, GitHub Webhooks
+List Bullet: Built an event-driven documentation system receiving pull-request webhooks via FastAPI, validating GitHub HMAC-SHA256 signatures, and enforcing idempotent delivery persistence in Supabase.
+List Bullet: Implemented asynchronous job processing with RabbitMQ, separating webhook ingestion from repository analysis and long-running documentation workflows with retry and failure handling.
+List Bullet: Designed Model Context Protocol (MCP) AST code intelligence servers extracting class and function call graphs to provide structural repository context to LLMs.
+List Bullet: Architected dynamic task-routing multi-agent systems using LangGraph to analyze code changes and generate contextual documentation with deterministic verification guardrails.
+Normal: EDUCATION
+Normal: University of South Florida, Tampa, United States	Aug 2024 – May 2026
+Normal: Master of Science, Computer Science
+Normal: CERTIFICATIONS
+Normal: AWS Certified Cloud Practitioner – Amazon, Nov 2023
+Normal: Google Cloud Certified: Associate Cloud Engineer – Google
+Normal: Microsoft Certified: Azure Fundamentals (AZ-900) – Microsoft

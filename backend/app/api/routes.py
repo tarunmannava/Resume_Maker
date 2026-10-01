@@ -13,6 +13,8 @@ from ..models.schemas import (
     RewriteResponse,
     ScoreRequest,
     ScoreResponse,
+    ScreenJobRequest,
+    ScreenJobResponse,
     ScreeningAnswerRequest,
     ScreeningAnswerResponse,
 )
@@ -23,6 +25,7 @@ from ..services.rewrite import rewrite_resume
 from ..services.scoring import score_keywords
 from ..services.job_analyzer import detect_details_with_ai, resolve_industry
 from ..services.screening import answer_screening_question
+from ..services.screening_classifier import screen_job_with_ai
 
 router = APIRouter()
 
@@ -50,7 +53,7 @@ def analyze_job(request: AnalyzeJobRequest) -> AnalyzeJobResponse:
         request.job_description,
         request.company_context,
     )
-    _, detected_role_category = detect_details_with_ai(
+    _, detected_role_category, _ = detect_details_with_ai(
         request.job_description, request.company_context
     )
     if industry_confidence < 0.35:
@@ -125,12 +128,12 @@ def compile_docx(request: CompileRequest):
     return result
 
 
-@router.get("/files/{folder}/{filename}")
-def get_file(folder: str, filename: str):
-    file_path = resolve_generated_file(folder, filename)
-    if not file_path:
+@router.get("/files/{file_path:path}")
+def get_file(file_path: str):
+    target = resolve_generated_file(file_path)
+    if not target:
         raise HTTPException(status_code=404, detail="File not found")
-    return FileResponse(file_path, filename=filename)
+    return FileResponse(target, filename=target.name)
 
 
 @router.post("/screening/answer", response_model=ScreeningAnswerResponse)
@@ -148,3 +151,8 @@ def screening_answer(request: ScreeningAnswerRequest) -> ScreeningAnswerResponse
         answer=answer,
         warning=warning,
     )
+
+
+@router.post("/screen-job", response_model=ScreenJobResponse)
+def screen_job(request: ScreenJobRequest) -> ScreenJobResponse:
+    return screen_job_with_ai(request)

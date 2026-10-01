@@ -152,12 +152,12 @@ def test_java_jd_pipeline_preserves_java_project_and_reorders_cognizant(monkeypa
     res = rewrite_service.rewrite_resume(req)
     output = res.rewritten_latex
 
-    # Cognizant MUST be before USF
+    # USF MUST be before Cognizant (reverse-chronological)
     cog_pos = output.find("Cognizant Technology Solutions")
     usf_pos = output.find("University of South Florida")
     assert cog_pos != -1
     assert usf_pos != -1
-    assert cog_pos < usf_pos
+    assert usf_pos < cog_pos
 
     # Java project preserved (not replaced with QA Assistant)
     assert "Java" in output

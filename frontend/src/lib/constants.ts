@@ -96,7 +96,7 @@ export const sampleResume = `%-------------------------
   {\\Huge \\textbf{Tarun Mannava}} \\\\[4pt]
   \\small
   \\resumeHeadingContact \\\\[4pt]
-  \\textit{Software Engineer with 3+ years of experience building backend and full-stack applications using Java, Spring Boot, Python, and FastAPI. Experienced in REST APIs, microservices, asynchronous processing, distributed systems, and AI-enabled applications.}
+  \\textit{Full Stack Software Engineer with 3+ years of experience building high-throughput microservices in Java 11/17 and Spring Boot alongside responsive React/TypeScript frontends. Proven track record in relational and NoSQL database optimization (PostgreSQL, MongoDB, SQL Server), event-driven messaging with RabbitMQ, and architecting AI solutions with AI-in-the-loop validation and custom AI skills.}
 \\end{center}
 
 \\vspace{-10pt}
@@ -105,15 +105,12 @@ export const sampleResume = `%-------------------------
 \\section{SKILLS}
 \\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
   \\small{\\item{
-    \\textbf{Languages:} Java, Python, TypeScript, JavaScript, SQL \\\\[1pt]
-    \\textbf{Backend:} Spring Boot, Spring MVC, Spring Security, FastAPI, SQLAlchemy, REST APIs, Microservices \\\\[1pt]
-    \\textbf{AI/ML:} LLMs, RAG, LangGraph, LangChain, Prompt Engineering, Embeddings, Hugging Face, Transformers, PyTorch, NLP, Computer Vision, scikit-learn \\\\[1pt]
-    \\textbf{Databases:} PostgreSQL, MongoDB, SQL Server, Redis, jOOQ \\\\[1pt]
-    \\textbf{Messaging \\& Distributed Systems:} RabbitMQ, Asynchronous Processing, Event-Driven Architecture \\\\[1pt]
-    \\textbf{Cloud \\& Infrastructure:} AWS, Cloudflare R2, Docker, Linux, GitHub Actions \\\\[1pt]
-    \\textbf{Authentication:} OAuth2, JWT, Neon Auth \\\\[1pt]
-    \\textbf{Testing:} JUnit, Cucumber, Pytest \\\\[1pt]
-    \\textbf{Frontend:} React, HTML, CSS
+    \\textbf{Languages:} Java (11/17/21), SQL, Python, JavaScript, TypeScript \\\\[1pt]
+    \\textbf{Backend \\& Frameworks:} Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, FastAPI, REST APIs, Microservices \\\\[1pt]
+    \\textbf{AI Developer Tools \\& GenAI:} Claude Code, Cursor, GitHub Copilot, LLMs, RAG, LangGraph, LangChain, Multi-Agent Systems, Model Context Protocol (MCP), Prompt Engineering \\\\[1pt]
+    \\textbf{Messaging \\& Distributed Systems:} RabbitMQ, Redis, CompletableFuture, Asynchronous Processing, Event-Driven Architecture \\\\[1pt]
+    \\textbf{Databases \\& Cloud:} PostgreSQL, MongoDB, SQL Server, AWS, Cloudflare R2, Docker, Linux, GitHub Actions, jOOQ \\\\[1pt]
+    \\textbf{Testing \\& Frontend:} JUnit 5, Mockito, Pytest, Postman, React, HTML5, CSS3
   }}
 \\end{itemize}
 
@@ -122,24 +119,24 @@ export const sampleResume = `%-------------------------
 \\resumeSubHeadingListStart
 
   \\resumeSubheading
-    {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
+    {University of South Florida}{Research Assistant, Software Engineer}{Jan 2025}{May 2026}
   \\resumeItemListStart
-    \\resumeItem{Developed Java 11/Spring Boot microservices for policy onboarding and validation (persisting client metadata in MongoDB), contributing to a service on a distributed insurance platform handling 20K+ hourly transactions.}
-    \\resumeItem{Enhanced asynchronous validation workflows built with CompletableFuture and ExecutorService, improving request latency through parallel task execution.}
-    \\resumeItem{Implemented Redis-backed caching strategies and cache warm-up mechanisms, reducing SQL Server load and improving p95 API response latency by 30\\% during peak onboarding traffic.}
-    \\resumeItem{Optimized policy audit and reporting queries using jOOQ and SQL across PostgreSQL and SQL Server, eliminating N+1 query patterns and reducing database round trips.}
-    \\resumeItem{Contributed to refactoring duplicate business logic across 8+ microservices into reusable Spring service-layer components with centralized exception handling.}
-    \\resumeItem{Implemented Spring Security OAuth2 integration with AWS Cognito by adding new authorization features and securing REST endpoints with JWT-based authentication.}
-    \\resumeItem{Developed JUnit and Cucumber test suites covering business-critical workflows, achieving 70\\% backend code coverage while reducing production regressions.}
+    \\resumeItem{Architected and deployed a production AI \\& Health Literacy web platform across 13 interactive modules in React and TypeScript (serving 60+ biomedical students/faculty), engineering PostgreSQL relational schemas with Spring Data JPA/Hibernate and OAuth2 (PKCE) authentication.}
+    \\resumeItem{Engineered a Java 17 and Spring Boot microservice backend with a real-time dual-model sandbox integrating Groq and Hugging Face LLM APIs for milestone detection and automated semantic rubric evaluation under 2s latency.}
+    \\resumeItem{Built an in-browser evaluation engine using Transformers.js (WASM / ONNX) and TypeScript for local cosine similarity embedding scoring, delivering zero-latency pedagogical feedback.}
+    \\resumeItem{Developed a RAG-based clinical nutrition chatbot for MyFoodRx, implementing a multi-layer safety architecture with query classification, semantic filtering, and rate-limit-aware caching using Google Gemini.}
   \\resumeItemListEnd
 
   \\resumeSubheading
-    {University of South Florida}{Graduate Researcher, Software Engineer}{Jan 2025}{May 2026}
+    {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
   \\resumeItemListStart
-    \\resumeItem{Architected and deployed a production AI \\& Health Literacy web platform for USF SHIELD Lab across 13 interactive modules in React and TypeScript, serving 60+ biomedical students and faculty.}
-    \\resumeItem{Engineered a Python/Flask backend and real-time dual-model sandbox integrating Groq and Hugging Face LLM APIs, featuring semantic grading rubrics, milestone detection, and response caching under 2s latency.}
-    \\resumeItem{Built an in-browser prompt evaluation engine using Transformers.js (WASM / ONNX) for local cosine similarity embedding scoring, providing zero-latency pedagogical feedback on prompt structure and constraints.}
-    \\resumeItem{Integrated Hugging Face OAuth2 (PKCE) for session authentication and engineered Supabase (PostgreSQL) relational schemas and server-side RPCs for secure access code verification, quiz scoring, and deterministic chat logging.}
+    \\resumeItem{Developed Java 11 and Spring Boot microservices for policy onboarding and validation with RESTful APIs, persisting client metadata in MongoDB and relational records in SQL Server, contributing to high-throughput healthcare platform handling 20K+ peak hourly requests.}
+    \\resumeItem{Enhanced asynchronous validation workflows using CompletableFuture and ExecutorService for parallel task execution, improving request latency.}
+    \\resumeItem{Implemented multi-tier Redis caching strategies with cache warm-up mechanisms to reduce SQL Server load and improve p95 API response latency during peak onboarding traffic.}
+    \\resumeItem{Optimized policy audit and reporting queries using jOOQ and Spring Data JPA with Hibernate across PostgreSQL and SQL Server, eliminating N+1 query patterns and reducing database round trips.}
+    \\resumeItem{Refactored duplicate business logic across 8+ microservices into reusable Spring Boot service-layer components with centralized exception handling and Spring MVC request validation.}
+    \\resumeItem{Implemented Spring Security OAuth2 integration with AWS Cognito, securing REST endpoints with JWT-based authentication and role-based access control for enterprise IAM.}
+    \\resumeItem{Developed comprehensive JUnit 5 and Mockito test suites covering business-critical workflows, achieving 70\\% backend code coverage while reducing production regressions.}
   \\resumeItemListEnd
 
 \\resumeSubHeadingListEnd
@@ -148,20 +145,22 @@ export const sampleResume = `%-------------------------
 \\section{PROJECTS}
 \\resumeSubHeadingListStart
 
-  \\resumeProject{SkillBeacon -- Skills and Career Development Platform $|$ \\href{https://skillbeacon-six.vercel.app/}{\\underline{Link}}}{Python, FastAPI, React, PostgreSQL, SQLAlchemy, Cloudflare R2, Neon Auth}
+  \\resumeProject{SkillBeacon -- Skills \\& Career Intelligence Platform $|$ \\href{https://skillbeacon-six.vercel.app/}{\\underline{Link}}}{Python, FastAPI, React, PostgreSQL, Cloudflare R2, Google OAuth2, Gmail API, Neon Auth}
   \\resumeItemListStart
-    \\resumeItem{Built a full-stack skills and career platform with a FastAPI/SQLAlchemy backend and React frontend, supporting student, mentor, employer, and administrator workflows.}
-    \\resumeItem{Implemented a Skill Passport with skill levels, evidence submissions, mentor and employer verification, and confidence scoring based on approved evidence and verification signals.}
-    \\resumeItem{Implemented role-based access controls across profiles, applications, mentorships, employer challenges, opportunities, notifications, and administrative workflows using PostgreSQL and JWT-based authentication.}
-    \\resumeItem{Integrated Cloudflare R2 through its S3-compatible API for resumes, employer logos, skill evidence, and challenge submissions, including file validation, size limits, storage quotas, presigned downloads, and secure file handling.}
+    \\resumeItem{Built a full-stack career platform with a Python/FastAPI backend and React frontend, supporting multi-role student, mentor, and employer workflows with PostgreSQL and SQLAlchemy ORM persistence.}
+    \\resumeItem{Implemented Skill Passport with skill proficiency tiers, evidence submissions, and multi-party confidence scoring algorithms based on mentor and employer verification signals.}
+    \\resumeItem{Architected an automated job intelligence engine with Next.js SSR data scraping, persistent CSV/JSON deduplication, and an intelligent soft-flagging system for qualification filtering.}
+    \\resumeItem{Engineered an asynchronous document generation microservice in FastAPI to dynamically tailor LaTeX templates and compile clean, ATS-compliant DOCX resumes under 2s latency.}
+    \\resumeItem{Integrated Google OAuth 2.0 with the Gmail REST API, building a scheduled background daemon that dispatches responsive, mobile-first multipart HTML email digests with direct application links.}
+    \\resumeItem{Integrated Cloudflare R2 via its S3-compatible API for resumes, logos, and evidence files, implementing presigned downloads, storage quotas, and Neon Auth JWT role-based access controls.}
   \\resumeItemListEnd
 
-  \\resumeProject{AutoDocs -- PR-Triggered Multi-Agent Documentation System}{Python, FastAPI, GitHub Webhooks, Supabase, RabbitMQ}
+  \\resumeProject{AutoDocs -- Event-Driven MCP \\& Multi-Agent Documentation System}{Python, FastAPI, MCP Protocol, A2A Protocol, RabbitMQ, Supabase, GitHub Webhooks}
   \\resumeItemListStart
-    \\resumeItem{Built an event-driven PR-triggered documentation system that receives merged pull-request events through a FastAPI webhook and validates GitHub HMAC-SHA256 signatures.}
-    \\resumeItem{Implemented idempotent webhook processing using GitHub delivery IDs, persisting webhook deliveries and documentation runs in Supabase before publishing pull-request jobs to RabbitMQ.}
+    \\resumeItem{Built an event-driven documentation system receiving pull-request webhooks via FastAPI, validating GitHub HMAC-SHA256 signatures, and enforcing idempotent delivery persistence in Supabase.}
     \\resumeItem{Implemented asynchronous job processing with RabbitMQ, separating webhook ingestion from repository analysis and long-running documentation workflows with retry and failure handling.}
-    \\resumeItem{Implemented a conditional multi-agent workflow that analyzes pull-request changes, routes relevant changes to specialized documentation agents, aggregates structured outputs, performs consistency validation, and generates documentation updates.}
+    \\resumeItem{Designed Model Context Protocol (MCP) AST code intelligence servers extracting class and function call graphs to provide structural repository context to LLMs.}
+    \\resumeItem{Architected dynamic task-routing multi-agent systems using LangGraph to analyze code changes and generate contextual documentation with deterministic verification guardrails.}
   \\resumeItemListEnd
 
 \\resumeSubHeadingListEnd
@@ -172,14 +171,6 @@ export const sampleResume = `%-------------------------
   \\resumeSubheading
     {University of South Florida, Tampa, United States}{Master of Science, Computer Science}{Aug 2024}{May 2026}
 \\resumeSubHeadingListEnd
-
-%---------- CERTIFICATIONS ----------
-\\section{CERTIFICATIONS}
-\\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
-  \\small{\\item{
-    AWS Certified Cloud Practitioner -- Amazon, Nov 2023
-  }}
-\\end{itemize}
 
 %-------------------------------------------
 \\end{document}`;

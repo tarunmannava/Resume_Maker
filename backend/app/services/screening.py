@@ -1,7 +1,5 @@
 import logging
 
-from google import genai
-from google.genai import types
 from openai import OpenAI
 
 from ..core.config import get_settings
@@ -23,38 +21,26 @@ Rules:
 
 def _call_llm(system: str, prompt: str, max_tokens: int = 2048) -> str | None:
     settings = get_settings()
-    provider = settings.ai_provider.lower().strip()
 
     try:
-        if provider == "gemini" and settings.gemini_api_key:
-            client = genai.Client(api_key=settings.gemini_api_key)
-            response = client.models.generate_content(
-                model=settings.gemini_model,
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    system_instruction=system,
-                    temperature=0.35,
-                    max_output_tokens=max_tokens,
-                ),
-            )
-            return response.text
-
-        if provider == "openai" and settings.openai_api_key:
+        if settings.openai_api_key:
             client = OpenAI(
                 api_key=settings.openai_api_key,
                 base_url=settings.openai_base_url,
             )
+            is_preset = bool(settings.openai_model and settings.openai_model.startswith("@"))
+            messages = []
+            if not is_preset:
+                messages.append({"role": "system", "content": system})
+            messages.append({"role": "user", "content": prompt})
+
             kwargs = {
                 "model": settings.openai_model,
-                "messages": [
-                    {"role": "system", "content": system},
-                    {"role": "user", "content": prompt},
-                ],
-                "temperature": 0.35,
-                "max_tokens": max_tokens,
+                "messages": messages,
             }
-            if settings.openai_base_url and "openrouter.ai" in settings.openai_base_url:
-                kwargs["extra_body"] = {"reasoning": {"enabled": True}}
+            if not is_preset:
+                kwargs["temperature"] = 0.35
+                kwargs["max_tokens"] = max_tokens
             completion = client.chat.completions.create(**kwargs)
             return completion.choices[0].message.content
     except Exception as exc:

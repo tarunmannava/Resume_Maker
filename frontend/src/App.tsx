@@ -14,8 +14,10 @@ import type {
   RewriteMode,
   RewriteResponse,
   CompileResponse,
+  QueueJob,
 } from "./lib/api";
 import { sampleResume } from "./lib/constants";
+import { JobQueueDashboard } from "./components/JobQueueDashboard";
 import "./styles.css";
 
 const sampleJob = `Required: Python, Django, PostgreSQL, REST APIs, AWS.
@@ -265,7 +267,7 @@ export default function App() {
   const [confirmedSkills, setConfirmedSkills] = useState("");
   const [bannedSkills, setBannedSkills] = useState("");
   const [rewriteMode, setRewriteMode] = useState<RewriteMode>("transferable");
-  const [targetThreshold, setTargetThreshold] = useState(75);
+  const [targetThreshold, setTargetThreshold] = useState(100);
   const [alignTitles, setAlignTitles] = useState(false);
   const [result, setResult] = useState<RewriteResponse | null>(null);
   const [backendOnline, setBackendOnline] = useState<boolean | null>(null);
@@ -275,6 +277,27 @@ export default function App() {
   const [selectedMissingSkills, setSelectedMissingSkills] = useState<string[]>(
     [],
   );
+  const [mainTab, setMainTab] = useState<"queue" | "studio">("queue");
+
+  function handleOpenInStudio(job: QueueJob) {
+    if (job.description_text) {
+      setJobDescription(job.description_text);
+    }
+    if (job.company) {
+      setCompanyName(job.company);
+    }
+    if (job.title) {
+      setRoleName(job.title);
+    }
+    if (
+      job.primary_stack &&
+      ["dotnet", "java", "node", "python", "ai"].includes(job.primary_stack)
+    ) {
+      setSelectedStackOverride(job.primary_stack as any);
+    }
+    setMainTab("studio");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   async function handleAnalyzeJob() {
     if (jobDescription.trim().length < 20 || analyzingJob) return;
@@ -478,7 +501,28 @@ export default function App() {
         </div>
       </header>
 
-      <div className="workflow-bar" aria-label="Resume workflow">
+      <nav className="main-tab-nav" aria-label="Main Navigation">
+        <button
+          type="button"
+          className={`main-tab-btn ${mainTab === "queue" ? "active" : ""}`}
+          onClick={() => setMainTab("queue")}
+        >
+          <span>🎯</span> Job Radar &amp; Queue
+        </button>
+        <button
+          type="button"
+          className={`main-tab-btn ${mainTab === "studio" ? "active" : ""}`}
+          onClick={() => setMainTab("studio")}
+        >
+          <span>📝</span> Manual Rewriter Studio
+        </button>
+      </nav>
+
+      {mainTab === "queue" ? (
+        <JobQueueDashboard onOpenInStudio={handleOpenInStudio} />
+      ) : (
+        <>
+          <div className="workflow-bar" aria-label="Resume workflow">
         <div className={`workflow-step active`}>
           <span>01</span>
           <div><strong>Prepare</strong><small>Job + resume</small></div>
@@ -895,6 +939,8 @@ export default function App() {
             </div>
           </div>
         </section>
+      )}
+        </>
       )}
 
     </main>

@@ -1,0 +1,185 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{mathptmx}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{anyfontsize}
+
+\geometry{
+  a4paper,
+  top=0.35in,
+  bottom=0.35in,
+  left=0.4in,
+  right=0.4in
+}
+
+\setstretch{1.0}
+\renewcommand{\normalsize}{\fontsize{10}{12}\selectfont}
+\renewcommand{\small}{\fontsize{10}{12}\selectfont}
+\normalsize
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-10pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+\newcommand{\resumeSep}{\textbullet}
+
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+\newcommand{\resumeSubheading}[4]{%
+  \vspace{0pt}\item
+  \textbf{#1} \\
+  \textit{\small #2} \\
+  \small #3 -- #4
+  \vspace{2pt}
+}
+
+\newcommand{\resumeProject}[2]{%
+  \vspace{0pt}\item[]
+  \textbf{#1} \\
+  \small\textit{#2}
+  \vspace{2pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+\newcommand{\resumeItemListStart}{%
+  \begin{itemize}[leftmargin=0.15in, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt, label={$\bullet$}]%
+}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{2pt}}
+\newcommand{\resumeHeadingContact}{%
+  Seattle, WA \hspace{0.4em}\resumeSep\hspace{0.4em}+1 (656) 203-7074 \hspace{0.4em}\resumeSep\hspace{0.4em}\href{mailto:mannava.tarun34@gmail.com}{mannava.tarun34@gmail.com} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://linkedin.com/in/tarunmannava}{linkedin.com/in/tarunmannava} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://github.com/tarunmannava}{github.com/tarunmannava}%
+}
+
+\begin{document}
+
+\begin{center}
+  {\Huge \textbf{Tarun Mannava}} \\[2pt]
+  \textbf{Full Stack Software Engineer} \\[4pt]
+  \small
+  \resumeHeadingContact \\[4pt]
+  \textit{AI \& Software Engineer with 4+ years of experience building scalable backend services and production agentic AI systems across Node.js, Python, and AWS. Specializing in multi-agent orchestration (Claude Code, LangGraph, CrewAI, AWS Bedrock), Model Context Protocol (MCP) server development, and developer productivity tooling, with hands-on experience in custom agent harnesses, enterprise API integrations, human-in-the-loop workflows, and LLM observability with LangSmith and CloudWatch.}
+\end{center}
+
+\vspace{-10pt}
+
+\section{SKILLS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    \textbf{Languages:} TypeScript, JavaScript (Node.js), Python, SQL, Java \\[1pt]
+    \textbf{Backend \& Tooling:} Node.js, Express.js, NestJS, FastAPI, REST APIs, WebSockets, Microservices, Event-Driven Architecture, CLI Tooling, Pydantic, Prisma ORM \\[1pt]
+    \textbf{Frontend:} React 18, Next.js, TypeScript, HTML5, CSS3 \\[1pt]
+    \textbf{GenAI \& Agents:} Claude Code, AWS Bedrock, CrewAI, LangGraph, LangChain, Model Context Protocol (MCP), Tool Calling, Agentic RAG, Human-in-the-Loop, Prompt Engineering \\[1pt]
+    \textbf{LLMOps:} LangSmith (Tracing, Evals, Datasets), RAGAS, LLM-as-Judge, Guardrails, Cost and Latency Tracking \\[1pt]
+    \textbf{Cloud \& Data:} AWS (Bedrock, Lambda, EC2, S3, RDS, Cognito, CloudWatch, API Gateway), GCP, Azure, Docker, Kubernetes, GitHub Actions, CI/CD, Redis, RabbitMQ, PostgreSQL (pgvector), Supabase, MongoDB, SQL Server, Linux \\[1pt]
+    \textbf{Testing \& Practices:} Jest, Supertest, pytest, JUnit 5, Mockito, OAuth2 (PKCE), JWT, RBAC, Agile/Scrum, Code Review, Git
+  }}
+\end{itemize}
+
+\section{EXPERIENCE}
+\resumeSubHeadingListStart
+
+  \resumeSubheading
+    {University of South Florida}{Graduate Research Assistant, Software Engineer}{Jan 2025}{May 2026}
+  \resumeItemListStart
+    \resumeItem{Built and maintained a production AI \& Health Literacy web platform for the USF SHIELD Lab: 13 interactive React/TypeScript modules on Node.js and TypeScript backend services with Express and Prisma ORM, serving 60+ biomedical students and faculty.}
+    \resumeItem{Engineered a real-time dual-model LLM sandbox in Node.js integrating AWS Bedrock and Hugging Face APIs with WebSocket/Socket.io streaming, semantic evaluation rubrics, and Redis caching that keeps response latency under 2 seconds.}
+    \resumeItem{Developed a RAG-based clinical nutrition chatbot for MyFoodRx with a multi-layer safety architecture: query classification, semantic filtering, cosine-similarity retrieval, and rate-limit-aware caching in front of the LLM provider.}
+    \resumeItem{Implemented an in-browser prompt evaluation engine with Transformers.js (WASM/ONNX) that computes cosine-similarity embedding scores locally for zero-latency, privacy-preserving feedback.}
+    \resumeItem{Built OAuth2 (PKCE) authentication, AWS S3/EC2 asset and CloudWatch telemetry pipelines, and Supabase PostgreSQL schemas with server-side RPCs for deterministic chat logging and quiz scoring.}
+    \resumeItem{Wrote Jest and Supertest suites for API endpoints and data-access paths, and built CLI developer harnesses and GitHub Actions workflows that shortened module testing and deployment for the research team.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+    {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
+  \resumeItemListStart
+    \resumeItem{Developed Java 11 and Spring Boot microservices for policy onboarding and validation on a healthcare insurance platform, exposing REST APIs and persisting client metadata in MongoDB and relational records in SQL Server at 20K+ peak hourly requests.}
+    \resumeItem{Eliminated N+1 query patterns in policy audit and reporting endpoints by replacing per-row lookups with batched Spring Data JPA/Hibernate fetches and composite indexes across PostgreSQL and SQL Server, collapsing dozens of queries per request into single-digit round trips.}
+    \resumeItem{Implemented multi-tier Redis caching with deploy-time warm-up for policy reference data, moving the bulk of read traffic off SQL Server during peak onboarding windows.}
+    \resumeItem{Parallelized validation workflows with CompletableFuture and ExecutorService, replacing sequential downstream calls with concurrent execution so end-to-end validation time tracked the slowest validator instead of the sum.}
+    \resumeItem{Refactored duplicate business logic across 8+ microservices into shared Spring Boot service-layer components with centralized exception handling and request validation.}
+    \resumeItem{Secured REST endpoints with Spring Security OAuth2 and AWS Cognito, implementing JWT authentication and role-based access control on AWS infrastructure (EC2, S3, RDS).}
+    \resumeItem{Developed JUnit 5 and Mockito test suites covering business-critical onboarding and validation workflows, raising backend coverage to 70\%.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\section{PROJECTS}
+\resumeSubHeadingListStart
+
+  \resumeProject{SkillBeacon: Skills \& Career Intelligence Platform $|$ \href{https://skillbeacon-six.vercel.app/}{skillbeacon-six.vercel.app}}{Node.js, TypeScript, Next.js, React, Python, FastAPI, PostgreSQL, Prisma, Cloudflare R2, Google OAuth2}
+  \resumeItemListStart
+    \resumeItem{Built a full-stack career platform with Node.js/TypeScript and Python/FastAPI backend services and a React/Next.js frontend, supporting student, mentor, and employer roles with PostgreSQL and Prisma ORM persistence.}
+    \resumeItem{Implemented a Skill Passport with proficiency tiers, evidence submissions, and multi-party confidence scoring driven by mentor and employer verification signals.}
+    \resumeItem{Built an automated job intelligence engine with Next.js server-side scraping, persistent CSV/JSON deduplication, and soft-flagging for qualification filtering.}
+    \resumeItem{Engineered an asynchronous FastAPI document service that tailors LaTeX templates and compiles ATS-compliant DOCX resumes in under 2 seconds.}
+  \resumeItemListEnd
+
+  \resumeProject{AutoDocs: Event-Driven MCP \& Multi-Agent Documentation System}{Node.js, TypeScript, Python, FastAPI, MCP, LangGraph, RabbitMQ, WebSockets, Supabase, GitHub Webhooks, LangSmith}
+  \resumeItemListStart
+    \resumeItem{Built an event-driven documentation platform that receives GitHub pull-request webhooks, validates HMAC-SHA256 signatures, and enforces idempotent delivery persistence in Supabase.}
+    \resumeItem{Decoupled webhook ingestion from repository AST analysis and long-running documentation jobs with RabbitMQ workers, including retry and failure handling, and streamed job progress to clients over WebSockets.}
+    \resumeItem{Designed custom MCP code-intelligence servers that extract class and function call graphs via AST analysis to give LLMs structural codebase context.}
+    \resumeItem{Built LangGraph task-routing multi-agent workflows with Claude Code developer harnesses that analyze code diffs and generate documentation under deterministic verification guardrails, traced and scored in LangSmith.}
+  \resumeItemListEnd
+
+  \resumeProject{ProofStack: MCP-Backed Corrective Retrieval Graph}{Python, Node.js, FastAPI, LangGraph, MCP, PostgreSQL (pgvector), Tavily, LangSmith}
+  \resumeItemListStart
+    \resumeItem{Built a corrective RAG system that answers questions over internal docs by routing all retrieval through MCP tool servers, falling back to web search only when graded evidence is insufficient.}
+    \resumeItem{Implemented a LangGraph retrieve-grade-rewrite loop that rewrites ambiguous queries, grades document relevance, and regenerates answers until a grounding threshold is met.}
+    \resumeItem{Designed three MCP servers as LangChain tools: vector\_search over PostgreSQL pgvector (HNSW) with dense-lexical hybrid ranking, docs\_sql for structured records, and web\_search via Tavily.}
+    \resumeItem{Enforced citation-required generation with grounding-score gates and Pydantic-validated RAG state, tracking per-route cost and latency in LangSmith.}
+  \resumeItemListEnd
+
+  \resumeProject{JobPilot: Conversational Job-Search \& Ranking Agent}{Python, LangGraph, LangChain, MCP, Dice MCP, LangSmith, Human-in-the-Loop}
+  \resumeItemListStart
+    \resumeItem{Built a conversational agent that extracts resume criteria and job preferences through natural-language dialogue and requires human-in-the-loop confirmation before executing downstream searches.}
+    \resumeItem{Integrated the Dice MCP server as a tool-use client to retrieve live job listings, validating tool schemas and handling graceful fallbacks.}
+    \resumeItem{Implemented a resume-to-listing ranking step that scores retrieved opportunities against parsed resumes and candidate constraints, with LangSmith pass/fail evaluation of tool-call correctness per run.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\section{EDUCATION}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {University of South Florida, Tampa}{Master of Science, Computer Science}{Aug 2024}{May 2026}
+\resumeSubHeadingListEnd
+
+\section{CERTIFICATIONS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    AWS Certified AI Practitioner (AIF-C01) - Amazon Web Services \\[1pt]
+    AWS Certified Cloud Practitioner - Amazon Web Services, Nov 2023 \\[1pt]
+    Microsoft Certified: Azure Fundamentals (AZ-900) - Microsoft
+  }}
+\end{itemize}
+
+\end{document}

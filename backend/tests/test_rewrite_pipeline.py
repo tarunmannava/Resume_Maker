@@ -131,3 +131,33 @@ def test_generate_with_openai_handles_empty_choices(monkeypatch):
     content, error = rewrite_service.generate_with_openai("prompt")
     assert content is None
     assert error is not None
+
+
+def test_clean_professional_title_normalizes_raw_jd_titles():
+    cases = [
+        ("Software Engineer - Ruby", "java", "Software Engineer"),
+        ("Full Stack Software Engineer, Manufacturing Systems ", "python", "Full Stack Software Engineer"),
+        ("Software Engineer, Manufacturing Infrastructure", "python", "Software Engineer"),
+        ("Software Engineer (Starlink Ground Network)", "python", "Software Engineer"),
+        ("Full-Stack Software Engineer, Reinforcement Learning", "ai", "AI Engineer"),
+        ("Software Engineer - Applied AI ", "ai", "AI Engineer"),
+        ("Cloud Software Engineer (Azure)", "dotnet", "Software Engineer"),
+        ("Lead Software Engineer - SQL/Python/Databricks", "python", "Software Engineer"),
+        ("Software Developer", "python", "Software Developer"),
+    ]
+    for raw, stack, expected in cases:
+        assert rewrite_service.clean_professional_title(raw, stack) == expected
+
+
+def test_enforce_clean_header_title_sanitizes_latex_header():
+    dirty_latex = (
+        r"\begin{center}" + "\n"
+        r"  {\Huge \textbf{Tarun Mannava}} \\[2pt]" + "\n"
+        r"  \textbf{Software Engineer - Ruby} \\[4pt]" + "\n"
+        r"  \small" + "\n"
+        r"\end{center}"
+    )
+    cleaned = rewrite_service.enforce_clean_header_title(dirty_latex, target_stack="java", role_name="Software Engineer - Ruby")
+    assert r"\textbf{Software Engineer} \\[4pt]" in cleaned
+    assert "Ruby" not in cleaned
+

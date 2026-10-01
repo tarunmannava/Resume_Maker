@@ -110,11 +110,11 @@ def test_java_stack_end_to_end(base_latex, monkeypatch, tmp_path):
     res = rewrite_resume(req)
     latex = res.rewritten_latex
 
-    # 1. Verify Cognizant appears before USF for Java roles
+    # 1. Verify USF appears before Cognizant for all roles (reverse-chronological)
     cog_idx = latex.find("Cognizant Technology Solutions")
     usf_idx = latex.find("University of South Florida")
     assert cog_idx != -1 and usf_idx != -1
-    assert cog_idx < usf_idx
+    assert usf_idx < cog_idx
 
     # 2. Verify Cognizant preserved as Java / Spring Boot
     assert "Spring Boot" in latex

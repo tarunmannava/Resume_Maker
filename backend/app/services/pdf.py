@@ -1,6 +1,7 @@
 import re
 import shutil
 import subprocess
+from datetime import datetime
 from pathlib import Path
 
 from pydantic import BaseModel
@@ -8,7 +9,7 @@ from pydantic import BaseModel
 class CompileResponse(BaseModel):
     success: bool
     filename_base: str
-    tex_path: str
+    tex_path: str | None = None
     pdf_path: str | None = None
     docx_path: str | None = None
     docx_download_url: str | None = None
@@ -46,14 +47,14 @@ WINDOWS_RESERVED_NAMES = {
 }
 
 
-def sanitize_filename_part(value: str, default: str = "") -> str:
+def sanitize_filename_part(value: str, default: str = "", max_length: int = 255) -> str:
     cleaned = re.sub(r"[^A-Za-z0-9]+", "_", value.strip())
     cleaned = re.sub(r"_+", "_", cleaned).strip("_")
     if not cleaned:
         cleaned = default
     if cleaned.upper() in WINDOWS_RESERVED_NAMES:
         cleaned = f"{cleaned}_File"
-    return cleaned[:80]
+    return cleaned[:max_length]
 
 
 def build_filename_base(candidate_name: str, company_name: str = "", role_name: str = "") -> str:
@@ -213,51 +214,83 @@ def compile_latex_to_pdf(
     )
 
 
+def sanitize_date_folder(value: str) -> str:
+    cleaned = re.sub(r"[^0-9\-]+", "", value.strip()).strip("-")
+    return cleaned or datetime.now().strftime("%Y-%m-%d")
+
+
 def compile_latex_to_docx(
     latex_code: str,
     candidate_name: str,
     company_name: str,
     role_name: str,
+    date_str: str | None = None,
 ) -> CompileResponse:
     GENERATED_ROOT.mkdir(parents=True, exist_ok=True)
-    filename_base = build_filename_base(candidate_name, company_name, role_name)
-    output_dir = GENERATED_ROOT / filename_base
+    if not date_str:
+        date_str = datetime.now().strftime("%Y-%m-%d")
+    date_folder = sanitize_date_folder(date_str)
+    output_dir = GENERATED_ROOT / date_folder
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    tex_path = output_dir / f"{filename_base}.tex"
+    filename_base = build_filename_base(candidate_name, company_name, role_name)
     docx_path = output_dir / f"{filename_base}.docx"
-    tex_path.write_text(latex_code, encoding="utf-8")
+    tex_path = output_dir / f"{filename_base}.tex"
 
     errors: list[str] = []
     warnings: list[str] = []
     try:
         from .docx import convert_tex_to_docx
-        convert_tex_to_docx(tex_path, docx_path)
+        convert_tex_to_docx(latex_code, docx_path)
     except Exception as e:
         errors.append(f"DOCX conversion failed: {e}")
+    finally:
+        # Guarantee no .tex files linger in the output directory
+        if tex_path.exists():
+            tex_path.unlink(missing_ok=True)
 
     success = docx_path.exists()
     return CompileResponse(
         success=success,
         filename_base=filename_base,
-        tex_path=safe_relative(tex_path),
+        tex_path=None,
         docx_path=safe_relative(docx_path) if success else None,
-        docx_download_url=f"/api/files/{filename_base}/{filename_base}.docx" if success else None,
+        docx_download_url=f"/api/files/{date_folder}/{filename_base}.docx" if success else None,
         errors=errors,
         warnings=warnings,
     )
 
 
-def resolve_generated_file(folder: str, filename: str) -> Path | None:
-    safe_folder = sanitize_filename_part(folder)
-    safe_filename = (
-        sanitize_filename_part(Path(filename).stem) + Path(filename).suffix.lower()
-    )
-    candidate = (GENERATED_ROOT / safe_folder / safe_filename).resolve()
+def resolve_generated_file(*path_segments: str) -> Path | None:
+    """Safely resolves a generated file by single string path (e.g. '2026-09-27/file.docx')
+    or multiple segments (e.g. '2026-09-27', 'file.docx') within GENERATED_ROOT.
+    Prevents path traversal attacks.
+    """
+    if not path_segments:
+        return None
+
+    parts: list[str] = []
+    for seg in path_segments:
+        if not seg:
+            continue
+        cleaned_seg = str(seg).replace("\\", "/")
+        for p in cleaned_seg.split("/"):
+            p_strip = p.strip()
+            if p_strip and p_strip != ".":
+                if p_strip == "..":
+                    return None  # Path traversal attempt
+                parts.append(p_strip)
+
+    if not parts:
+        return None
+
+    candidate = GENERATED_ROOT.joinpath(*parts).resolve()
     try:
         candidate.relative_to(GENERATED_ROOT.resolve())
     except ValueError:
         return None
-    if not candidate.exists() or not candidate.is_file():
-        return None
-    return candidate
+
+    if candidate.exists() and candidate.is_file():
+        return candidate
+
+    return None

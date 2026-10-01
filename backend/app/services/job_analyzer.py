@@ -46,6 +46,25 @@ def detect_industry_with_keywords(
     return result.industry, result.confidence
 
 
+def normalize_target_stack(stack: str | None) -> str | None:
+    if not stack:
+        return None
+    s = stack.strip().lower()
+    if s in ("dotnet", "java", "node", "python", "ai"):
+        return s
+    if s in ("c#", "csharp", ".net", "c#/.net", "asp.net"):
+        return "dotnet"
+    if s in ("typescript", "javascript", "react", "fullstack", "full stack", "frontend"):
+        return "node"
+    if s in ("genai", "generative ai", "llm", "llms", "rag", "ml", "machine learning"):
+        return "ai"
+    if s in ("spring", "spring boot", "jvm"):
+        return "java"
+    if s in ("fastapi", "django", "flask"):
+        return "python"
+    return None
+
+
 def detect_details_with_keywords(text: str) -> tuple[str | None, str]:
     # 1. Detect Industry (weighted signals — do not use bare "health", "auth", etc.)
     detected_industry, _ = detect_industry_with_keywords(text, None)
@@ -59,11 +78,12 @@ def detect_details_with_keywords(text: str) -> tuple[str | None, str]:
             score += len(re.findall(pattern, text_lower))
         role_scores[role] = score
         
-    detected_role = "Software Engineer" # Default
+    detected_role = "Software Engineer"  # Default
     if role_scores and max(role_scores.values()) > 0:
         detected_role = max(role_scores, key=role_scores.get)
         
     return detected_industry, detected_role
+
 
 def clean_json_text(text: str) -> str:
     # Strip markdown fences if present
@@ -78,7 +98,10 @@ def clean_json_text(text: str) -> str:
             text = "\n".join(lines).strip()
     return text
 
-def detect_details_with_ai(job_description: str, company_context: str | None = None) -> tuple[str | None, str]:
+
+def detect_details_with_ai(
+    job_description: str, company_context: str | None = None
+) -> tuple[str | None, str, str | None]:
     settings = get_settings()
     provider = settings.ai_provider.lower().strip()
     
@@ -88,19 +111,28 @@ def detect_details_with_ai(job_description: str, company_context: str | None = N
     system_instruction = (
         "You are a recruiting intelligence assistant. Analyze the job description and optional company context.\n"
         "1. Identify the role category. It MUST be exactly one of: 'Software Engineer', 'AI Engineer', 'AI Support', 'ML Engineer'.\n"
-        f"2. Identify the company's PRIMARY business industry. It MUST be exactly one of: {industry_enum}, or null.\n"
+        "2. Identify the primary technical stack. It MUST be exactly one of: 'python', 'java', 'dotnet', 'node', 'ai', or null if not clear.\n"
+        "   - 'dotnet': C#, .NET, ASP.NET Core, Entity Framework, SQL Server, etc.\n"
+        "   - 'java': Java, Spring Boot, Spring MVC, Hibernate, JVM microservices, etc.\n"
+        "   - 'node': Node.js, TypeScript, JavaScript, React, Next.js, Express, etc.\n"
+        "   - 'python': Python, FastAPI, Django, Flask, AsyncIO, SQLAlchemy, etc.\n"
+        "   - 'ai': Generative AI, LLMs, RAG, LangChain, LangGraph, Machine Learning, Deep Learning, etc.\n"
+        f"3. Identify the company's PRIMARY business industry. It MUST be exactly one of: {industry_enum}, or null.\n"
         "   - Infer from what the company sells or regulates (e.g. hospital → Healthcare, bank → Fintech), NOT from generic tech words.\n"
         "   - Do NOT classify as Healthcare for 'health checks' or uptime. Do NOT classify as Cybersecurity for app login/JWT/Spring Security alone.\n"
         "   - Do NOT classify as Edtech for machine learning / deep learning. Return null if unclear.\n"
         "Return valid JSON only, no markdown. Example:\n"
-        '{"role_category": "Software Engineer", "industry": "Healthcare", "confidence": 0.9}'
+        '{"role_category": "Software Engineer", "industry": "Healthcare", "target_stack": "python", "confidence": 0.9}'
     )
     
     prompt = f"Job Description:\n{job_description}\n\nCompany Context:\n{company_context or 'None'}"
     
     try:
         if provider == "gemini" and settings.gemini_api_key:
-            client = genai.Client(api_key=settings.gemini_api_key)
+            client = genai.Client(
+                api_key=settings.gemini_api_key,
+                http_options=types.HttpOptions(timeout=5000),
+            )
             response = client.models.generate_content(
                 model=settings.gemini_model,
                 contents=prompt,
@@ -113,31 +145,39 @@ def detect_details_with_ai(job_description: str, company_context: str | None = N
             raw_text = clean_json_text(response.text or "")
             data = json.loads(raw_text)
             industry = normalize_industry(data.get("industry"))
-            return industry, data.get("role_category", "Software Engineer")
+            stack = normalize_target_stack(data.get("target_stack"))
+            return industry, data.get("role_category", "Software Engineer"), stack
 
         elif provider == "openai" and settings.openai_api_key:
             client = OpenAI(
                 api_key=settings.openai_api_key,
                 base_url=settings.openai_base_url,
+                timeout=5.0,
             )
+            is_preset = bool(settings.openai_model and settings.openai_model.startswith("@"))
+            messages = []
+            if not is_preset:
+                messages.append({"role": "system", "content": system_instruction})
+            messages.append({"role": "user", "content": prompt})
+
             completion = client.chat.completions.create(
                 model=settings.openai_model,
-                messages=[
-                    {"role": "system", "content": system_instruction},
-                    {"role": "user", "content": prompt},
-                ],
+                messages=messages,
                 temperature=0.1,
                 max_tokens=150,
             )
             raw_text = clean_json_text(completion.choices[0].message.content or "")
             data = json.loads(raw_text)
             industry = normalize_industry(data.get("industry"))
-            return industry, data.get("role_category", "Software Engineer")
+            stack = normalize_target_stack(data.get("target_stack"))
+            return industry, data.get("role_category", "Software Engineer"), stack
 
     except Exception:
         pass  # Fallback below
 
-    return detect_details_with_keywords(job_description + "\n" + (company_context or ""))
+    ind, role = detect_details_with_keywords(job_description + "\n" + (company_context or ""))
+    stack = detect_target_stack_with_keywords(job_description + "\n" + (company_context or ""))
+    return ind, role, stack
 
 
 def resolve_industry(
@@ -153,7 +193,8 @@ def resolve_industry(
         return user_selected.strip(), 1.0, "user"
 
     kw_result = detect_industry_from_text(job_description, company_context)
-    ai_industry, _ = detect_details_with_ai(job_description, company_context)
+    ai_details = detect_details_with_ai(job_description, company_context)
+    ai_industry = ai_details[0]
     ai_norm = normalize_industry(ai_industry)
 
     # High-confidence keyword match wins (fast, fewer false positives than before)
@@ -174,22 +215,13 @@ def resolve_industry(
     return "General Technology", 0.0, "default"
 
 
-def detect_target_stack(
+def detect_target_stack_with_keywords(
     job_description: str,
-    user_override: str | None = None,
     role_name: str | None = None,
 ) -> str:
     """
-    Detects target technical stack (dotnet, java, node, python, ai) from job description,
-    role_name, or respects manual user_override.
+    Detects target technical stack (dotnet, java, node, python, ai) via regex patterns.
     """
-    if user_override:
-        ov = user_override.strip().lower()
-        if ov in ("dotnet", "java", "node", "python", "ai"):
-            return ov
-        if ov in ("c#", "csharp", ".net"):
-            return "dotnet"
-
     if role_name:
         rn_lower = role_name.lower()
         if any(p in rn_lower for p in (".net", "c#", "csharp", "dotnet", "asp.net")):
@@ -200,6 +232,8 @@ def detect_target_stack(
             return "node"
         if any(p in rn_lower for p in ("ai engineer", "genai", "llm", "ai platform", "machine learning", "ml engineer")):
             return "ai"
+        if "python" in rn_lower:
+            return "python"
 
     combined_text = (job_description + "\n" + (role_name or "")).lower()
     
@@ -239,5 +273,48 @@ def detect_target_stack(
         return max_stack
 
     return "python"
+
+
+def detect_target_stack(
+    job_description: str,
+    user_override: str | None = None,
+    role_name: str | None = None,
+    company_context: str | None = None,
+    use_ai: bool = True,
+) -> str:
+    """
+    Detects target technical stack (dotnet, java, node, python, ai) from job description,
+    role_name, or respects manual user_override. Uses AI model classification first if enabled,
+    falling back to keyword/pattern detection.
+    """
+    if user_override:
+        ov = normalize_target_stack(user_override)
+        if ov:
+            return ov
+
+    if role_name:
+        rn_lower = role_name.lower()
+        if any(p in rn_lower for p in (".net", "c#", "csharp", "dotnet", "asp.net")):
+            return "dotnet"
+        if any(p in rn_lower for p in ("java", "spring")):
+            return "java"
+        if any(p in rn_lower for p in ("node", "react", "frontend", "full stack", "fullstack", "typescript")):
+            return "node"
+        if any(p in rn_lower for p in ("ai engineer", "genai", "llm", "ai platform", "machine learning", "ml engineer")):
+            return "ai"
+        if "python" in rn_lower:
+            return "python"
+
+    if use_ai:
+        try:
+            ai_context = f"Target Role: {role_name}\n{company_context}" if role_name else company_context
+            _, _, ai_stack = detect_details_with_ai(job_description, ai_context)
+            norm_ai_stack = normalize_target_stack(ai_stack)
+            if norm_ai_stack:
+                return norm_ai_stack
+        except Exception:
+            pass
+
+    return detect_target_stack_with_keywords(job_description, role_name=role_name)
 
 

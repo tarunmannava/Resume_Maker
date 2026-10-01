@@ -207,3 +207,56 @@ def test_docx_real_resume_file_conversion(tmp_path: Path):
     assert "SkillBeacon" in full_text
     assert "CERTIFICATIONS" in full_text
     assert "AWS Certified Cloud Practitioner" in full_text
+
+
+def test_date_foldered_docx_compilation_and_download():
+    from fastapi.testclient import TestClient
+    from backend.app.main import app
+    from backend.app.services.pdf import compile_latex_to_docx
+
+    res = compile_latex_to_docx(
+        latex_code=RESUME_TEX,
+        candidate_name="Tarun Mannava",
+        company_name="SpaceX",
+        role_name="Software Engineer",
+        date_str="2026-09-27",
+    )
+    assert res.success is True
+    assert res.docx_download_url == "/api/files/2026-09-27/Tarun_Mannava_SpaceX_Software_Engineer.docx"
+
+    client = TestClient(app)
+    download_res = client.get(res.docx_download_url)
+    assert download_res.status_code == 200
+    assert len(download_res.content) > 0
+    assert "application/vnd.openxmlformats-officedocument.wordprocessingml.document" in download_res.headers["content-type"]
+
+
+def test_docx_summary_section_preserves_content(tmp_path: Path):
+    """Verifies that if a LaTeX file contains a \\section{SUMMARY}, its body text
+    is never discarded by the DOCX parser."""
+    tex_content = r"""
+\documentclass{article}
+\begin{document}
+\begin{center}
+{\Huge \textbf{Tarun Mannava}} \\
+Software Engineer
+\end{center}
+\section{SUMMARY}
+AI \& Software Engineer with 4+ years of experience building scalable backend services.
+\section{SKILLS}
+\begin{itemize}
+\item Python, FastAPI
+\end{itemize}
+\end{document}
+"""
+    tex_path = tmp_path / "resume_with_summary_sec.tex"
+    tex_path.write_text(tex_content, encoding="utf-8")
+    out_path = tmp_path / "resume_with_summary_sec.docx"
+
+    convert_tex_to_docx(tex_path, out_path)
+
+    doc = Document(str(out_path))
+    paragraphs = [p.text.strip() for p in doc.paragraphs if p.text.strip()]
+    assert "SUMMARY" in paragraphs
+    assert any("AI & Software Engineer with 4+ years of experience" in p for p in paragraphs)
+

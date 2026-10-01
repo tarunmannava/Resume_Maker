@@ -1,0 +1,171 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{mathptmx}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{anyfontsize}
+
+\geometry{
+  a4paper,
+  top=0.35in,
+  bottom=0.35in,
+  left=0.4in,
+  right=0.4in
+}
+
+\setstretch{1.0}
+\renewcommand{\normalsize}{\fontsize{10}{12}\selectfont}
+\renewcommand{\small}{\fontsize{10}{12}\selectfont}
+\normalsize
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-10pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+\newcommand{\resumeSep}{\textbullet}
+
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+\newcommand{\resumeSubheading}[4]{%
+  \vspace{0pt}\item
+  \textbf{#1} \\
+  \textit{\small #2} \\
+  \small #3 -- #4
+  \vspace{2pt}
+}
+
+\newcommand{\resumeProject}[2]{%
+  \vspace{0pt}\item[]
+  \textbf{#1} \\
+  \small\textit{#2}
+  \vspace{2pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+\newcommand{\resumeItemListStart}{%
+  \begin{itemize}[leftmargin=0.15in, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt, label={$\bullet$}]%
+}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{2pt}}
+\newcommand{\resumeHeadingContact}{%
+  Seattle, WA \hspace{0.4em}\resumeSep\hspace{0.4em}+1 (656) 203-7074 \hspace{0.4em}\resumeSep\hspace{0.4em}\href{mailto:mannava.tarun34@gmail.com}{mannava.tarun34@gmail.com} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://linkedin.com/in/tarunmannava}{linkedin.com/in/tarunmannava} \hspace{0.4em}\resumeSep\hspace{0.4em}\href{https://github.com/tarunmannava}{github.com/tarunmannava}%
+}
+
+\begin{document}
+
+\begin{center}
+  {\Huge \textbf{Tarun Mannava}} \\[2pt]
+  \textbf{.NET Software Engineer} \\[4pt]
+  \small
+  \resumeHeadingContact \\[4pt]
+  \textit{Full Stack Software Engineer with 3+ years of experience specializing in C\#, .NET 6/8 and ASP.NET Core, and distributed systems alongside modern React frontends. Experienced in enterprise Web APIs (Swagger/OpenAPI), Entity Framework Core and SQL Server optimization, Azure DevOps pipelines, Azure and AWS cloud services, structured logging and metrics, and building AI-in-the-loop solutions with custom AI skills and automated evaluation pipelines.}
+\end{center}
+
+\vspace{-10pt}
+
+\section{SKILLS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    \textbf{Languages \& Core:} C\#, .NET 6/8, ASP.NET Core, Entity Framework Core, LINQ, SQL, Python, TypeScript, JavaScript \\[1pt]
+    \textbf{Backend \& APIs:} RESTful APIs, Web API, Microservices, Swagger/OpenAPI, async/await, Task Parallel Library (TPL), FastAPI, RabbitMQ, Redis Caching, OAuth2, JWT \\[1pt]
+    \textbf{AI Developer Tools \& GenAI:} Claude Code, Cursor, GitHub Copilot, LLMs, RAG, LangGraph, LangChain, Multi-Agent Systems, Model Context Protocol (MCP), Prompt Engineering \\[1pt]
+    \textbf{Databases \& Cloud:} SQL Server (T-SQL, stored procedures), PostgreSQL, MongoDB, Azure (App Services, Blob Storage), AWS (EC2, S3, RDS, Cognito), GCP, Cloudflare R2, Docker, Linux, Azure DevOps, GitHub Actions, CI/CD \\[1pt]
+    \textbf{Testing, Frontend \& Practices:} xUnit, Moq, Pytest, Postman, React 18, HTML5, CSS3, SOLID, structured logging, Agile/Scrum, Code Review, System Design, Git
+  }}
+\end{itemize}
+
+\section{EXPERIENCE}
+\resumeSubHeadingListStart
+
+  \resumeSubheading
+    {University of South Florida}{Graduate Research Assistant, Software Engineer}{Jan 2025}{May 2026}
+  \resumeItemListStart
+    \resumeItem{Prototyped a Behavioral Health Workflow Platform supporting session tracking, therapist workflows, and clinic resource utilization for behavioral health services.}
+    \resumeItem{Engineered C\# and .NET 8 microservices to model therapist productivity, billable vs. non-billable hours, session activity, and physical room utilization across daily, weekly, and monthly reporting periods, exposing Swagger/OpenAPI-documented APIs.}
+    \resumeItem{Built PostgreSQL data pipelines using Entity Framework Core and LINQ to organize session and operational data for utilization and financial analysis.}
+    \resumeItem{Implemented AWS Cognito and PostgreSQL synchronization for role-based access, therapist accounts, and administrator profiles within the prototype.}
+    \resumeItem{Designed session lifecycle workflows with state transitions, automated status restoration, granular session activity auditing, and Excel data exports using ClosedXML.}
+    \resumeItem{Built React 18 and TypeScript dashboards with utilization metrics, Recharts trend visualizations, and custom date-range reporting.}
+    \resumeItem{Developed xUnit and Moq test suites to validate backend workflows, data processing, and session state transitions.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+    {Cognizant Technology Solutions}{Software Development Engineer}{Feb 2022}{Aug 2024}
+  \resumeItemListStart
+    \resumeItem{Developed C\# and ASP.NET Core (.NET 6/8) microservices for policy onboarding and validation on a healthcare insurance platform, exposing Swagger/OpenAPI-documented REST APIs and persisting client metadata in MongoDB and relational records in SQL Server at 20K+ peak hourly requests.}
+    \resumeItem{Eliminated N+1 query patterns in policy audit and reporting endpoints by replacing per-row lookups with batched LINQ queries, Entity Framework Core eager loading, composite indexes, and SQL Server stored procedures, collapsing dozens of queries per request into single-digit round trips.}
+    \resumeItem{Implemented multi-tier Redis distributed caching with IDistributedCache and deploy-time warm-up for policy reference data, moving the bulk of repeated read traffic off SQL Server during peak onboarding windows.}
+    \resumeItem{Parallelized validation workflows with async/await and Task.WhenAll, replacing sequential downstream calls with concurrent execution so end-to-end validation time tracked the slowest validator instead of the sum.}
+    \resumeItem{Refactored duplicate business logic across 8+ microservices into shared ASP.NET Core service-layer components following SOLID principles, with centralized exception-handling middleware and request validation.}
+    \resumeItem{Secured REST endpoints with ASP.NET Core authentication, OAuth2, and JWT integrated with AWS Cognito, implementing role-based authorization policies.}
+    \resumeItem{Raised backend coverage to 70\% with xUnit and Moq on onboarding and validation workflows. Added structured logging and application metrics, and released the services through Azure DevOps build and release pipelines.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\section{PROJECTS}
+\resumeSubHeadingListStart
+
+  \resumeProject{SkillBeacon: Skills \& Career Intelligence Platform $|$ \href{https://skillbeacon-six.vercel.app/}{skillbeacon-six.vercel.app}}{Python, FastAPI, React, PostgreSQL, Cloudflare R2, Google OAuth2, Gmail API, Neon Auth}
+  \resumeItemListStart
+    \resumeItem{Built a full-stack career platform with a Python/FastAPI backend and React frontend, supporting student, mentor, and employer roles with PostgreSQL and SQLAlchemy ORM persistence.}
+    \resumeItem{Implemented a Skill Passport with proficiency tiers, evidence submissions, and multi-party confidence scoring driven by mentor and employer verification signals.}
+    \resumeItem{Built an automated job intelligence engine with Next.js server-side scraping, persistent CSV/JSON deduplication, and soft-flagging for qualification filtering.}
+    \resumeItem{Engineered an asynchronous FastAPI document service that tailors LaTeX templates and compiles ATS-compliant DOCX resumes in under 2 seconds.}
+    \resumeItem{Integrated Google OAuth 2.0 with the Gmail REST API and built a scheduled background daemon that sends mobile-first multipart HTML email digests with direct application links.}
+    \resumeItem{Integrated Cloudflare R2 through its S3-compatible API for resumes, logos, and evidence files, with presigned downloads, storage quotas, and Neon Auth JWT role-based access control.}
+  \resumeItemListEnd
+
+  \resumeProject{AutoDocs: Event-Driven MCP \& Multi-Agent Documentation System}{Python, FastAPI, MCP, LangGraph, RabbitMQ, Supabase, GitHub Webhooks}
+  \resumeItemListStart
+    \resumeItem{Built an event-driven documentation system that receives GitHub pull-request webhooks through FastAPI, validates HMAC-SHA256 signatures, and enforces idempotent delivery persistence in Supabase.}
+    \resumeItem{Decoupled webhook ingestion from repository analysis and long-running documentation jobs with RabbitMQ workers, including retry and failure handling.}
+    \resumeItem{Designed MCP code-intelligence servers that extract class and function call graphs via AST analysis to give LLMs structural repository context.}
+    \resumeItem{Built LangGraph task-routing multi-agent workflows that analyze code changes and generate documentation under deterministic verification guardrails.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\section{EDUCATION}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {University of South Florida, Tampa}{Master of Science, Computer Science}{Aug 2024}{May 2026}
+\resumeSubHeadingListEnd
+
+\section{CERTIFICATIONS}
+\begin{itemize}[leftmargin=0in, label={}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \small{\item{
+    AWS Certified AI Practitioner (AIF-C01) - Amazon Web Services \\[1pt]
+    AWS Certified Cloud Practitioner - Amazon Web Services, Nov 2023 \\[1pt]
+    Microsoft Certified: Azure Fundamentals (AZ-900) - Microsoft
+  }}
+\end{itemize}
+
+\end{document}

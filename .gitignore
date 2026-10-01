@@ -21,8 +21,11 @@ venv/
 # Build/output
 backend/storage/generated/**
 !backend/storage/generated/.gitkeep
+backend/storage/*.db*
+*.db*
 *.pdf
 *.aux
 *.log
 *.out
 *.synctex.gz
+~$*

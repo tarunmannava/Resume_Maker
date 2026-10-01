@@ -233,39 +233,32 @@ def inject_canonical_skills_section(
     return latex.rstrip() + "\n\n" + raw
 
 
-def reorder_experience_for_java(latex: str) -> str:
-    """Ensure Cognizant Technology Solutions appears before USF in EXPERIENCE for Java roles."""
+def enforce_reverse_chronological_experience(latex: str) -> str:
+    """Ensure Experience entries strictly follow reverse-chronological sequence across all roles:
+    1. University of South Florida (Jan 2025 -- May 2026)
+    2. Cognizant Technology Solutions (Feb 2022 -- Aug 2024)
+    """
     exp_match = re.search(
-        r"(\\section\{EXPERIENCE\}.*?)(?=\\section\{|\\end\{document\}|\Z)",
+        r"(\\section\{(?:EXPERIENCE|Work Experience)\}\s*(?:%[^\n]*\n\s*)*(?:\\resumeSubHeadingListStart|\\begin\{itemize\}|\\begin\{enumerate\})\s*)(.*?)(\s*(?:\\resumeSubHeadingListEnd|\\end\{itemize\}|\\end\{enumerate\}))",
         latex,
         flags=re.DOTALL | re.IGNORECASE,
     )
     if not exp_match:
         return latex
 
-    exp_block = exp_match.group(1)
-    cog_match = re.search(
-        r"\\resumeSubheading\s*\{[^}]*Cognizant.*?(?=\\resumeSubheading|\\end\{itemize\}|\Z)",
-        exp_block,
-        flags=re.DOTALL | re.IGNORECASE,
-    )
-    usf_match = re.search(
-        r"\\resumeSubheading\s*\{[^}]*University of South Florida.*?(?=\\resumeSubheading|\\end\{itemize\}|\Z)",
-        exp_block,
-        flags=re.DOTALL | re.IGNORECASE,
-    )
+    header, body, footer = exp_match.groups()
+    entries = [e for e in re.split(r"(?=\\resumeSubheading)", body) if e.strip()]
+    usf_entry = [e for e in entries if "University of South Florida" in e or "South Florida" in e]
+    cog_entry = [e for e in entries if "Cognizant" in e]
+    other_entries = [e for e in entries if e not in usf_entry and e not in cog_entry]
 
-    if cog_match and usf_match and cog_match.start() > usf_match.start():
-        cog_text = cog_match.group(0).strip()
-        usf_text = usf_match.group(0).strip()
-
-        new_exp_block = (
-            exp_block[: usf_match.start()]
-            + cog_text
-            + "\n\n  "
-            + usf_text
-            + exp_block[cog_match.end() :]
-        )
-        latex = latex[: exp_match.start(1)] + new_exp_block + latex[exp_match.end(1) :]
-
+    reordered_entries = usf_entry + cog_entry + other_entries
+    if reordered_entries:
+        reordered_body = "\n\n  ".join(e.strip() for e in reordered_entries).strip()
+        return latex[: exp_match.start(0)] + header + "\n  " + reordered_body + "\n" + footer + latex[exp_match.end(0) :]
     return latex
+
+
+# Backward-compatible alias
+reorder_experience_for_java = enforce_reverse_chronological_experience
+

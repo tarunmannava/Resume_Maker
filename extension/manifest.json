@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "HiringCafe Job Queue Capture",
+  "version": "1.0.0",
+  "description": "Capture jobs from logged-in HiringCafe tab and queue them in Resume Maker for automated AI screening and DOCX tailoring.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://hiringcafe.com/*",
+    "http://localhost:8000/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Capture HiringCafe Jobs"
+  }
+}

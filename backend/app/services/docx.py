@@ -539,7 +539,7 @@ def _parse_item_block(doc: Document, block: str) -> None:
 def _parse_section_content(doc: Document, content: str, *, section_title: str) -> None:
     """Parse inner content of a resume section."""
     title = section_title.upper()
-    if any(k in title for k in ("SKILLS", "CERTIFICATIONS", "AWARDS", "HONORS", "PUBLICATIONS")):
+    if any(k in title for k in ("SKILLS", "CERTIFICATIONS", "AWARDS", "HONORS", "PUBLICATIONS", "SUMMARY", "PROFILE", "OBJECTIVE")):
         _parse_item_block(doc, content)
         return
 
@@ -550,6 +550,10 @@ def _parse_section_content(doc: Document, content: str, *, section_title: str) -
         "resumeProjectHeading",
         "resumeItem",
     ]
+    # If the section contains no recognized macros, render content lines as paragraphs
+    if not any(re.search(rf"\\{macro}\b", content) for macro in macros):
+        _parse_item_block(doc, content)
+        return
     pos = 0
     while pos < len(content):
         next_macro = None
@@ -590,9 +594,14 @@ def _has_section_content(content: str) -> bool:
     return bool(cleaned.strip())
 
 
-def convert_tex_to_docx(tex_path: Path, out_path: Path) -> None:
-    """Convert a resume LaTeX file to a high-fidelity Word (.docx) document."""
-    raw_tex = _read_tex(tex_path)
+def convert_tex_to_docx(tex_input: str | Path, out_path: Path) -> None:
+    """Convert a resume LaTeX string or file to a high-fidelity Word (.docx) document."""
+    if isinstance(tex_input, Path):
+        raw_tex = _read_tex(tex_input)
+    elif str(tex_input).endswith(".tex") and Path(tex_input).exists():
+        raw_tex = _read_tex(Path(tex_input))
+    else:
+        raw_tex = str(tex_input)
     tex = _expand_newcommands(_strip_comments(raw_tex))
     body = _extract_body(tex)
 
